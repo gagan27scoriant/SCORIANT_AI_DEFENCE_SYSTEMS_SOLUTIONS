@@ -1,0 +1,186 @@
+:root {
+  --font-heading: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+  
+  --brand-gradient: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
+  --brand-glow: 0 10px 25px -5px rgba(124, 58, 237, 0.35);
+  
+  --primary-purple: #7c3aed;
+  --primary-blue: #3b82f6;
+  --border-light: rgba(226, 232, 240, 0.8);
+  --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 20px 40px -10px rgba(124, 58, 237, 0.12);
+  
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-pill: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* Button & Pill Utilities */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--brand-gradient);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--brand-glow);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 30px -4px rgba(124, 58, 237, 0.5);
+  background: var(--brand-gradient-hover);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 26px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary-purple);
+  color: var(--primary-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid #c7d2fe;
+  letter-spacing: 0.3px;
+}
+
+/* Container Cards */
+.card-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Text Gradient Effect */
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Section Wrapper */
+.section-wrapper {
+  padding: 80px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section-wrapper {
+    padding: 50px 16px;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.pulse-glow {
+  animation: pulseGlow 4s infinite ease-in-out;
+}

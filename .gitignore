@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+Frontend/node_modules/
+
+# Build & Cache
+dist/
+Frontend/dist/
+.vite/
+.vite-temp/
+Frontend/.vite/
+Frontend/.vite-temp/
+
+# Misc
+.DS_Store
+*.log
