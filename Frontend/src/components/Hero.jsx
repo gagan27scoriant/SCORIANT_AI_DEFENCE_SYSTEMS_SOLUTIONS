@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Home, ChevronRight, Circle, Disc, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Home, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
@@ -9,12 +9,12 @@ export default function Hero() {
       id: 'defence-systems',
       category: 'Aerospace & Defense',
       breadcrumb: 'Solutions > Aerospace & Defense',
-      radioLabel: 'DEFENCE ENGINEERING & AIR-GAPPED SYSTEMS',
+      radioLabel: 'EDGE AI & COMPUTE POWERHOUSE',
       title: 'Defence Engineering Systems',
-      subtitle: 'Rugged Edge AI & Mission-Critical Infrastructure',
-      desc: 'Scoriant delivers enterprise-grade infrastructure engineered for secure, scalable, and mission-critical operations across cloud, edge, on-premise, and air-gapped defense environments. Built for extreme operational readiness without internet dependency.',
-      bgImage: '/PRODUCT_PREVIEW_IMAGE/SECURE_STORAGE.jpg',
-      videoUrl: '/HERO.mp4',
+      subtitle: 'Edge AI & Compute Powerhouse',
+      desc: 'High-performance edge computing and storage platform designed for mounted, mobile, and mission-critical environments. Featuring 144 Intel Xeon cores with NVIDIA L4 / RTX GPUs for AI/ML, computer vision, sensor fusion, and 512 TB scalable storage.',
+      bgImage: '/HERO/IMAGE_08.jpg',
+      videoUrl: null,
     },
     {
       id: 'agentic-ai',
@@ -24,21 +24,29 @@ export default function Hero() {
       title: 'Agentic AI Systems',
       subtitle: 'Autonomous Context-Aware Machine Intelligence',
       desc: 'Advanced autonomous AI systems that perceive, reason, plan, and act across complex operational environments. Scoriant integrates human expertise with machine intelligence for faster, more informed decision-making across tactical scenarios.',
-      bgImage: '/PRODUCT_PREVIEW_IMAGE/AI_KNOWLEDGE_STUDIO.jpg',
+      bgImage: '/HERO/IMAGE_01.jpg',
       videoUrl: null,
     },
     {
-      id: 'geospatial-intelligence',
-      category: 'Data & Geospatial',
-      breadcrumb: 'Solutions > Satellite & Geospatial Intelligence',
-      radioLabel: 'GEO-SPATIAL SATELLITE & SMART SURVEILLANCE',
-      title: 'Data Science & Intelligence Platforms',
-      subtitle: 'Multi-Source Sensor & Satellite Analytics',
-      desc: 'Unified data platforms transforming information from satellite imagery, sensors, CCTV feeds, and documents into actionable operational intelligence at scale with pixel-level deep learning change detection.',
+      id: '5g-capabilities',
+      category: 'Telecom & 5G',
+      breadcrumb: 'Solutions > 5G Engineering',
+      radioLabel: '5G ENGINEERING & PROTOCOL STACKS',
+      title: '5G Engineering',
+      subtitle: 'Carrier-Grade RAN & Protocol Stack Architecture',
+      desc: 'Comprehensive 5G and engineering expertise spanning the radio access network stack—from CU and DU to Upper/Lower PHY and protocol layers. Engineered for high throughput, ultra-low latency, and mission-critical reliability.',
       bgImage: '/PRODUCT_PREVIEW_IMAGE/GEO_SPATIAL_INTELLIGENCE.jpg',
       videoUrl: null,
     },
   ];
+
+  // Automatic slideshow transition every 7 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % heroItems.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [heroItems.length]);
 
   const currentItem = heroItems[activeTab];
 
@@ -48,101 +56,50 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '85vh',
-        maxHeight: '920px',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         overflow: 'hidden',
         background: '#0b0f19',
         color: '#f8fafc',
       }}
     >
-      {/* Background Image / Video Backdrop */}
+      {/* Background Image Backdrop */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           zIndex: 1,
-          transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        {currentItem.videoUrl ? (
-          <video
-            key={currentItem.id}
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              opacity: 0.35,
-            }}
-          >
-            <source src={currentItem.videoUrl} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={currentItem.bgImage}
-            alt={currentItem.title}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              opacity: 0.3,
-              filter: 'contrast(1.1)',
-              transition: 'opacity 0.6s ease',
-            }}
-          />
-        )}
+        <img
+          key={currentItem.id}
+          src={currentItem.bgImage}
+          alt={currentItem.title}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            opacity: 0.75,
+            filter: 'contrast(1.05) brightness(0.95)',
+            transition: 'opacity 0.8s ease',
+          }}
+        />
 
-        {/* Dark Overlay Gradients */}
+        {/* Subtle Overlay Gradients for Text Legibility */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             background: `
-              linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.5) 40%, rgba(11, 15, 25, 0.95) 100%),
-              linear-gradient(90deg, rgba(11, 15, 25, 0.9) 0%, rgba(11, 15, 25, 0.65) 50%, rgba(11, 15, 25, 0.85) 100%)
+              linear-gradient(180deg, rgba(11, 15, 25, 0.5) 0%, rgba(11, 15, 25, 0.25) 50%, rgba(11, 15, 25, 0.7) 100%),
+              linear-gradient(90deg, rgba(11, 15, 25, 0.75) 0%, rgba(11, 15, 25, 0.4) 50%, rgba(11, 15, 25, 0.6) 100%)
             `,
           }}
         />
-      </div>
-
-      {/* Top Floating Pill Breadcrumb */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          paddingTop: '110px',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(17, 24, 39, 0.85)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            color: '#f8fafc',
-            padding: '7px 20px',
-            borderRadius: 'var(--radius-pill)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
-            backdropFilter: 'blur(12px)',
-            fontSize: '13px',
-            fontWeight: 600,
-          }}
-        >
-          <Home size={14} color="#a78bfa" />
-          <ChevronRight size={13} color="#64748b" />
-          <span>{currentItem.breadcrumb}</span>
-        </div>
       </div>
 
       {/* Main Content Area */}
@@ -152,170 +109,116 @@ export default function Hero() {
           position: 'relative',
           zIndex: 10,
           width: '100%',
-          paddingBottom: '70px',
-          paddingTop: '40px',
+          paddingTop: '175px',
+          paddingBottom: '60px',
         }}
       >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 0.8fr',
-            gap: '60px',
-            alignItems: 'end',
-          }}
-          className="tsecond-hero-grid"
-        >
-          {/* Left Column */}
-          <div style={{ maxWidth: '640px' }}>
-            <div
+        <div style={{ maxWidth: '920px', marginTop: '30px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(124, 58, 237, 0.2)',
+              border: '1px solid rgba(167, 139, 250, 0.35)',
+              color: '#c084fc',
+              fontSize: '12px',
+              fontWeight: 700,
+              letterSpacing: '1.2px',
+              textTransform: 'uppercase',
+              padding: '4px 14px',
+              borderRadius: 'var(--radius-pill)',
+              marginBottom: '18px',
+            }}
+          >
+            <Sparkles size={13} />
+            <span>Scoriant Defense & AI Architecture</span>
+          </div>
+
+          <h1
+            key={`title-${currentItem.id}`}
+            className="hero-main-title"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(30px, 4.2vw, 50px)',
+              fontWeight: 800,
+              color: '#ffffff',
+              lineHeight: 1.15,
+              letterSpacing: '-1px',
+              marginBottom: '16px',
+              animation: 'fadeInText 0.6s ease',
+            }}
+          >
+            {currentItem.title}
+          </h1>
+
+          <p
+            key={`desc-${currentItem.id}`}
+            style={{
+              fontSize: 'clamp(15.5px, 1.8vw, 18px)',
+              color: '#cbd5e1',
+              lineHeight: 1.65,
+              marginBottom: '32px',
+              maxWidth: '700px',
+              animation: 'fadeInText 0.6s ease',
+            }}
+          >
+            {currentItem.desc}
+          </p>
+
+          {/* CTA */}
+          <div>
+            <a
+              href="#tech-stack"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                background: 'rgba(124, 58, 237, 0.2)',
-                border: '1px solid rgba(167, 139, 250, 0.35)',
-                color: '#c084fc',
-                fontSize: '12px',
-                fontWeight: 700,
-                letterSpacing: '1.2px',
-                textTransform: 'uppercase',
-                padding: '4px 14px',
-                borderRadius: 'var(--radius-pill)',
-                marginBottom: '16px',
-              }}
-            >
-              <Sparkles size={13} />
-              <span>Scoriant Defense & AI Architecture</span>
-            </div>
-
-            <h1
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(36px, 4.5vw, 54px)',
-                fontWeight: 800,
+                gap: '8px',
+                background: 'var(--brand-gradient)',
                 color: '#ffffff',
-                lineHeight: 1.12,
-                letterSpacing: '-1px',
-                marginBottom: '16px',
+                fontWeight: 700,
+                fontSize: '15px',
+                padding: '14px 32px',
+                borderRadius: 'var(--radius-pill)',
+                textDecoration: 'none',
+                boxShadow: 'var(--brand-glow)',
+                transition: 'all 0.25s ease',
               }}
             >
-              {currentItem.title}
-            </h1>
-
-            <p
-              style={{
-                fontSize: 'clamp(15px, 1.8vw, 17px)',
-                color: '#94a3b8',
-                lineHeight: 1.65,
-                marginBottom: '32px',
-              }}
-            >
-              {currentItem.desc}
-            </p>
-
-            {/* CTA */}
-            <div>
-              <a
-                href="#tech-stack"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'var(--brand-gradient)',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  padding: '14px 32px',
-                  borderRadius: 'var(--radius-pill)',
-                  textDecoration: 'none',
-                  boxShadow: 'var(--brand-glow)',
-                  transition: 'all 0.25s ease',
-                }}
-              >
-                <span>Explore Technology Stack</span>
-                <ArrowRight size={18} />
-              </a>
-            </div>
+              <span>Explore Technology Stack</span>
+              <ArrowRight size={18} />
+            </a>
           </div>
 
-          {/* Right Column: Floating Selector Card */}
+          {/* Centered Slide Navigation Indicator Dots in Next Row */}
           <div
             style={{
-              background: '#131b2e',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '20px',
-              padding: '28px',
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
               display: 'flex',
-              flexDirection: 'column',
-              gap: '16px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              width: '100%',
+              marginTop: '40px',
             }}
           >
-            <div
-              style={{
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                color: '#a78bfa',
-                marginBottom: '4px',
-              }}
-            >
-              Select Operational Capability
-            </div>
-
             {heroItems.map((item, idx) => {
-              const isSelected = activeTab === idx;
+              const isActive = activeTab === idx;
               return (
-                <div
+                <button
                   key={item.id}
                   onClick={() => setActiveTab(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '14px',
-                    padding: '16px 20px',
-                    borderRadius: '14px',
-                    background: isSelected
-                      ? 'rgba(124, 58, 237, 0.22)'
-                      : 'rgba(255, 255, 255, 0.03)',
-                    border: isSelected
-                      ? '1px solid rgba(167, 139, 250, 0.4)'
-                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    height: '6px',
+                    width: isActive ? '40px' : '12px',
+                    borderRadius: '4px',
+                    background: isActive ? 'var(--primary-purple)' : 'rgba(255, 255, 255, 0.35)',
+                    border: 'none',
                     cursor: 'pointer',
-                    transition: 'all 0.25s ease',
+                    transition: 'all 0.4s ease',
+                    padding: 0,
                   }}
-                  onMouseEnter={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                    }
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {isSelected ? (
-                      <Disc size={20} color="#c084fc" />
-                    ) : (
-                      <Circle size={20} color="#64748b" />
-                    )}
-                  </div>
-
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      letterSpacing: '0.6px',
-                      color: isSelected ? '#ffffff' : '#94a3b8',
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {item.radioLabel}
-                  </span>
-                </div>
+                />
               );
             })}
           </div>
@@ -323,6 +226,21 @@ export default function Hero() {
       </div>
 
       <style>{`
+        @keyframes fadeInText {
+          from {
+            opacity: 0.3;
+            transform: translateY(6px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @media (min-width: 900px) {
+          .hero-main-title {
+            white-space: nowrap !important;
+          }
+        }
         @media (max-width: 900px) {
           .tsecond-hero-grid {
             grid-template-columns: 1fr !important;

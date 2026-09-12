@@ -212,6 +212,7 @@ export default function TechStackSection() {
           {PRODUCTS_DATA.map((product) => (
             <div
               key={product.id}
+              className="product-card"
               style={{
                 flex: '0 0 380px',
                 scrollSnapAlign: 'start',
@@ -304,6 +305,7 @@ export default function TechStackSection() {
 
                   {/* Key Capability Bullets */}
                   <div
+                    className="responsive-product-bullets"
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -343,6 +345,15 @@ export default function TechStackSection() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        /* Full product info and bullets displayed at all viewports */
+        .responsive-product-bullets {
+          display: flex !important;
+          opacity: 1 !important;
+          max-height: none !important;
+        }
+      `}</style>
 
       {/* In-depth Product Specifications Modal */}
       {activeModalProduct && (

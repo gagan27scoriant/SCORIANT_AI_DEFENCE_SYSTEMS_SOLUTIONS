@@ -31,16 +31,16 @@ export const PILLARS_DATA = [
   {
     id: "pillar-03",
     tag: "Pillar 03",
-    title: "Data Science & Intelligence Platforms",
-    subtitle: "Multi-Source Sensor & Visual Analytics",
-    desc: "Unified data platforms transforming information from sensors, documents, cameras, enterprise systems, and geospatial sources into actionable operational intelligence at scale.",
+    title: "5G Engineering & Network Stack",
+    subtitle: "Carrier-Grade RAN & Protocol Stack Architecture",
+    desc: "Comprehensive 5G radio access network stack engineering—spanning CU/DU architecture, Upper/Lower PHY layers, and protocol stacks built for ultra-low latency, high throughput, and mission-critical reliability.",
     bullets: [
-      "Multi-source data fusion & real-time telemetry",
-      "Real-time intelligence pipeline orchestration",
-      "Geospatial, satellite & predictive analytics"
+      "Carrier-grade 5G RAN & protocol stack architecture",
+      "CU, DU & PHY layer direct-to-silicon compilation",
+      "Ultra-low latency & mission-critical reliability"
     ],
-    gradient: "linear-gradient(135deg, #1e40af, #3b82f6)",
-    icon: "Database"
+    gradient: "linear-gradient(135deg, #0284c7, #38bdf8)",
+    icon: "Radio"
   }
 ];
 
@@ -223,30 +223,48 @@ export const REAL_WORLD_USE_CASES = [
   },
   {
     id: "uc-2",
-    tag: "Smart Manufacturing & Supply",
-    title: "Smarter Factories & Edge Telemetry",
-    subtitle: "Predictive Quality Analytics and Machine Vision Verification",
-    desc: "Integrating edge computer vision cameras and telemetry sensors across manufacturing floors to detect component anomalies, monitor yield rates, and prevent unplanned downtime.",
-    metrics: ["99.4% Defect Detection", "35% Maintenance Savings", "Real-Time Edge Telemetry"],
+    tag: "Video Intelligence",
+    title: "AI-Based Video Analytics",
+    subtitle: "Edge Computer-Vision & Situational Awareness",
+    desc: "Deploy computer-vision applications for object detection, tracking, surveillance, intrusion detection, safety monitoring, perimeter security and situational awareness without continuously sending high-bandwidth video to a central data center.",
+    metrics: ["Edge Object Tracking", "Perimeter Security", "Zero Cloud Bandwidth"],
     image: "/PRODUCT_PREVIEW_IMAGE/VIDEO_SURVELLIENCE.jpg"
   },
   {
     id: "uc-3",
-    tag: "Enterprise & Governance",
-    title: "Multilingual Document Intelligence & Search",
-    subtitle: "Instant Vector RAG Access Across Millions of Enterprise Specs",
-    desc: "Ingesting complex engineering drawings, defense specifications, and regulatory policy documents into an offline vector RAG chatbot for instant, cited decision support.",
-    metrics: ["10x Faster Retrieval", "100% Citation Accuracy", "Multi-Language Support"],
-    image: "/PRODUCT_PREVIEW_IMAGE/DOCUMENT INTELLIGENCE.jpg"
+    tag: "Tactical Operations",
+    title: "Remote Operations & Situational Awareness",
+    subtitle: "Local AI Services for Mobile & Field Command",
+    desc: "Provide a local AI and data-processing capability at temporary command posts, field locations, remote sites or mobile platforms. Multiple users can access the same data and AI services through LAN or private 5G.",
+    metrics: ["LAN & Private 5G Access", "Multi-User Command", "Field Deployment"],
+    image: "/PRODUCT_PREVIEW_IMAGE/SECURE_STORAGE.jpg"
   },
   {
     id: "uc-4",
-    tag: "Geospatial & Defense Intelligence",
-    title: "Border & Infrastructure Change Monitoring",
-    subtitle: "Automated Satellite Change Detection Across Critical Terrain",
-    desc: "Analyzing historical satellite timelines to detect infrastructure additions, land degradation, and spatial movements with pixel-level transformer models.",
-    metrics: ["Sub-meter Resolution", "Automated Temporal Alerts", "Multi-Sensor Fusion"],
+    tag: "Mission Intelligence",
+    title: "Offline Mission Intelligence",
+    subtitle: "Onboard AI Analysis in Air-Gapped Environments",
+    desc: "Process and analyze mission-critical data locally using onboard AI models, enabling intelligence and decision support even in air-gapped, disconnected or low-connectivity environment.",
+    metrics: ["100% Offline Autonomy", "Air-Gapped Models", "Low-Connectivity Support"],
     image: "/PRODUCT_PREVIEW_IMAGE/GEO_SPATIAL_INTELLIGENCE.jpg"
+  },
+  {
+    id: "uc-5",
+    tag: "Rapid AI Deployment",
+    title: "Mobile and Temporary AI Deployment",
+    subtitle: "Compact Form-Factor for Rapid Field Operations",
+    desc: "The compact form factor makes the platform suitable where a permanent data center is not practical—for example, temporary operations, field deployments, emergency response locations, temporary work sites and rapidly changing operational environments.",
+    metrics: ["Compact Edge Form Factor", "Emergency Response", "Rapid Relocation"],
+    image: "/PRODUCT_PREVIEW_IMAGE/AI_KNOWLEDGE_STUDIO.jpg"
+  },
+  {
+    id: "uc-6",
+    tag: "Reconnaissance & Sensors",
+    title: "Field Sensor & UAV Data Processing",
+    subtitle: "Local Reconnaissance & Sensor Stream Ingestion",
+    desc: "Capture and process data from UAVs, Cameras, Ground sensors and other reconnaissance systems locally, reducing the need to transmit large volumes of raw data to distant data centers.",
+    metrics: ["UAV Stream Ingestion", "Local Reconnaissance", "Reduced Data Latency"],
+    image: "/PRODUCT_PREVIEW_IMAGE/GURUKULA_AI.jpg"
   }
 ];
 

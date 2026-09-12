@@ -1,8 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { REAL_WORLD_USE_CASES } from '../data/scoriantData';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function UseCasesSection() {
   const [activeUseCase, setActiveUseCase] = useState(0);
+
+  // Automatic slideshow transition every 7 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveUseCase((prev) => (prev + 1) % REAL_WORLD_USE_CASES.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handlePrev = () => {
+    setActiveUseCase((prev) => (prev === 0 ? REAL_WORLD_USE_CASES.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveUseCase((prev) => (prev + 1) % REAL_WORLD_USE_CASES.length);
+  };
 
   const useCase = REAL_WORLD_USE_CASES[activeUseCase];
 
@@ -22,6 +39,7 @@ export default function UseCasesSection() {
           <div className="pill-badge" style={{ marginBottom: '12px' }}>
             <span>Deployment Proof Points</span>
           </div>
+
           <h2
             style={{
               fontFamily: 'var(--font-heading)',
@@ -35,46 +53,86 @@ export default function UseCasesSection() {
           >
             Real-World Use Cases
           </h2>
-          <p style={{ fontSize: '15.5px', color: 'var(--text-muted)', maxWidth: '640px', lineHeight: 1.55 }}>
-            Proven deployment architectures solving complex challenges across air-gapped defense networks, smart factories, enterprise document intelligence, and satellite monitoring.
-          </p>
-        </div>
 
-        {/* Tab Selector */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            overflowX: 'auto',
-            paddingBottom: '14px',
-            marginBottom: '28px',
-          }}
-        >
-          {REAL_WORLD_USE_CASES.map((item, idx) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveUseCase(idx)}
-              style={{
-                padding: '10px 20px',
-                borderRadius: 'var(--radius-pill)',
-                fontSize: '13.5px',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-                border: activeUseCase === idx ? 'none' : '1px solid var(--border-light)',
-                background: activeUseCase === idx ? 'var(--brand-gradient)' : 'var(--bg-card)',
-                color: activeUseCase === idx ? '#ffffff' : 'var(--text-muted)',
-                cursor: 'pointer',
-                boxShadow: activeUseCase === idx ? 'var(--brand-glow)' : 'none',
-                transition: 'all 0.25s ease',
-              }}
-            >
-              {item.tag}
-            </button>
-          ))}
+          {/* Subtitle & Far Right Forward & Backward Buttons */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              gap: '20px',
+              flexWrap: 'wrap',
+            }}
+          >
+            <p style={{ fontSize: '15.5px', color: 'var(--text-muted)', maxWidth: '640px', lineHeight: 1.55, margin: 0 }}>
+              Proven deployment architectures solving complex challenges across air-gapped defense networks, smart factories, enterprise document intelligence, and satellite monitoring.
+            </p>
+
+            {/* Forward & Backward Controls on Far Right */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto' }}>
+              <button
+                onClick={handlePrev}
+                aria-label="Previous Use Case"
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '50%',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--primary-purple)';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--bg-card)';
+                  e.currentTarget.style.color = 'var(--text-main)';
+                }}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={handleNext}
+                aria-label="Next Use Case"
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '50%',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--primary-purple)';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--bg-card)';
+                  e.currentTarget.style.color = 'var(--text-main)';
+                }}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Use Case Spotlight Card */}
         <div
+          key={useCase.id}
           className="card-container use-case-grid"
           style={{
             borderRadius: '18px',
@@ -84,6 +142,7 @@ export default function UseCasesSection() {
             gap: '40px',
             alignItems: 'center',
             background: 'var(--bg-card)',
+            animation: 'fadeInText 0.6s ease',
           }}
         >
           {/* Left Text */}
@@ -202,9 +261,34 @@ export default function UseCasesSection() {
             </div>
           </div>
         </div>
+
+        {/* Slide Indicator Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '28px' }}>
+          {REAL_WORLD_USE_CASES.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveUseCase(idx)}
+              aria-label={`Go to use case ${idx + 1}`}
+              style={{
+                height: '6px',
+                width: activeUseCase === idx ? '36px' : '10px',
+                borderRadius: '4px',
+                background: activeUseCase === idx ? 'var(--primary-purple)' : 'var(--border-light)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.35s ease',
+                padding: 0,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <style>{`
+        @keyframes fadeInText {
+          from { opacity: 0.3; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         @media (max-width: 900px) {
           .use-case-grid {
             grid-template-columns: 1fr !important;

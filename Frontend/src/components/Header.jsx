@@ -16,6 +16,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
   const navLinks = [
     { label: 'Home', id: 'home' },
     { label: 'About Us', id: 'about' },
+    { label: 'Contact Us', id: 'contact' },
   ];
 
   const handleNavClick = (e, id) => {
@@ -48,7 +49,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
         style={{
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '16px 24px',
+          padding: '18px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -80,7 +81,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
                 fontSize: '22px',
                 fontWeight: 800,
                 color: '#0f172a',
-                letterSpacing: '-0.5px',
+                letterSpacing: '1.5px',
                 lineHeight: 1.1,
               }}
             >
@@ -88,14 +89,14 @@ export default function Header({ activePage = 'home', onPageChange }) {
             </span>
             <span
               style={{
-                fontSize: '10px',
-                fontWeight: 700,
+                fontSize: '11.5px',
+                fontWeight: 900,
                 color: '#7c3aed',
-                letterSpacing: '1.2px',
+                letterSpacing: '2.0px',
                 textTransform: 'uppercase',
               }}
             >
-              Technologies
+              AI and Defence Systems
             </span>
           </div>
         </a>
@@ -105,7 +106,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '28px',
+            gap: '32px',
           }}
           className="desktop-nav"
         >
@@ -117,22 +118,37 @@ export default function Header({ activePage = 'home', onPageChange }) {
                 href={`#${link.id}`}
                 onClick={(e) => handleNavClick(e, link.id)}
                 style={{
-                  fontSize: '14.5px',
-                  fontWeight: 600,
+                  position: 'relative',
+                  fontSize: '15px',
+                  fontWeight: isActive ? 800 : 600,
                   color: isActive ? '#7c3aed' : '#475569',
-                  borderBottom: isActive ? '2px solid #7c3aed' : '2px solid transparent',
-                  paddingBottom: '4px',
+                  padding: '6px 2px',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
+                  letterSpacing: '0.2px',
                 }}
                 onMouseEnter={(e) => {
-                  if (!isActive) e.target.style.color = '#0f172a';
+                  if (!isActive) e.currentTarget.style.color = '#0f172a';
                 }}
                 onMouseLeave={(e) => {
-                  if (!isActive) e.target.style.color = '#475569';
+                  if (!isActive) e.currentTarget.style.color = '#475569';
                 }}
               >
-                {link.label}
+                <span>{link.label}</span>
+                {isActive && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      left: 0,
+                      right: 0,
+                      height: '3px',
+                      borderRadius: '4px',
+                      background: 'var(--brand-gradient)',
+                      boxShadow: '0 2px 10px rgba(124, 58, 237, 0.5)',
+                    }}
+                  />
+                )}
               </a>
             );
           })}

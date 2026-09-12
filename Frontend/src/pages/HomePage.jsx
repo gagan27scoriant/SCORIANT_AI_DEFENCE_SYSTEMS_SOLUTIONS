@@ -16,8 +16,8 @@ export default function HomePage() {
       <PillarsSection />
       <GlobalPartnersSection />
       <TechStackSection />
-      <UseCasesSection />
       <ClientMarquee />
+      <UseCasesSection />
       <CertificationsSection />
     </>
   );

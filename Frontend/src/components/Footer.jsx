@@ -40,8 +40,8 @@ export default function Footer() {
                 <div style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
                   SCORIANT
                 </div>
-                <div style={{ fontSize: '10px', fontWeight: 700, color: '#a78bfa', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                  Technologies
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#a78bfa', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  AI and Defence Systems
                 </div>
               </div>
             </div>
@@ -58,12 +58,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nav Links */}
-          <div>
+          {/* Solutions Column */}
+          <div className="footer-col">
             <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '20px' }}>
               Solutions
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
+            <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
               <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Secure Storage</a></li>
               <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>AI Knowledge Studio</a></li>
               <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Document Intelligence</a></li>
@@ -72,12 +72,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company Links */}
-          <div>
+          {/* Navigation Column */}
+          <div className="footer-col">
             <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '20px' }}>
               Navigation
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
+            <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
               <li><a href="#hero" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</a></li>
               <li><a href="#why-scoriant" style={{ color: '#94a3b8', textDecoration: 'none' }}>Why Scoriant</a></li>
               <li><a href="#expertise" style={{ color: '#94a3b8', textDecoration: 'none' }}>Our Expertise</a></li>
@@ -88,11 +88,11 @@ export default function Footer() {
           </div>
 
           {/* Contact Column */}
-          <div>
+          <div className="footer-col">
             <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '20px' }}>
               Contact
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '13.5px', color: '#94a3b8' }}>
+            <div className="responsive-footer-list" style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '13.5px', color: '#94a3b8' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Mail size={16} color="#a78bfa" />
                 <span>info@scoriant.com</span>
@@ -140,7 +140,46 @@ export default function Footer() {
         @media (max-width: 900px) {
           .footer-grid {
             grid-template-columns: 1fr 1fr !important;
-            gap: 32px !important;
+            gap: 24px !important;
+          }
+          .footer-col {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+          .footer-col h4 {
+            margin-bottom: 0 !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .footer-col h4::after {
+            content: '+';
+            font-size: 16px;
+            color: #a78bfa;
+            font-weight: 400;
+            transition: transform 0.3s ease;
+          }
+          .footer-col:hover h4::after,
+          .footer-col:active h4::after {
+            content: '-';
+            transform: rotate(180deg);
+          }
+          .responsive-footer-list {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            overflow: hidden !important;
+            margin-top: 0 !important;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          }
+          .footer-col:hover .responsive-footer-list,
+          .footer-col:active .responsive-footer-list {
+            max-height: 300px !important;
+            opacity: 1 !important;
+            margin-top: 14px !important;
           }
         }
         @media (max-width: 600px) {

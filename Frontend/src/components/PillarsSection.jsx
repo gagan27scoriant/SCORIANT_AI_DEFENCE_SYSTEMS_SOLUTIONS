@@ -1,12 +1,14 @@
 import React from 'react';
 import { PILLARS_DATA } from '../data/scoriantData';
-import { Shield, Cpu, Database, CheckCircle2 } from 'lucide-react';
+import { Shield, Cpu, Database, CheckCircle2, Radio, Wifi } from 'lucide-react';
 
 export default function PillarsSection() {
   const getIcon = (name) => {
     switch (name) {
       case 'Shield': return <Shield size={22} color="#ffffff" />;
       case 'Cpu': return <Cpu size={22} color="#ffffff" />;
+      case 'Radio': return <Radio size={22} color="#ffffff" />;
+      case 'Wifi': return <Wifi size={22} color="#ffffff" />;
       case 'Database': return <Database size={22} color="#ffffff" />;
       default: return <Cpu size={22} color="#ffffff" />;
     }
@@ -150,6 +152,7 @@ export default function PillarsSection() {
               </div>
 
               <div
+                className="responsive-card-bullets"
                 style={{
                   borderTop: '1px solid var(--border-light)',
                   paddingTop: '16px',
@@ -171,6 +174,15 @@ export default function PillarsSection() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        /* Full expertise info and bullets displayed at all viewports */
+        .responsive-card-bullets {
+          display: flex !important;
+          opacity: 1 !important;
+          max-height: none !important;
+        }
+      `}</style>
     </section>
   );
 }

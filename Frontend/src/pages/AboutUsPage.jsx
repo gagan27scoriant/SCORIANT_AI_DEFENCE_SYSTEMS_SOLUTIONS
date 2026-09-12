@@ -1,534 +1,701 @@
 import React from 'react';
-import { ShieldCheck, Cpu, Zap, Lock, Award, Target, Compass, ArrowRight } from 'lucide-react';
+import { Sparkles, Target, Compass, Layers, ArrowRight } from 'lucide-react';
+import PillarsSection from '../components/PillarsSection';
 
 export default function AboutUsPage() {
-  const stats = [
-    { label: 'Air-Gapped Compliance', value: '100%', sub: 'Zero External Cloud Dependency' },
-    { label: 'Edge Inference Latency', value: '< 15ms', sub: 'Real-time Hardware Compilation' },
-    { label: 'Defense & Enterprise Integrations', value: '12+', sub: 'Ruggedized Mission Compute Nodes' },
-    { label: 'Operational Uptime', value: '99.99%', sub: 'High-Availability Tactical Kernels' },
-  ];
-
-  const coreValues = [
-    {
-      icon: <Lock size={26} color="#7c3aed" />,
-      title: 'Zero-Trust Sovereignty',
-      desc: 'All models, datasets, and telemetry remain strictly inside host perimeter hardware. Zero phone-home calls, AES-256 GCM encryption, and hardware-enforced RBAC.',
-    },
-    {
-      icon: <Cpu size={26} color="#7c3aed" />,
-      title: 'Hardware-Accelerated Engineering',
-      desc: 'Direct-to-silicon compilation for NVIDIA TensorRT, Intel Xeon, AMD Xilinx FPGA, and Qualcomm Neural Engine without abstraction layer overhead.',
-    },
-    {
-      icon: <Zap size={26} color="#7c3aed" />,
-      title: 'Autonomous Edge Intelligence',
-      desc: 'Enabling unmanned systems, tactical command nodes, and industrial telemetry sensors to evaluate, decide, and act autonomously without network connectivity.',
-    },
-    {
-      icon: <Award size={26} color="#7c3aed" />,
-      title: 'Military-Grade Reliability',
-      desc: 'Engineered against MIL-STD-810H environmental standards and NIST SP 800-53 security controls to ensure fault-tolerant mission success.',
-    },
-  ];
-
-  const leadership = [
-    {
-      name: 'Dr. Vikramaditya Sen',
-      role: 'Chief Executive Officer & Co-Founder',
-      bio: 'Ex-Defense R&D Lead with 16+ years specializing in sovereign edge computing, air-gapped security protocols, and mission-critical telemetry systems.',
-      initials: 'VS',
-    },
-    {
-      name: 'Ananya Deshmukh',
-      role: 'Chief Technology Officer',
-      bio: 'Pioneer in FPGA neural compiler acceleration and low-latency agentic orchestration. Former Lead AI Architect at defense telemetry labs.',
-      initials: 'AD',
-    },
-    {
-      name: 'Col. Rajesh Verma (Retd.)',
-      role: 'Head of Defense & Security Operations',
-      bio: '25+ years in tactical military command, strategic electronic warfare integration, and air-gapped defense infrastructure deployment.',
-      initials: 'RV',
-    },
-  ];
-
-  const milestones = [
-    {
-      year: '2021',
-      title: 'Foundation & Stealth R&D',
-      desc: 'Scoriant founded by defense AI researchers to engineer sovereign, cloud-independent neural engine architectures.',
-    },
-    {
-      year: '2022',
-      title: 'Sub-15ms Edge Compilation Breakthrough',
-      desc: 'Achieved ultra-low latency direct FPGA neural inference benchmarks for real-time sensor fusion.',
-    },
-    {
-      year: '2023',
-      title: 'Strategic Ecosystem Integrations',
-      desc: 'Partnered with STACO & T-SECOND for joint hardware-level telemetry and air-gapped storage validation.',
-    },
-    {
-      year: '2024',
-      title: 'Sovereign AI Suite Deployment',
-      desc: 'Full operational release of Scoriant Agentic & Computer Vision platforms for mission-critical enterprise environments.',
-    },
-  ];
-
   return (
-    <div style={{ paddingTop: '90px', background: '#f8fafc', color: '#0f172a', minHeight: '100vh' }}>
-      {/* 1. Hero Section */}
-      <section style={{ padding: '80px 0 60px', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      {/* 1. Hero Section (Home Hero Aesthetic featuring Scoriant & 3 Core Domains) */}
+      <section
+        id="about-hero"
+        style={{
+          position: 'relative',
+          width: '100%',
+          minHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          background: '#0b0f19',
+          color: '#f8fafc',
+          paddingTop: '150px',
+          paddingBottom: '80px',
+        }}
+      >
+        {/* Background Image Backdrop */}
         <div
           style={{
             position: 'absolute',
-            top: '-10%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '800px',
-            height: '400px',
-            background: 'radial-gradient(ellipse at center, rgba(124, 58, 237, 0.08) 0%, rgba(248, 250, 252, 0) 70%)',
-            filter: 'blur(60px)',
-            pointerEvents: 'none',
+            inset: 0,
+            zIndex: 1,
           }}
-        />
+        >
+          <img
+            src="/HERO/IMAGE_08.jpg"
+            alt="About Scoriant Hero"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              opacity: 0.65,
+              filter: 'contrast(1.05) brightness(0.9)',
+            }}
+          />
 
-        <div className="section-wrapper" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          {/* Dark Overlay Gradients */}
           <div
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(124, 58, 237, 0.1)',
-              border: '1px solid rgba(124, 58, 237, 0.25)',
-              borderRadius: '9999px',
-              padding: '6px 16px',
+              position: 'absolute',
+              inset: 0,
+              background: `
+                linear-gradient(180deg, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.45) 50%, rgba(11, 15, 25, 0.85) 100%),
+                linear-gradient(90deg, rgba(11, 15, 25, 0.8) 0%, rgba(11, 15, 25, 0.5) 50%, rgba(11, 15, 25, 0.75) 100%)
+              `,
+            }}
+          />
+        </div>
+
+        {/* Hero Content */}
+        <div
+          className="section-wrapper"
+          style={{
+            position: 'relative',
+            zIndex: 10,
+            width: '100%',
+            paddingTop: '40px',
+            paddingBottom: '20px',
+          }}
+        >
+          <div style={{ maxWidth: '960px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'rgba(124, 58, 237, 0.25)',
+                border: '1px solid rgba(167, 139, 250, 0.4)',
+                color: '#c084fc',
+                fontSize: '12px',
+                fontWeight: 700,
+                letterSpacing: '1.2px',
+                textTransform: 'uppercase',
+                padding: '5px 16px',
+                borderRadius: 'var(--radius-pill)',
+                marginBottom: '20px',
+              }}
+            >
+              <Sparkles size={13} />
+              <span>SCORIANT AI SOLUTIONS & ENGINEERING</span>
+            </div>
+
+            <h1
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(32px, 4.5vw, 54px)',
+                fontWeight: 900,
+                color: '#ffffff',
+                lineHeight: 1.15,
+                letterSpacing: '-1px',
+                marginBottom: '20px',
+              }}
+            >
+              Empowering Organizations Through{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Intelligent AI Innovation
+              </span>
+            </h1>
+
+            <p
+              style={{
+                fontSize: 'clamp(16.5px, 1.9vw, 19.5px)',
+                color: '#cbd5e1',
+                lineHeight: 1.7,
+                marginBottom: '36px',
+                maxWidth: '860px',
+              }}
+            >
+              Scoriant AI & Defence Systems Solutions is a technology-driven pioneer delivering enterprise-grade AI platforms, sovereign compute architectures, and air-gapped defense solutions across <strong>5G Engineering</strong>, <strong>Secure Storage & Computing Engines</strong>, and <strong>Autonomous AI-Powered Platforms</strong>.
+            </p>
+
+            <div>
+              <a
+                href="#our-identity"
+                className="btn-primary"
+                style={{
+                  textDecoration: 'none',
+                  fontSize: '15px',
+                  padding: '14px 34px',
+                }}
+              >
+                <span>Explore Scoriant Identity</span>
+                <ArrowRight size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. OUR IDENTITY Section (Content from image + Scoriant Technical Highlights) */}
+      <section
+        id="our-identity"
+        style={{
+          padding: '85px 0 70px',
+          background: 'var(--bg-secondary)',
+          borderBottom: '1px solid var(--border-light)',
+        }}
+      >
+        <div className="section-wrapper">
+          <div style={{ maxWidth: '980px', margin: '0 auto' }}>
+            <span
+              style={{
+                fontSize: '13px',
+                fontWeight: 800,
+                letterSpacing: '1.8px',
+                textTransform: 'uppercase',
+                color: 'var(--primary-purple)',
+                display: 'inline-block',
+                marginBottom: '10px',
+              }}
+            >
+              OUR IDENTITY
+            </span>
+
+            <h2
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(28px, 3.8vw, 42px)',
+                fontWeight: 900,
+                color: 'var(--text-main)',
+                lineHeight: 1.2,
+                letterSpacing: '-0.5px',
+                marginBottom: '32px',
+              }}
+            >
+              Empowering Organizations Through Intelligent AI Innovation
+            </h2>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+              <p
+                style={{
+                  fontSize: '16.5px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                Scoriant AI Solutions is a technology-driven organization focused on developing enterprise-grade Artificial Intelligence platforms that transform data into actionable intelligence. We specialize in delivering secure, scalable, and intelligent solutions that help organizations automate processes, enhance decision-making, and unlock the full value of their digital assets.
+              </p>
+
+              <p
+                style={{
+                  fontSize: '16.5px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                Our expertise spans across Artificial Intelligence, Computer Vision, Document Intelligence, Speech Analytics, Geospatial Intelligence, and Intelligent Automation, enabling businesses, government agencies, educational institutions, and enterprises to solve complex operational challenges through cutting-edge AI technologies.
+              </p>
+
+              <p
+                style={{
+                  fontSize: '16.5px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                By combining advanced machine learning models, enterprise-grade security, multilingual capabilities, and flexible deployment architectures, Scoriant delivers innovative solutions that are built for real-world impact and long-term scalability.
+              </p>
+            </div>
+
+            {/* Scoriant Core Architectural Highlights */}
+            <div
+              style={{
+                background: 'var(--bg-subtle)',
+                borderRadius: '20px',
+                padding: '32px 30px',
+                border: '1px solid var(--border-light)',
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  color: 'var(--text-main)',
+                  marginBottom: '20px',
+                }}
+              >
+                Scoriant Core Technical Highlights
+              </h3>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                  gap: '20px',
+                }}
+              >
+                <div
+                  style={{
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-light)',
+                    padding: '20px',
+                    borderRadius: '16px',
+                  }}
+                >
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--primary-purple)', marginBottom: '6px' }}>
+                    ✦ 100% Air-Gapped Data Sovereignty
+                  </div>
+                  <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', margin: 0, lineHeight: 1.55 }}>
+                    Hardware-enforced zero-trust architecture ensuring all telemetry and models remain strictly on host perimeter hardware with zero external phone-home dependencies.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-light)',
+                    padding: '20px',
+                    borderRadius: '16px',
+                  }}
+                >
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--primary-blue)', marginBottom: '6px' }}>
+                    ⚡ Sub-15ms Hardware Compilation
+                  </div>
+                  <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', margin: 0, lineHeight: 1.55 }}>
+                    Direct-to-silicon compilation for NVIDIA TensorRT, Intel Xeon, and AMD Xilinx FPGA accelerators engineered for real-time edge neural inference.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-light)',
+                    padding: '20px',
+                    borderRadius: '16px',
+                  }}
+                >
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#10b981', marginBottom: '6px' }}>
+                    🛡️ Carrier-Grade 5G & Sensor Fusion
+                  </div>
+                  <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', margin: 0, lineHeight: 1.55 }}>
+                    Full 5G RAN protocol stack engineering seamlessly integrated with computer vision and tactical command sensor networks.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. OUR MISSION, OUR VISION & WHAT WE DO (Compact Modern Layout) */}
+      <section
+        style={{
+          padding: '60px 0',
+          background: 'var(--bg-primary)',
+          borderBottom: '1px solid var(--border-light)',
+        }}
+      >
+        <div className="section-wrapper">
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+            <div className="pill-badge" style={{ marginBottom: '10px' }}>
+              <Layers size={13} />
+              <span>STRATEGIC FOUNDATION</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(24px, 3.2vw, 36px)',
+                fontWeight: 900,
+                color: 'var(--text-main)',
+                lineHeight: 1.2,
+                letterSpacing: '-0.5px',
+              }}
+            >
+              Our Purpose & Core Capabilities
+            </h2>
+          </div>
+
+          {/* Top Row: Mission & Vision (2-Column Grid) */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '24px',
               marginBottom: '24px',
             }}
           >
-            <ShieldCheck size={16} color="#7c3aed" />
-            <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: '#7c3aed' }}>
-              About Scoriant Technologies
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(32px, 4.5vw, 54px)',
-              fontWeight: 900,
-              letterSpacing: '-1px',
-              lineHeight: 1.15,
-              color: '#0f172a',
-              maxWidth: '900px',
-              margin: '0 auto 20px',
-            }}
-          >
-            Pioneering Autonomous Intelligence For{' '}
-            <span style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Mission-Critical Operations
-            </span>
-          </h1>
-
-          <p
-            style={{
-              fontSize: '17px',
-              color: '#475569',
-              lineHeight: 1.65,
-              maxWidth: '780px',
-              margin: '0 auto 48px',
-            }}
-          >
-            Scoriant engineers hardware-accelerated, 100% air-gapped AI solutions that empower defense forces, aerospace operators, and enterprise industrial networks with real-time edge intelligence and absolute data sovereignty.
-          </p>
-
-          {/* Stats Grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '20px',
-              maxWidth: '1100px',
-              margin: '0 auto',
-            }}
-          >
-            {stats.map((stat, idx) => (
+            {/* 1. Our Mission */}
+            <div
+              className="card-container"
+              style={{
+                borderRadius: '18px',
+                padding: '26px 24px',
+                background: 'var(--bg-card)',
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
               <div
-                key={idx}
                 style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '16px',
-                  padding: '24px 20px',
-                  textAlign: 'center',
-                  boxShadow: '0 10px 30px rgba(15, 23, 42, 0.05)',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)',
                 }}
-              >
+              />
+
+              <div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '34px',
-                    fontWeight: 900,
-                    color: '#0f172a',
-                    marginBottom: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '18px',
                   }}
                 >
-                  {stat.value}
+                  <div
+                    style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: 'rgba(124, 58, 237, 0.1)',
+                      border: '1px solid rgba(124, 58, 237, 0.25)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 4px 14px rgba(124, 58, 237, 0.12)',
+                    }}
+                  >
+                    <Target size={22} color="var(--primary-purple)" />
+                  </div>
+
+                  <span
+                    style={{
+                      fontSize: '10.5px',
+                      fontWeight: 800,
+                      letterSpacing: '1.2px',
+                      textTransform: 'uppercase',
+                      color: 'var(--primary-purple)',
+                      background: 'rgba(124, 58, 237, 0.08)',
+                      padding: '3px 10px',
+                      borderRadius: 'var(--radius-pill)',
+                    }}
+                  >
+                    01 / PURPOSE
+                  </span>
                 </div>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: '#7c3aed', marginBottom: '4px' }}>
-                  {stat.label}
-                </div>
-                <div style={{ fontSize: '12px', color: '#64748b' }}>{stat.sub}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* 2. Mission & Vision */}
-      <section style={{ padding: '70px 0', borderTop: '1px solid #e2e8f0', background: '#ffffff' }}>
-        <div className="section-wrapper">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }} className="responsive-two-col">
-            {/* Mission Card */}
-            <div
-              style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-                border: '1px solid rgba(124, 58, 237, 0.25)',
-                borderRadius: '20px',
-                padding: '40px',
-                boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
-              }}
-            >
-              <div
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: 'rgba(124, 58, 237, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '24px',
-                }}
-              >
-                <Target size={24} color="#7c3aed" />
-              </div>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '24px',
-                  fontWeight: 800,
-                  color: '#0f172a',
-                  marginBottom: '14px',
-                }}
-              >
-                Our Core Mission
-              </h2>
-              <p style={{ color: '#475569', fontSize: '15.5px', lineHeight: 1.7 }}>
-                To eliminate cloud reliance in mission-critical operations by embedding autonomous, sovereign AI directly into edge telemetry devices, unmanned platforms, and secure tactical command nodes.
-              </p>
-            </div>
-
-            {/* Vision Card */}
-            <div
-              style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-                border: '1px solid rgba(59, 130, 246, 0.25)',
-                borderRadius: '20px',
-                padding: '40px',
-                boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
-              }}
-            >
-              <div
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: 'rgba(59, 130, 246, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '24px',
-                }}
-              >
-                <Compass size={24} color="#3b82f6" />
-              </div>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '24px',
-                  fontWeight: 800,
-                  color: '#0f172a',
-                  marginBottom: '14px',
-                }}
-              >
-                Our Long-Term Vision
-              </h2>
-              <p style={{ color: '#475569', fontSize: '15.5px', lineHeight: 1.7 }}>
-                To establish the benchmark standard for sovereign defense AI and zero-trust industrial ecosystems across allied defense networks, space telemetry systems, and heavy industrial automation worldwide.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Engineering Core Values */}
-      <section style={{ padding: '80px 0', borderTop: '1px solid #e2e8f0', background: '#f8fafc' }}>
-        <div className="section-wrapper">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#7c3aed' }}>
-              Built For Sovereign Trust
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(26px, 3.2vw, 38px)',
-                fontWeight: 900,
-                color: '#0f172a',
-                marginTop: '8px',
-              }}
-            >
-              Our Engineering Principles
-            </h2>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '24px',
-            }}
-          >
-            {coreValues.map((item, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '16px',
-                  padding: '28px 24px',
-                  boxShadow: '0 6px 20px rgba(15, 23, 42, 0.04)',
-                }}
-              >
-                <div style={{ marginBottom: '16px' }}>{item.icon}</div>
                 <h3
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '18px',
-                    fontWeight: 800,
-                    color: '#0f172a',
+                    fontSize: '20px',
+                    fontWeight: 900,
+                    color: 'var(--text-main)',
+                    lineHeight: 1.25,
                     marginBottom: '10px',
                   }}
                 >
-                  {item.title}
+                  Our Mission
                 </h3>
-                <p style={{ color: '#475569', fontSize: '14px', lineHeight: 1.6 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* 4. Leadership Team */}
-      <section style={{ padding: '80px 0', background: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
-        <div className="section-wrapper">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#7c3aed' }}>
-              Leadership & Defense Expertise
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(26px, 3.2vw, 38px)',
-                fontWeight: 900,
-                color: '#0f172a',
-                marginTop: '8px',
-              }}
-            >
-              Executive Leadership Team
-            </h2>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '28px',
-            }}
-          >
-            {leadership.map((member, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '20px',
-                  padding: '32px 28px',
-                  textAlign: 'left',
-                }}
-              >
-                <div
+                <p
                   style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '20px',
-                    fontWeight: 800,
-                    color: '#ffffff',
-                    marginBottom: '20px',
-                    boxShadow: '0 4px 14px rgba(124, 58, 237, 0.3)',
+                    color: 'var(--text-muted)',
+                    fontSize: '14.5px',
+                    lineHeight: 1.6,
+                    margin: 0,
                   }}
                 >
-                  {member.initials}
+                  To empower organizations with secure, intelligent, and scalable AI solutions that drive innovation, improve operational efficiency, and accelerate digital transformation.
+                </p>
+              </div>
+            </div>
+
+            {/* 2. Our Vision */}
+            <div
+              className="card-container"
+              style={{
+                borderRadius: '18px',
+                padding: '26px 24px',
+                background: 'var(--bg-card)',
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%)',
+                }}
+              />
+
+              <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '18px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: 'rgba(59, 130, 246, 0.1)',
+                      border: '1px solid rgba(59, 130, 246, 0.25)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 4px 14px rgba(59, 130, 246, 0.12)',
+                    }}
+                  >
+                    <Compass size={22} color="var(--primary-blue)" />
+                  </div>
+
+                  <span
+                    style={{
+                      fontSize: '10.5px',
+                      fontWeight: 800,
+                      letterSpacing: '1.2px',
+                      textTransform: 'uppercase',
+                      color: 'var(--primary-blue)',
+                      background: 'rgba(59, 130, 246, 0.08)',
+                      padding: '3px 10px',
+                      borderRadius: 'var(--radius-pill)',
+                    }}
+                  >
+                    02 / ASPIRATION
+                  </span>
                 </div>
+
                 <h3
                   style={{
                     fontFamily: 'var(--font-heading)',
                     fontSize: '20px',
-                    fontWeight: 800,
-                    color: '#0f172a',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {member.name}
-                </h3>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#7c3aed', marginBottom: '14px' }}>
-                  {member.role}
-                </div>
-                <p style={{ color: '#475569', fontSize: '14px', lineHeight: 1.6 }}>{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Company Milestones Timeline */}
-      <section style={{ padding: '80px 0', borderTop: '1px solid #e2e8f0', background: '#f8fafc' }}>
-        <div className="section-wrapper">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#7c3aed' }}>
-              Evolution & Milestones
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(26px, 3.2vw, 38px)',
-                fontWeight: 900,
-                color: '#0f172a',
-                marginTop: '8px',
-              }}
-            >
-              Journey to Defense Autonomy
-            </h2>
-          </div>
-
-          <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            {milestones.map((item, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: 'flex',
-                  gap: '24px',
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '16px',
-                  padding: '24px 28px',
-                  alignItems: 'flex-start',
-                  boxShadow: '0 4px 16px rgba(15, 23, 42, 0.04)',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '20px',
                     fontWeight: 900,
-                    color: '#7c3aed',
-                    background: 'rgba(124, 58, 237, 0.1)',
-                    padding: '8px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(124, 58, 237, 0.2)',
+                    color: 'var(--text-main)',
+                    lineHeight: 1.25,
+                    marginBottom: '10px',
                   }}
                 >
-                  {item.year}
-                </div>
-                <div>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '18px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ color: '#475569', fontSize: '14.5px', lineHeight: 1.6 }}>{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                  Our Vision
+                </h3>
 
-      {/* 6. CTA Section */}
-      <section style={{ padding: '70px 0 90px', background: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
-        <div className="section-wrapper">
+                <p
+                  style={{
+                    color: 'var(--text-muted)',
+                    fontSize: '14.5px',
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  To become a trusted global leader in enterprise AI by building intelligent systems that seamlessly integrate advanced technology with real-world business and government needs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Full-Width Spotlight Card: What We Do */}
           <div
+            className="card-container"
             style={{
-              background: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
-              border: '1px solid rgba(124, 58, 237, 0.3)',
-              borderRadius: '24px',
-              padding: '48px 40px',
-              textAlign: 'center',
-              boxShadow: '0 20px 40px rgba(15, 23, 42, 0.06)',
+              borderRadius: '18px',
+              padding: '28px 28px',
+              background: 'linear-gradient(135deg, var(--bg-card) 0%, var(--bg-subtle) 100%)',
+              border: '1px solid var(--border-light)',
+              position: 'relative',
+              overflow: 'hidden',
             }}
           >
-            <h2
+            <div
               style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(26px, 3.2vw, 38px)',
-                fontWeight: 900,
-                color: '#0f172a',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: '5px',
+                background: 'var(--brand-gradient)',
+              }}
+            />
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
                 marginBottom: '14px',
+                flexWrap: 'wrap',
+                gap: '10px',
               }}
             >
-              Deploy Sovereign Intelligence on Your Infrastructure
-            </h2>
-            <p style={{ color: '#475569', fontSize: '16px', maxWidth: '640px', margin: '0 auto 28px', lineHeight: 1.6 }}>
-              Contact our defense engineering team to schedule a technical deep-dive and air-gapped pilot demonstration.
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '12px',
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Layers size={22} color="#10b981" />
+                </div>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: '21px',
+                    fontWeight: 900,
+                    color: 'var(--text-main)',
+                    lineHeight: 1.2,
+                    margin: 0,
+                  }}
+                >
+                  What We Do
+                </h3>
+              </div>
+
+              <span
+                style={{
+                  fontSize: '10.5px',
+                  fontWeight: 800,
+                  letterSpacing: '1.2px',
+                  textTransform: 'uppercase',
+                  color: '#10b981',
+                  background: 'rgba(16, 185, 129, 0.1)',
+                  padding: '3px 10px',
+                  borderRadius: 'var(--radius-pill)',
+                }}
+              >
+                03 / EXECUTION & PLATFORMS
+              </span>
+            </div>
+
+            <p
+              style={{
+                color: 'var(--text-muted)',
+                fontSize: '14.5px',
+                lineHeight: 1.65,
+                marginBottom: '20px',
+                maxWidth: '1060px',
+              }}
+            >
+              We design and develop AI-powered platforms that enable organizations to process information faster, automate critical workflows, improve situational awareness, and make data-driven decisions with confidence. Our solutions are engineered to support both cloud and on-premise environments, ensuring flexibility, security, and compliance for mission-critical operations.
             </p>
 
-            <button
-              onClick={() => alert('Briefing request initiated. Our defense team will reach out directly.')}
+            {/* 4 Execution Pillars Badges */}
+            <div
               style={{
-                background: 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)',
-                color: '#ffffff',
-                border: 'none',
-                padding: '14px 32px',
-                borderRadius: '9999px',
-                fontWeight: 700,
-                fontSize: '15px',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                boxShadow: '0 8px 24px rgba(124, 58, 237, 0.35)',
-                transition: 'all 0.2s ease',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+                gap: '12px',
               }}
             >
-              <span>Schedule Executive Briefing</span>
-              <ArrowRight size={18} />
-            </button>
+              <div
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#7c3aed' }} />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
+                  Faster Data Processing
+                </span>
+              </div>
+
+              <div
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#3b82f6' }} />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
+                  Critical Workflow Automation
+                </span>
+              </div>
+
+              <div
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981' }} />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
+                  Enhanced Situational Awareness
+                </span>
+              </div>
+
+              <div
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#f59e0b' }} />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
+                  Cloud & On-Premise Hybrid Security
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .responsive-two-col {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
+      {/* 4. Core Pillars (Cloned from Home Page) */}
+      <PillarsSection />
     </div>
   );
 }
