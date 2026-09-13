@@ -102,7 +102,7 @@ export default function DemoModal({ isOpen, onClose }) {
             </h3>
 
             <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '28px' }}>
-              Thank you, <strong>{formData.name}</strong>. Our defense & AI engineering team will contact you at <strong>{formData.email}</strong> within 24 hours to schedule your briefing.
+              Thank you, <strong>{formData.name}</strong>. Our defence & AI engineering team will contact you at <strong>{formData.email}</strong> within 24 hours to schedule your briefing.
             </p>
 
             <button onClick={handleReset} className="btn-primary">

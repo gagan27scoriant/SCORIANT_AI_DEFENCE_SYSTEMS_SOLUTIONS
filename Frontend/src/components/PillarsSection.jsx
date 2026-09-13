@@ -1,8 +1,10 @@
 import React from 'react';
-import { PILLARS_DATA } from '../data/scoriantData';
+import { useDataContext } from '../context/DataContext';
 import { Shield, Cpu, Database, CheckCircle2, Radio, Wifi } from 'lucide-react';
 
 export default function PillarsSection() {
+  const { pillars } = useDataContext();
+
   const getIcon = (name) => {
     switch (name) {
       case 'Shield': return <Shield size={22} color="#ffffff" />;
@@ -40,13 +42,11 @@ export default function PillarsSection() {
           </div>
           <div
             style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '1px',
+              fontSize: '13px',
+              fontWeight: 800,
               color: 'var(--primary-purple)',
-              textTransform: 'uppercase',
-              background: '#eef2ff',
-              border: '1px solid #c7d2fe',
+              background: 'rgba(124, 58, 237, 0.08)',
+              border: '1px solid rgba(124, 58, 237, 0.2)',
               padding: '6px 16px',
               borderRadius: 'var(--radius-pill)',
             }}
@@ -62,7 +62,7 @@ export default function PillarsSection() {
             gap: '24px',
           }}
         >
-          {PILLARS_DATA.map((pillar, i) => (
+          {pillars.map((pillar, i) => (
             <div
               key={pillar.id}
               className="card-container"

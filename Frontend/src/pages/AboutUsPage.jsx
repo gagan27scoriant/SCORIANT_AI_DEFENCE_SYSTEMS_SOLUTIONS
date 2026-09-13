@@ -11,7 +11,7 @@ export default function AboutUsPage() {
         style={{
           position: 'relative',
           width: '100%',
-          minHeight: '80vh',
+          minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -31,15 +31,15 @@ export default function AboutUsPage() {
           }}
         >
           <img
-            src="/HERO/IMAGE_08.jpg"
+            src="/HERO/ABOUT_US.jpg"
             alt="About Scoriant Hero"
             style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
-              opacity: 0.65,
-              filter: 'contrast(1.05) brightness(0.9)',
+              opacity: 0.85,
+              filter: 'contrast(1.05) brightness(0.95)',
             }}
           />
 
@@ -49,8 +49,8 @@ export default function AboutUsPage() {
               position: 'absolute',
               inset: 0,
               background: `
-                linear-gradient(180deg, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.45) 50%, rgba(11, 15, 25, 0.85) 100%),
-                linear-gradient(90deg, rgba(11, 15, 25, 0.8) 0%, rgba(11, 15, 25, 0.5) 50%, rgba(11, 15, 25, 0.75) 100%)
+                linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.2) 50%, rgba(11, 15, 25, 0.65) 100%),
+                linear-gradient(90deg, rgba(11, 15, 25, 0.55) 0%, rgba(11, 15, 25, 0.2) 50%, rgba(11, 15, 25, 0.45) 100%)
               `,
             }}
           />
@@ -89,18 +89,19 @@ export default function AboutUsPage() {
               <span>SCORIANT AI SOLUTIONS & ENGINEERING</span>
             </div>
 
+            {/* Title */}
             <h1
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(32px, 4.5vw, 54px)',
+                fontSize: 'clamp(34px, 4.8vw, 56px)',
                 fontWeight: 900,
                 color: '#ffffff',
                 lineHeight: 1.15,
-                letterSpacing: '-1px',
-                marginBottom: '20px',
+                letterSpacing: '-0.5px',
+                marginBottom: '18px',
               }}
             >
-              Empowering Organizations Through{' '}
+              About{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
@@ -108,20 +109,21 @@ export default function AboutUsPage() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Intelligent AI Innovation
+                SCORIANT
               </span>
             </h1>
 
             <p
               style={{
-                fontSize: 'clamp(16.5px, 1.9vw, 19.5px)',
+                fontSize: 'clamp(16px, 1.85vw, 19px)',
                 color: '#cbd5e1',
-                lineHeight: 1.7,
+                lineHeight: 1.75,
                 marginBottom: '36px',
-                maxWidth: '860px',
+                maxWidth: '880px',
+                fontWeight: 450,
               }}
             >
-              Scoriant AI & Defence Systems Solutions is a technology-driven pioneer delivering enterprise-grade AI platforms, sovereign compute architectures, and air-gapped defense solutions across <strong>5G Engineering</strong>, <strong>Secure Storage & Computing Engines</strong>, and <strong>Autonomous AI-Powered Platforms</strong>.
+              Scoriant AI & Defence Systems is an engineering-driven pioneer specializing in sovereign AI platforms, air-gapped compute architectures, and mission-critical defence systems. Combining direct-to-silicon hardware acceleration with autonomous agentic intelligence, we empower aerospace agencies, defence establishments, and regulated enterprises with real-time situational awareness, carrier-grade 5G protocol stacks, and high-performance edge computing engineered for disconnected and extreme environments.
             </p>
 
             <div>

@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
+import { useDataContext } from '../context/DataContext';
 
-export default function Header({ activePage = 'home', onPageChange }) {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { products } = useDataContext();
+
+  const EMOJI_MAP = {
+    'secure-storage': '🗄️',
+    'ai-knowledge-studio': '🧠',
+    'document-intelligence': '📄',
+    'geospatial-intelligence': '🛰️',
+    'smart-surveillance': '📹',
+    'gurukula-ai': '🎓',
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,18 +29,26 @@ export default function Header({ activePage = 'home', onPageChange }) {
   }, []);
 
   const navLinks = [
-    { label: 'Home', id: 'home' },
-    { label: 'About Us', id: 'about' },
-    { label: 'Contact Us', id: 'contact' },
+    { label: 'HOME', path: '/' },
+    { label: 'ABOUT US', path: '/about' },
+    { label: 'OUR SOLUTIONS', path: '/solutions', hasDropdown: true },
+    { label: 'CAREERS', path: '/careers' },
+    { label: 'CONTACT US', path: '/contact' },
   ];
 
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    if (onPageChange) {
-      onPageChange(id);
+  const isPathActive = (linkPath) => {
+    if (linkPath === '/') {
+      return location.pathname === '/';
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return location.pathname.startsWith(linkPath);
+  };
+
+  const handleProductClick = (e, productId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsSolutionsHovered(false);
     setMobileMenuOpen(false);
+    navigate(`/solutions/${productId}`);
   };
 
   return (
@@ -38,8 +61,8 @@ export default function Header({ activePage = 'home', onPageChange }) {
         zIndex: 1000,
         transition: 'all 0.3s ease',
         background: scrolled
-          ? 'rgba(255, 255, 255, 0.95)'
-          : 'rgba(255, 255, 255, 0.85)',
+          ? 'rgba(255, 255, 255, 0.96)'
+          : 'rgba(255, 255, 255, 0.88)',
         backdropFilter: 'blur(16px)',
         borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
         boxShadow: scrolled ? '0 4px 20px rgba(0, 0, 0, 0.05)' : 'none',
@@ -56,10 +79,10 @@ export default function Header({ activePage = 'home', onPageChange }) {
         }}
       >
         {/* Logo */}
-        <a
-          href="#home"
-          onClick={(e) => handleNavClick(e, 'home')}
+        <Link
+          to="/"
           style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
+          onClick={() => setMobileMenuOpen(false)}
         >
           <img
             src="/SCORIANT_LOGO.png"
@@ -99,7 +122,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
               AI and Defence Systems
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav
@@ -111,21 +134,227 @@ export default function Header({ activePage = 'home', onPageChange }) {
           className="desktop-nav"
         >
           {navLinks.map((link) => {
-            const isActive = activePage === link.id;
+            const isActive = isPathActive(link.path);
+
+            if (link.hasDropdown) {
+              return (
+                <div
+                  key={link.path}
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setIsSolutionsHovered(true)}
+                  onMouseLeave={() => setIsSolutionsHovered(false)}
+                >
+                  <Link
+                    to={link.path}
+                    style={{
+                      position: 'relative',
+                      fontSize: '13.5px',
+                      fontWeight: isActive ? 800 : 700,
+                      color: isActive || isSolutionsHovered ? '#7c3aed' : '#475569',
+                      padding: '12px 4px',
+                      textDecoration: 'none',
+                      transition: 'all 0.2s ease',
+                      letterSpacing: '0.8px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown
+                      size={14}
+                      style={{
+                        transform: isSolutionsHovered ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.25s ease',
+                      }}
+                    />
+
+                    {isActive && (
+                      <span
+                        style={{
+                          position: 'absolute',
+                          bottom: '2px',
+                          left: 0,
+                          right: 0,
+                          height: '3px',
+                          borderRadius: '4px',
+                          background: 'var(--brand-gradient)',
+                          boxShadow: '0 2px 10px rgba(124, 58, 237, 0.5)',
+                        }}
+                      />
+                    )}
+                  </Link>
+
+                  {/* Dropdown Solutions Menu */}
+                  {isSolutionsHovered && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        paddingTop: '10px',
+                        zIndex: 2000,
+                      }}
+                    >
+                      <div
+                        style={{
+                          background: '#ffffff',
+                          border: '1px solid rgba(226, 232, 240, 0.95)',
+                          borderRadius: '18px',
+                          boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15), 0 6px 20px rgba(124, 58, 237, 0.08)',
+                          padding: '12px',
+                          width: '360px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                          backdropFilter: 'blur(20px)',
+                        }}
+                      >
+                        {/* Header banner inside dropdown */}
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '4px 8px 8px 8px',
+                            borderBottom: '1px solid #f1f5f9',
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: '11px',
+                              fontWeight: 800,
+                              color: '#7c3aed',
+                              letterSpacing: '1.2px',
+                              textTransform: 'uppercase',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                            }}
+                          >
+                            <Sparkles size={13} />
+                            <span>Enterprise & Defence Suite</span>
+                          </span>
+                          <Link
+                            to="/solutions"
+                            onClick={() => setIsSolutionsHovered(false)}
+                            style={{
+                              fontSize: '11.5px',
+                              fontWeight: 700,
+                              color: '#64748b',
+                              textDecoration: 'none',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              transition: 'color 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = '#7c3aed')}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = '#64748b')}
+                          >
+                            <span>View All</span>
+                            <ArrowRight size={12} />
+                          </Link>
+                        </div>
+
+                        {/* 1-Column List of Products */}
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '4px',
+                          }}
+                        >
+                          {products.map((product) => (
+                            <div
+                              key={product.id}
+                              onClick={(e) => handleProductClick(e, product.id)}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '10px',
+                                padding: '8px 10px',
+                                borderRadius: '10px',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                background: 'transparent',
+                                border: '1px solid transparent',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = 'rgba(124, 58, 237, 0.08)';
+                                e.currentTarget.style.borderColor = 'rgba(124, 58, 237, 0.15)';
+                                e.currentTarget.style.transform = 'translateX(2px)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = 'transparent';
+                                e.currentTarget.style.borderColor = 'transparent';
+                                e.currentTarget.style.transform = 'translateX(0)';
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: '32px',
+                                  height: '32px',
+                                  borderRadius: '8px',
+                                  background: 'rgba(124, 58, 237, 0.08)',
+                                  border: '1px solid rgba(124, 58, 237, 0.15)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  fontSize: '16px',
+                                  flexShrink: 0,
+                                }}
+                              >
+                                {EMOJI_MAP[product.id] || '⚡'}
+                              </div>
+                              <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
+                                <span
+                                  style={{
+                                    fontSize: '13px',
+                                    fontWeight: 800,
+                                    color: '#0f172a',
+                                    lineHeight: 1.3,
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                  }}
+                                >
+                                  {product.title}
+                                </span>
+                                <span
+                                  style={{
+                                    fontSize: '10.5px',
+                                    fontWeight: 600,
+                                    color: '#7c3aed',
+                                    marginTop: '1px',
+                                  }}
+                                >
+                                  {product.badge || product.category}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             return (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => handleNavClick(e, link.id)}
+              <Link
+                key={link.path}
+                to={link.path}
                 style={{
                   position: 'relative',
-                  fontSize: '15px',
-                  fontWeight: isActive ? 800 : 600,
+                  fontSize: '13.5px',
+                  fontWeight: isActive ? 800 : 700,
                   color: isActive ? '#7c3aed' : '#475569',
                   padding: '6px 2px',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
-                  letterSpacing: '0.2px',
+                  letterSpacing: '0.8px',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) e.currentTarget.style.color = '#0f172a';
@@ -149,7 +378,7 @@ export default function Header({ activePage = 'home', onPageChange }) {
                     }}
                   />
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -180,23 +409,71 @@ export default function Header({ activePage = 'home', onPageChange }) {
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
+            maxHeight: '80vh',
+            overflowY: 'auto',
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={(e) => handleNavClick(e, link.id)}
-              style={{
-                fontSize: '16px',
-                fontWeight: 600,
-                color: activePage === link.id ? '#7c3aed' : '#0f172a',
-                textDecoration: 'none',
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = isPathActive(link.path);
+
+            if (link.hasDropdown) {
+              return (
+                <div key={link.path} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <Link
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      fontSize: '16px',
+                      fontWeight: 800,
+                      color: isActive ? '#7c3aed' : '#0f172a',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+
+                  {/* Sub products for mobile */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', paddingLeft: '12px' }}>
+                    {products.map((p) => (
+                      <div
+                        key={p.id}
+                        onClick={(e) => handleProductClick(e, p.id)}
+                        style={{
+                          fontSize: '13.5px',
+                          fontWeight: 700,
+                          color: '#475569',
+                          padding: '6px 0',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <span>{EMOJI_MAP[p.id] || '⚡'}</span>
+                        <span>{p.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: isActive ? '#7c3aed' : '#0f172a',
+                  textDecoration: 'none',
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       )}
 

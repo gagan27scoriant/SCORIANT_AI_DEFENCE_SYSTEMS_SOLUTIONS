@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { PRODUCTS_DATA } from '../data/scoriantData';
+import { useNavigate } from 'react-router-dom';
+import { useDataContext } from '../context/DataContext';
 import DemoModal from './DemoModal';
 import {
   Cpu,
@@ -20,6 +21,8 @@ import {
 } from 'lucide-react';
 
 export default function TechStackSection() {
+  const { products } = useDataContext();
+  const navigate = useNavigate();
   const [activeModalProduct, setActiveModalProduct] = useState(null);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
@@ -127,7 +130,7 @@ export default function TechStackSection() {
                 Our Intelligence Products
               </h2>
               <p style={{ fontSize: '15.5px', color: '#94a3b8', maxWidth: '680px', lineHeight: 1.6 }}>
-                Enterprise-grade AI platforms designed for air-gapped security, real-time analytics, and high-performance field deployment across defense and government organizations.
+                Enterprise-grade AI platforms designed for air-gapped security, real-time analytics, and high-performance field deployment across defence and government organizations.
               </p>
             </div>
 
@@ -209,10 +212,11 @@ export default function TechStackSection() {
             scrollbarColor: 'rgba(124, 58, 237, 0.4) #111827',
           }}
         >
-          {PRODUCTS_DATA.map((product) => (
+          {products.map((product) => (
             <div
               key={product.id}
               className="product-card"
+              onClick={() => navigate(`/solutions/${product.id}`)}
               style={{
                 flex: '0 0 380px',
                 scrollSnapAlign: 'start',
@@ -225,6 +229,7 @@ export default function TechStackSection() {
                 justifyContent: 'space-between',
                 transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
                 boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                cursor: 'pointer',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -339,6 +344,30 @@ export default function TechStackSection() {
                       </div>
                     ))}
                   </div>
+
+                  {/* Know More Action Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/solutions/${product.id}`);
+                    }}
+                    className="btn-primary"
+                    style={{
+                      width: '100%',
+                      padding: '10px 16px',
+                      fontSize: '13.5px',
+                      fontWeight: 700,
+                      marginTop: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    <span>Know More</span>
+                    <ArrowRight size={15} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -551,8 +580,11 @@ export default function TechStackSection() {
                 </button>
                 <button
                   onClick={() => {
+                    const prodTitle = activeModalProduct.title;
                     setActiveModalProduct(null);
-                    setIsDemoModalOpen(true);
+                    navigate(`/contact?product=${encodeURIComponent(prodTitle)}#send-message-section`, {
+                      state: { product: prodTitle },
+                    });
                   }}
                   className="btn-primary"
                   style={{ padding: '10px 24px' }}

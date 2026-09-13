@@ -37,7 +37,7 @@ export default function CapabilitiesSection() {
             Engineered for High-Throughput Mission Demands
           </h2>
           <p style={{ fontSize: '15.5px', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '28px' }}>
-            Scoriant solutions undergo continuous stress-testing across air-gapped defense networks, edge hardware nodes, and enterprise telemetry feeds to guarantee maximum availability and minimal latency.
+            Scoriant solutions undergo continuous stress-testing across air-gapped defence networks, edge hardware nodes, and enterprise telemetry feeds to guarantee maximum availability and minimal latency.
           </p>
 
           <div style={{ display: 'flex', gap: '20px' }}>

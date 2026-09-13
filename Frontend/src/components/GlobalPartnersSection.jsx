@@ -55,7 +55,7 @@ export default function GlobalPartnersSection() {
             Global Technology Partners
           </h2>
           <p style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: 0 }}>
-            Collaborating with leading innovators to deliver state-of-the-art AI and edge defense solutions.
+            Collaborating with leading innovators to deliver state-of-the-art AI and edge defence solutions.
           </p>
         </div>
 

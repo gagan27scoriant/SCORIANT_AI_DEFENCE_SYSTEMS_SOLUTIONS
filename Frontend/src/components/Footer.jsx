@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
@@ -37,17 +38,17 @@ export default function Footer() {
                 }}
               />
               <div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: 800, color: '#ffffff', letterSpacing: '1.5px', lineHeight: 1.1 }}>
                   SCORIANT
                 </div>
-                <div style={{ fontSize: '10px', fontWeight: 800, color: '#a78bfa', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#a78bfa', letterSpacing: '2.0px', textTransform: 'uppercase' }}>
                   AI and Defence Systems
                 </div>
               </div>
             </div>
 
             <p style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.6, marginBottom: '24px', maxWidth: '340px' }}>
-              Engineering the Autonomous Future of Defence and Intelligence — high-performance edge data systems, agentic AI platforms, and defense-grade air-gapped infrastructure.
+              Engineering the Autonomous Future of Defence and Intelligence — high-performance edge data systems, agentic AI platforms, and defence-grade air-gapped infrastructure.
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -64,11 +65,11 @@ export default function Footer() {
               Solutions
             </h4>
             <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
-              <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Secure Storage</a></li>
-              <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>AI Knowledge Studio</a></li>
-              <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Document Intelligence</a></li>
-              <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Geo-Spatial AI</a></li>
-              <li><a href="#tech-stack" style={{ color: '#94a3b8', textDecoration: 'none' }}>Smart Surveillance</a></li>
+              <li><Link to="/solutions/secure-storage" style={{ color: '#94a3b8', textDecoration: 'none' }}>Secure Storage</Link></li>
+              <li><Link to="/solutions/ai-knowledge-studio" style={{ color: '#94a3b8', textDecoration: 'none' }}>AI Knowledge Studio</Link></li>
+              <li><Link to="/solutions/document-intelligence" style={{ color: '#94a3b8', textDecoration: 'none' }}>Document Intelligence</Link></li>
+              <li><Link to="/solutions/geospatial-intelligence" style={{ color: '#94a3b8', textDecoration: 'none' }}>Geo-Spatial AI</Link></li>
+              <li><Link to="/solutions/smart-surveillance" style={{ color: '#94a3b8', textDecoration: 'none' }}>Smart Surveillance</Link></li>
             </ul>
           </div>
 
@@ -78,12 +79,11 @@ export default function Footer() {
               Navigation
             </h4>
             <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
-              <li><a href="#hero" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</a></li>
-              <li><a href="#why-scoriant" style={{ color: '#94a3b8', textDecoration: 'none' }}>Why Scoriant</a></li>
-              <li><a href="#expertise" style={{ color: '#94a3b8', textDecoration: 'none' }}>Our Expertise</a></li>
-              <li><a href="#global-partners" style={{ color: '#94a3b8', textDecoration: 'none' }}>Partners</a></li>
-              <li><a href="#clients" style={{ color: '#94a3b8', textDecoration: 'none' }}>Clients</a></li>
-              <li><a href="#certifications" style={{ color: '#94a3b8', textDecoration: 'none' }}>Certifications</a></li>
+              <li><Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link></li>
+              <li><Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About Us</Link></li>
+              <li><Link to="/solutions" style={{ color: '#94a3b8', textDecoration: 'none' }}>Our Solutions</Link></li>
+              <li><Link to="/careers" style={{ color: '#94a3b8', textDecoration: 'none' }}>Careers</Link></li>
+              <li><Link to="/contact" style={{ color: '#94a3b8', textDecoration: 'none' }}>Contact Us</Link></li>
             </ul>
           </div>
 

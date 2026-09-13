@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { PRODUCTS_DATA } from '../data/scoriantData';
+import { useDataContext } from '../context/DataContext';
 import { ArrowRight, CheckCircle2, X, ExternalLink, ShieldAlert, Cpu, Server, BrainCircuit, FileText, Globe, Eye, GraduationCap } from 'lucide-react';
 
 export default function ProductCatalog({ onOpenDemoModal }) {
+  const { products } = useDataContext();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeModalProduct, setActiveModalProduct] = useState(null);
 
   const categories = ['All', 'Infrastructure', 'Agentic AI', 'Document AI', 'Geospatial AI', 'Computer Vision', 'EdTech AI'];
 
   const filteredProducts = selectedCategory === 'All'
-    ? PRODUCTS_DATA
-    : PRODUCTS_DATA.filter((p) => p.category === selectedCategory);
+    ? products
+    : products.filter((p) => p.category === selectedCategory);
 
   const getProductIcon = (iconName) => {
     switch (iconName) {
@@ -40,7 +41,7 @@ export default function ProductCatalog({ onOpenDemoModal }) {
             marginBottom: '16px',
           }}
         >
-          Enterprise AI & Defense Technology Suite
+          Enterprise AI & Defence Technology Suite
         </h2>
         <p style={{ fontSize: '16px', color: 'var(--text-muted)' }}>
           High-performance, secure platforms engineered for air-gapped security, real-time analytics, and intelligent automation.

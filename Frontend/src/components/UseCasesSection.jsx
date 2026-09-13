@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { REAL_WORLD_USE_CASES } from '../data/scoriantData';
+import { useDataContext } from '../context/DataContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function UseCasesSection() {
+  const { useCases } = useDataContext();
   const [activeUseCase, setActiveUseCase] = useState(0);
 
   // Automatic slideshow transition every 7 seconds
   useEffect(() => {
+    if (!useCases || useCases.length === 0) return;
     const timer = setInterval(() => {
-      setActiveUseCase((prev) => (prev + 1) % REAL_WORLD_USE_CASES.length);
+      setActiveUseCase((prev) => (prev + 1) % useCases.length);
     }, 7000);
     return () => clearInterval(timer);
-  }, []);
+  }, [useCases]);
 
   const handlePrev = () => {
-    setActiveUseCase((prev) => (prev === 0 ? REAL_WORLD_USE_CASES.length - 1 : prev - 1));
+    if (!useCases || useCases.length === 0) return;
+    setActiveUseCase((prev) => (prev === 0 ? useCases.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setActiveUseCase((prev) => (prev + 1) % REAL_WORLD_USE_CASES.length);
+    if (!useCases || useCases.length === 0) return;
+    setActiveUseCase((prev) => (prev + 1) % useCases.length);
   };
 
-  const useCase = REAL_WORLD_USE_CASES[activeUseCase];
+  const useCase = useCases[activeUseCase] || useCases[0];
 
   return (
     <section
@@ -65,7 +69,7 @@ export default function UseCasesSection() {
             }}
           >
             <p style={{ fontSize: '15.5px', color: 'var(--text-muted)', maxWidth: '640px', lineHeight: 1.55, margin: 0 }}>
-              Proven deployment architectures solving complex challenges across air-gapped defense networks, smart factories, enterprise document intelligence, and satellite monitoring.
+              Proven deployment architectures solving complex challenges across air-gapped defence networks, smart factories, enterprise document intelligence, and satellite monitoring.
             </p>
 
             {/* Forward & Backward Controls on Far Right */}
@@ -241,30 +245,12 @@ export default function UseCasesSection() {
                 objectFit: 'cover',
               }}
             />
-            <div
-              style={{
-                position: 'absolute',
-                top: '14px',
-                left: '14px',
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(10px)',
-                color: '#0f172a',
-                padding: '4px 12px',
-                borderRadius: 'var(--radius-pill)',
-                fontSize: '11px',
-                fontWeight: 700,
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.08)',
-              }}
-            >
-              Enterprise Deployment
-            </div>
           </div>
         </div>
 
         {/* Slide Indicator Dots */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '28px' }}>
-          {REAL_WORLD_USE_CASES.map((_, idx) => (
+          {(useCases || []).map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveUseCase(idx)}

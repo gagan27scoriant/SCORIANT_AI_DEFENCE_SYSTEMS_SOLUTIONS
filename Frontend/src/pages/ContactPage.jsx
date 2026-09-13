@@ -1,7 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Mail, MapPin, Building, Phone, Clock, Send, User, FileText, CheckCircle2, ChevronDown, Sparkles, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { useDataContext } from '../context/DataContext';
+
+const getPreloadedMessageForProduct = (productTitle) => {
+  const normalized = (productTitle || '').toLowerCase();
+  if (normalized.includes('storage') || normalized.includes('secure')) {
+    return `Hi Scoriant Team,\n\nI would like to schedule a product demonstration and technical briefing for the Secure Storage & Deployment Platform. We are interested in understanding its air-gapped deployment architecture, hardware-enforced AES-256 encryption, and local cluster synchronization capabilities.`;
+  }
+  if (normalized.includes('knowledge') || normalized.includes('studio')) {
+    return `Hi Scoriant Team,\n\nI would like to request a demonstration for AI Knowledge Studio. We are interested in exploring its multimodal transcription, multi-speaker diarization, and sovereign on-premises LLM processing workflows.`;
+  }
+  if (normalized.includes('document') || normalized.includes('chatbot') || normalized.includes('rag')) {
+    return `Hi Scoriant Team,\n\nI would like to schedule a live demonstration for the Document Intelligence Chatbot. We want to evaluate its layout-aware OCR, vector RAG retrieval with exact page citations, and air-gapped deployment requirements.`;
+  }
+  if (normalized.includes('spatial') || normalized.includes('satellite') || normalized.includes('geospatial')) {
+    return `Hi Scoriant Team,\n\nI would like to request a demonstration for the Geo-Spatial Change Detection Platform. We are interested in evaluating its Vision Transformer satellite image analysis, GIS integration, and automated change alerting.`;
+  }
+  if (normalized.includes('surveillance') || normalized.includes('video') || normalized.includes('cctv')) {
+    return `Hi Scoriant Team,\n\nI would like to schedule a demonstration for the Smart Surveillance Platform. We are interested in its real-time multi-camera video analytics, TensorRT edge inference, ANPR, and cross-camera tracking capabilities.`;
+  }
+  if (normalized.includes('gurukula') || normalized.includes('lms') || normalized.includes('learning')) {
+    return `Hi Scoriant Team,\n\nI would like to request a demonstration for GuruKula AI. We are interested in exploring the 24/7 contextual AI Tutor, automated grading engines, and institutional multi-tenant LMS deployment.`;
+  }
+  return `Hi Scoriant Team,\n\nI would like to schedule a technical demonstration and consultation for ${productTitle}. We are interested in evaluating its capabilities, air-gapped deployment architecture, and integration with our organization's systems.`;
+};
 
 export default function ContactPage() {
+  const { locations: officesData, products } = useDataContext();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
   // Toggle state for office selection: 'india' | 'usa'
   const [activeOffice, setActiveOffice] = useState('india');
 
@@ -17,39 +46,55 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const officesData = {
-    india: {
-      tag: 'HEADQUARTERS / INDIA',
-      title: 'India Office',
-      company: 'Scoriant AI and Defence Systems',
-      address: '3rd Floor Sree Gururaya Mansion, 8th Main Rd, KSRTC Layout, J.P. Nagar, Bengaluru 560078',
-      phone: '+91 (080) 4123-5890',
-      email: 'info@scoriant.com',
-      hours: 'Mon - Fri: 9:00 AM - 7:00 PM IST',
-      mapUrl: 'https://maps.google.com/maps?q=3rd%20Floor%20Sree%20Gururaya%20Mansion,%208th%20Main%20Rd,%20KSRTC%20Layout,%20J.P.%20Nagar,%20Bengaluru%20560078&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    },
-    usa: {
-      tag: 'OPERATIONS CENTER / USA',
-      title: 'USA Office',
-      company: 'Scoriant AI and Defence Systems',
-      address: '531A Giuffrida Avenue, San Jose',
-      phone: '+1 (408) 555-0198',
-      email: 'info@scoriant.com',
-      hours: 'Mon - Fri: 8:00 AM - 6:00 PM PST',
-      mapUrl: 'https://maps.google.com/maps?q=531A%20Giuffrida%20Avenue,%20San%20Jose&t=&z=14&ie=UTF8&iwloc=&output=embed',
-    },
-  };
-
-  const office = officesData[activeOffice];
+  const office = officesData[activeOffice] || officesData['india'];
 
   const productOptions = [
+    ...(products || []).map((p) => p.title),
     '5G Engineering & Network Protocol Stack',
     'Agentic AI Systems & Platform',
-    'Secure Storage & Compute Engine',
     'Autonomous AI Defence Systems',
-    'Smart Surveillance & Sensor Fusion',
-    'Geospatial AI & Document Intelligence',
-  ];
+    'Other / Custom Defence AI Solution',
+  ].filter((v, i, a) => a.indexOf(v) === i);
+
+  // Preload product info and message when arriving via Request Demo CTA
+  useEffect(() => {
+    const productParam = searchParams.get('product') || location.state?.product || location.state?.productTitle;
+    const messageParam = searchParams.get('message') || location.state?.preloadedMessage || location.state?.message;
+
+    if (productParam) {
+      // Find matching product title
+      const matched = (products || []).find(
+        (p) =>
+          p.id === productParam ||
+          p.title.toLowerCase() === productParam.toLowerCase() ||
+          p.title.toLowerCase().includes(productParam.toLowerCase()) ||
+          productParam.toLowerCase().includes(p.title.toLowerCase())
+      );
+      const titleToSet = matched ? matched.title : productParam;
+      const initialMessage = messageParam || getPreloadedMessageForProduct(titleToSet);
+
+      setFormData((prev) => ({
+        ...prev,
+        productOfInterest: titleToSet,
+        message: initialMessage,
+      }));
+
+      // Smooth scroll down to send-message-section
+      setTimeout(() => {
+        const el = document.getElementById('send-message-section');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 200);
+    } else if (location.hash === '#send-message-section') {
+      setTimeout(() => {
+        const el = document.getElementById('send-message-section');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 200);
+    }
+  }, [searchParams, location, products]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -86,15 +131,15 @@ export default function ContactPage() {
           }}
         >
           <img
-            src="/HERO/IMAGE_08.jpg"
+            src="/HERO/CONTACT_ME_PAGE.jpg"
             alt="Contact Scoriant Hero"
             style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
-              opacity: 0.45,
-              filter: 'contrast(1.05) brightness(0.85)',
+              opacity: 0.8,
+              filter: 'contrast(1.05) brightness(0.95)',
             }}
           />
           <div
@@ -102,8 +147,8 @@ export default function ContactPage() {
               position: 'absolute',
               inset: 0,
               background: `
-                linear-gradient(180deg, rgba(11, 15, 25, 0.75) 0%, rgba(11, 15, 25, 0.55) 50%, rgba(11, 15, 25, 0.95) 100%),
-                linear-gradient(90deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.5) 50%, rgba(11, 15, 25, 0.85) 100%)
+                linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.25) 50%, rgba(11, 15, 25, 0.75) 100%),
+                linear-gradient(90deg, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.2) 50%, rgba(11, 15, 25, 0.5) 100%)
               `,
             }}
           />
@@ -207,10 +252,10 @@ export default function ContactPage() {
                     letterSpacing: '-0.5px',
                   }}
                 >
-                  Our Offices
+                  OUR OFFICE'S
                 </h2>
                 <p style={{ fontSize: '14px', color: 'var(--text-muted)', maxWidth: '600px', lineHeight: 1.45, margin: 0 }}>
-                  Explore our global facilities engineered for high-performance AI, defense hardware, and carrier-grade 5G stack development.
+                  Explore our global facilities engineered for high-performance AI, defence hardware, and carrier-grade 5G stack development.
                 </p>
               </div>
 
@@ -245,7 +290,7 @@ export default function ContactPage() {
                     boxShadow: activeOffice === 'india' ? '0 4px 14px rgba(124, 58, 237, 0.3)' : 'none',
                   }}
                 >
-                  <span>🇮🇳 India Office</span>
+                  <span>India Office</span>
                 </button>
 
                 <button
@@ -267,7 +312,7 @@ export default function ContactPage() {
                     boxShadow: activeOffice === 'usa' ? '0 4px 14px rgba(124, 58, 237, 0.3)' : 'none',
                   }}
                 >
-                  <span>🇺🇸 USA Office</span>
+                  <span>USA Office</span>
                 </button>
               </div>
             </div>
@@ -292,19 +337,6 @@ export default function ContactPage() {
           >
             {/* Left Column: Office Address Details */}
             <div>
-              <div
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  letterSpacing: '1.1px',
-                  textTransform: 'uppercase',
-                  color: 'var(--primary-purple)',
-                  marginBottom: '3px',
-                }}
-              >
-                {office.tag}
-              </div>
-
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
@@ -555,7 +587,7 @@ export default function ContactPage() {
                 {/* ROW 1: Name (Full Width) */}
                 <div>
                   <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                    Name
+                    Name *
                   </label>
                   <input
                     type="text"
@@ -588,7 +620,6 @@ export default function ContactPage() {
                     <input
                       type="text"
                       name="companyName"
-                      required
                       placeholder="Company Name"
                       value={formData.companyName}
                       onChange={handleChange}
@@ -609,7 +640,7 @@ export default function ContactPage() {
                   {/* Email Address */}
                   <div>
                     <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Email Address
+                      Email Address *
                     </label>
                     <input
                       type="email"
@@ -638,7 +669,7 @@ export default function ContactPage() {
                   {/* Phone Number */}
                   <div>
                     <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Phone Number
+                      Phone Number *
                     </label>
                     <div
                       style={{
@@ -650,32 +681,16 @@ export default function ContactPage() {
                         overflow: 'hidden',
                       }}
                     >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                          padding: '0 10px',
-                          color: '#ffffff',
-                          fontSize: '13.5px',
-                          background: 'rgba(255, 255, 255, 0.04)',
-                          height: '42px',
-                          borderRight: '1px solid rgba(255, 255, 255, 0.1)',
-                          flexShrink: 0,
-                        }}
-                      >
-                        <span>🇮🇳</span>
-                        <span style={{ fontSize: '10px', opacity: 0.7 }}>▾</span>
-                      </div>
                       <input
                         type="tel"
                         name="phone"
-                        placeholder="+91"
+                        required
+                        placeholder="+91 / +1 Phone Number"
                         value={formData.phone}
                         onChange={handleChange}
                         style={{
                           width: '100%',
-                          padding: '11px 12px',
+                          padding: '11px 14px',
                           background: 'transparent',
                           border: 'none',
                           color: '#ffffff',

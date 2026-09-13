@@ -36,7 +36,7 @@ export default function InteractiveDemos() {
     setIsProcessingRag(true);
 
     setTimeout(() => {
-      let botResponse = `Based on Scoriant's vector indexing across defense specifications: "${userText}" is addressed using enterprise-grade encryption, on-premise model inference, and role-based access controls (RBAC).`;
+      let botResponse = `Based on Scoriant's vector indexing across defence specifications: "${userText}" is addressed using enterprise-grade encryption, on-premise model inference, and role-based access controls (RBAC).`;
       let citations = ['SCORIANT_ENTERPRISE_ARCHITECTURE.pdf - Page 12', 'AGENTIC_AI_GOVERNANCE.pdf - Section 5.3'];
 
       if (userText.toLowerCase().includes('satellite') || userText.toLowerCase().includes('geospatial')) {
@@ -229,7 +229,7 @@ export default function InteractiveDemos() {
               ))}
               {isProcessingRag && (
                 <div style={{ alignSelf: 'flex-start', fontSize: '13px', color: 'var(--primary-purple)', fontWeight: 600 }}>
-                  ⚡ Performing semantic vector lookup across defense corpus...
+                  ⚡ Performing semantic vector lookup across defence corpus...
                 </div>
               )}
             </div>
@@ -318,7 +318,7 @@ export default function InteractiveDemos() {
             >
               {/* After Image (Background) */}
               <img
-                src="/PRODUCT_PREVIEW_IMAGE/GEO_SPATIAL_INTELLIGENCE.jpg"
+                src="/HERO/PRODUCTS/GEOSPATIAL-01.jpg"
                 alt="After"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -350,7 +350,7 @@ export default function InteractiveDemos() {
                 }}
               >
                 <img
-                  src="/PRODUCT_PREVIEW_IMAGE/SECURE_STORAGE.jpg"
+                  src="/HERO/PRODUCTS/SECURE_STORAGE.jpg"
                   alt="Before"
                   style={{
                     width: '100%',
@@ -474,7 +474,7 @@ export default function InteractiveDemos() {
               }}
             >
               <img
-                src="/PRODUCT_PREVIEW_IMAGE/VIDEO_SURVELLIENCE.jpg"
+                src="/HERO/PRODUCTS/SMART_SURVELLIENCE.jpg"
                 alt="Camera Stream"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />

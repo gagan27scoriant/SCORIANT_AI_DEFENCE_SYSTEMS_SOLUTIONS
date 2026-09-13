@@ -24,7 +24,7 @@ export default function CertificationsSection() {
             COMPLIANCE & CERTIFICATION BADGES
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '15.5px', maxWidth: '680px', lineHeight: 1.55 }}>
-            Our systems are built and validated to the highest international defense and enterprise compliance standards.
+            Our systems are built and validated to the highest international defence and enterprise compliance standards.
           </p>
         </div>
 
