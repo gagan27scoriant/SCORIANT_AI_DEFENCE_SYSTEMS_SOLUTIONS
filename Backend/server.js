@@ -353,14 +353,19 @@ app.post('/api/demo', async (req, res) => {
   }
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`=========================================`);
-  console.log(` Scoriant Backend API running on port ${PORT}`);
-  console.log(` Primary Target: ${RECEIVER_EMAIL}`);
-  console.log(` Carbon Copy (CC): ${CC_EMAIL}`);
-  console.log(` Health Check: http://localhost:${PORT}/api/health`);
-  console.log(`=========================================`);
-});
+// Start Server (when run locally or in persistent container)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`=========================================`);
+    console.log(` Scoriant Backend API running on port ${PORT}`);
+    console.log(` Primary Target: ${RECEIVER_EMAIL}`);
+    console.log(` Carbon Copy (CC): ${CC_EMAIL}`);
+    console.log(` Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`=========================================`);
+  });
+}
+
+module.exports = app;
+
 
 
