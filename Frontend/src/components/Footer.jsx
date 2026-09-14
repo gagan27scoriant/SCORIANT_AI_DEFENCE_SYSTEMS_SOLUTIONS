@@ -42,7 +42,7 @@ export default function Footer() {
                   SCORIANT
                 </div>
                 <div style={{ fontSize: '10px', fontWeight: 800, color: '#a78bfa', letterSpacing: '2.0px', textTransform: 'uppercase' }}>
-                  AI and Defence Systems
+                  AI Defence Systems Solutions
                 </div>
               </div>
             </div>
@@ -64,12 +64,13 @@ export default function Footer() {
             <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '20px' }}>
               Solutions
             </h4>
-            <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px' }}>
+            <ul className="responsive-footer-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px' }}>
               <li><Link to="/solutions/secure-storage" style={{ color: '#94a3b8', textDecoration: 'none' }}>Secure Storage</Link></li>
-              <li><Link to="/solutions/ai-knowledge-studio" style={{ color: '#94a3b8', textDecoration: 'none' }}>AI Knowledge Studio</Link></li>
-              <li><Link to="/solutions/document-intelligence" style={{ color: '#94a3b8', textDecoration: 'none' }}>Document Intelligence</Link></li>
-              <li><Link to="/solutions/geospatial-intelligence" style={{ color: '#94a3b8', textDecoration: 'none' }}>Geo-Spatial AI</Link></li>
-              <li><Link to="/solutions/smart-surveillance" style={{ color: '#94a3b8', textDecoration: 'none' }}>Smart Surveillance</Link></li>
+              <li><Link to="/solutions/conversational-ai-platform" style={{ color: '#94a3b8', textDecoration: 'none' }}>Conversational AI</Link></li>
+              <li><Link to="/solutions/kavacha-ai" style={{ color: '#94a3b8', textDecoration: 'none' }}>Kavacha AI (Border Vision)</Link></li>
+              <li><Link to="/solutions/intelligent-fusion" style={{ color: '#94a3b8', textDecoration: 'none' }}>Intelligent Fusion</Link></li>
+              <li><Link to="/solutions/logistics-ai" style={{ color: '#94a3b8', textDecoration: 'none' }}>Logistics & Warehouse AI</Link></li>
+              <li><Link to="/solutions" style={{ color: '#a78bfa', textDecoration: 'none', fontWeight: 600 }}>View All 10 Solutions →</Link></li>
             </ul>
           </div>
 
@@ -129,7 +130,7 @@ export default function Footer() {
         }}
       >
         <div>
-          © {new Date().getFullYear()} Scoriant AI and Defence Systems. All rights reserved.
+          © {new Date().getFullYear()} Scoriant AI Defence Systems Solutions. All rights reserved.
         </div>
         <div>
           Engineering the Autonomous Future

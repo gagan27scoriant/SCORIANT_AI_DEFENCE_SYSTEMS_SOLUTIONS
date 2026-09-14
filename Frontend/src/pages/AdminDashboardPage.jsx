@@ -244,7 +244,7 @@ export default function AdminDashboardPage() {
             Admin Command Access
           </h2>
           <p style={{ fontSize: '14px', color: '#cbd5e1', marginBottom: '32px', lineHeight: 1.6 }}>
-            Enter administrator secret key to unlock live CRUD data management for Scoriant AI & Defence Systems.
+            Enter administrator secret key to unlock live CRUD data management for Scoriant AI Defence Systems Solutions.
           </p>
 
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
@@ -398,7 +398,7 @@ export default function AdminDashboardPage() {
                   maxWidth: '740px',
                 }}
               >
-                Full-spectrum live CRUD control center for Scoriant AI & Defence Systems. Add, modify, or remove product features, active job postings, real-world case studies, and office deployment metrics.
+                Full-spectrum live CRUD control center for Scoriant AI Defence Systems Solutions. Add, modify, or remove product features, active job postings, real-world case studies, and office deployment metrics.
               </p>
             </div>
 

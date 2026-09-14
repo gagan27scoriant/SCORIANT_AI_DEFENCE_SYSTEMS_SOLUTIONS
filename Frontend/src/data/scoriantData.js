@@ -51,11 +51,13 @@ export const PRODUCTS_DATA = [
     icon: "Server",
     title: "Secure Storage & Deployment Platform",
     short: "Enterprise-Grade Secure Infrastructure for AI, Data, and Mission-Critical Deployments.",
-    detail: `Secure Storage & Deployment Platform is a defence-grade infrastructure solution engineered for high-assurance storage, automated model packaging, and air-gapped deployment of mission-critical AI workloads.
+    detail: `Secure Storage & Deployment Platform is a defence-grade infrastructure ecosystem engineered for high-assurance storage, automated model packaging, and air-gapped deployment of mission-critical AI workloads across hostile and extreme operational environments.
 
-Built specifically for defence establishments, intelligence agencies, sovereign institutions, and sensitive enterprise datacenters, the platform eliminates external telemetry and cloud reliance. It provides hardware-enforced AES-256 encryption, zero-trust cryptographic role-based access control (RBAC), and autonomous edge cluster synchronization.
+Built specifically for aerospace agencies, defence establishments, intelligence services, and regulated enterprises, the platform completely eliminates external telemetry beacons, cloud dependencies, and third-party phone-home vulnerabilities. It enforces direct-to-silicon AES-256-GCM cryptographic encryption with post-quantum key isolation, immutable write-once audit logging, and hardware-security-module (HSM) clearance boundaries.
 
-The architecture protects proprietary weights, classified datasets, and mission telemetry both at rest and in transit, guaranteeing continuous computing autonomy across tactical edge nodes and isolated central command networks.`,
+The deployment subsystem utilizes sovereign OCI-compliant container runtimes that encapsulate quantized LLMs, computer vision weights, execution binaries, and runtime dependencies into standalone deployable containers. High-throughput PCIe 5.0 and direct DMA NVMe pipelines sustain multi-gigabyte-per-second I/O throughput, guaranteeing zero latency bottlenecks during high-concurrency neural inference.
+
+Across tactical field hubs, mobile command vehicles, and forward operating bases, the platform establishes autonomous peer-to-peer data replication over local area networks (LAN) and private 5G mesh architectures without requiring connection to central master servers, ensuring unbroken computational survivability.`,
     architecturePillars: [
       {
         step: "01",
@@ -115,11 +117,13 @@ The architecture protects proprietary weights, classified datasets, and mission 
     icon: "BrainCircuit",
     title: "AI Knowledge Studio",
     short: "Intelligence Platform Transforming Meetings into Actionable Knowledge Through Agent-Driven AI Workflows.",
-    detail: `AI Knowledge Studio is a sovereign multimodal intelligence system designed to ingest, process, and analyze complex enterprise meetings, voice communications, video feeds, and multi-format classified documents.
+    detail: `AI Knowledge Studio is a sovereign multimodal intelligence system designed to ingest, process, and analyze complex enterprise meetings, tactical voice communications, high-definition video feeds, and multi-format classified documents into unified, searchable operational intelligence.
 
-The platform utilizes an autonomous query-first agent router that classifies operational intent and dynamically orchestrates specialized neural sub-agents for acoustic noise filtering, multi-speaker diarization, accent-resilient speech recognition, contextual summarization, and interactive Q&A.
+The platform utilizes an autonomous query-first agent coordinator that classifies operational intent and dynamically orchestrates specialized neural sub-agents. These sub-agents perform real-time acoustic beamforming, multi-speaker diarization, accent-resilient speech recognition, deep semantic entity indexing, and automated action-item matrix synthesis.
 
-Engineered to operate entirely on internal enterprise infrastructure or sovereign cloud clusters, AI Knowledge Studio ensures complete data privacy while transforming unstructured audio/video logs into indexed, searchable, and citation-backed organizational intelligence.`,
+Engineered with comprehensive multilingual and dialect adaptation, the system provides native recognition tuned for 14+ regional Indian languages and international dialects, handling acronym-dense military jargon, engineering nomenclature, and operational codes with exceptional transcription fidelity.
+
+Deployable entirely on internal enterprise server clusters, GPU stacks, or sovereign air-gapped networks, AI Knowledge Studio guarantees strict departmental data partitioning. Executive deliberations, classified briefings, and engineering reviews remain strictly compartmentalized, enabling instant cross-meeting conversational search and verifiable citations with zero data leakage.`,
     architecturePillars: [
       {
         step: "01",
@@ -177,11 +181,13 @@ Engineered to operate entirely on internal enterprise infrastructure or sovereig
     icon: "FileText",
     title: "Document Intelligence Chatbot",
     short: "AI-Powered Knowledge Platform for Conversational Access to Enterprise Documents.",
-    detail: `The Document Intelligence Chatbot transforms massive, heterogeneous enterprise document archives into an interactive, high-precision knowledge intelligence ecosystem.
+    detail: `The Document Intelligence Chatbot transforms massive, heterogeneous enterprise document archives, technical manuals, contracts, and classified dossiers into an interactive, high-precision conversational knowledge intelligence ecosystem.
 
-The system combines layout-aware optical character recognition (OCR), dense semantic vector indexing, BM25 hybrid keyword retrieval, and Retrieval-Augmented Generation (RAG) to allow analysts and personnel to interrogate millions of document pages in natural language.
+The system combines layout-aware optical character recognition (OCR), multi-column text reconstruction, dense semantic vector embeddings, and BM25 lexical search into a hybrid Retrieval-Augmented Generation (RAG) architecture. It allows analysts, command personnel, and researchers to interrogate millions of pages in natural language and receive synthesized answers within seconds.
 
-Every response is strictly grounded in the underlying source documentation and is accompanied by exact page numbers, paragraph coordinates, and snippet references—drastically reducing hallucination risk and enabling rapid verification in mission-critical decision workflows.`,
+Crucially, the platform enforces strict grounding guardrails: every generated response is linked to exact physical source pages, bounding-box coordinates, and verbatim snippets. Analysts can click directly into the integrated side-by-side document viewer to audit the physical source of each fact, completely eliminating model hallucination risks in high-stakes environments.
+
+Equipped with automated directory watchers, role-based document governance, and air-gapped local model execution (supporting Llama 3, Mistral, and Qwen weights), the platform indexes newly deposited manuals and classified files continuously while enforcing strict departmental clearance boundaries.`,
     architecturePillars: [
       {
         step: "01",
@@ -239,11 +245,13 @@ Every response is strictly grounded in the underlying source documentation and i
     icon: "Globe",
     title: "Geo-Spatial Change Detection",
     short: "AI-Powered Geospatial Intelligence for Monitoring Land, Infrastructure, and Environmental Changes.",
-    detail: `Geo-Spatial Change Detection Platform is a high-resolution geospatial intelligence solution designed to ingest, align, and analyze multi-temporal satellite, aerial, and drone imagery for comprehensive situational awareness.
+    detail: `Geo-Spatial Change Detection Platform is a high-resolution earth observation and geospatial intelligence platform engineered to ingest, coregister, and analyze multi-temporal satellite, aerial, and drone imagery for dynamic situational awareness.
 
-Powered by Vision Transformer (ViT) deep learning backbones, the platform conducts sub-pixel image coregistration, contextual feature extraction, and multi-spectral anomaly detection. It autonomously identifies infrastructure development, terrain alterations, deforestation, coastal erosion, water body variations, and tactical troop or vehicular movements across massive geographical expanses.
+Powered by Vision Transformer (ViT) deep learning backbones, the platform conducts sub-pixel geometric orthorectification, radiational calibration, and multi-spectral anomaly detection. It autonomously identifies infrastructure construction, runway alterations, coastal erosion, deforestation, water reservoir fluctuations, and tactical vehicular or encampment movements across vast geographical regions.
 
-The system integrates natively with existing defence and enterprise GIS platforms, delivering interactive map layer visualizations, change bounding polygons, and automated alerts for designated Areas of Interest (AOIs).`,
+The multi-sensor fusion pipeline unifies Optical, Synthetic Aperture Radar (SAR), and multispectral data streams, ensuring continuous round-the-clock monitoring through cloud cover, sandstorms, and adverse atmospheric conditions.
+
+Integrating natively with OGC Web Map Services (WMS/WFS), ESRI ArcGIS, QGIS, and custom defence C4ISR consoles, the system vectorizes detected changes into standard GeoJSON and Shapefile layers, automatically triggering real-time anomaly alerts to monitoring command centers when pre-set Area of Interest (AOI) thresholds are breached.`,
     architecturePillars: [
       {
         step: "01",
@@ -301,11 +309,13 @@ The system integrates natively with existing defence and enterprise GIS platform
     icon: "Eye",
     title: "Smart Surveillance Platform",
     short: "AI-Powered Video Intelligence Platform for Real-Time Monitoring, Threat Detection, and Situational Awareness.",
-    detail: `Smart Surveillance Platform is an enterprise-scale computer vision ecosystem designed to convert high-density CCTV and camera networks into proactive situational awareness hubs.
+    detail: `Smart Surveillance Platform is an enterprise-scale computer vision ecosystem designed to convert high-density CCTV and camera networks into proactive situational awareness hubs with zero cloud bandwidth requirements.
 
-The platform executes hardware-accelerated multi-stream video decoding and edge inference at up to 60 frames per second. It performs simultaneous real-time multi-object detection, perimeter intrusion identification, Automatic Number Plate Recognition (ANPR), facial biometric cross-referencing against secure watchlists, and trajectory analysis across non-overlapping camera fields.
+The platform executes hardware-accelerated multi-stream video decoding and edge inference at up to 60 frames per second using NVIDIA DeepStream and TensorRT runtimes. It performs simultaneous real-time multi-object detection, perimeter intrusion identification, Automatic Number Plate Recognition (ANPR), and facial biometric cross-referencing against secure watchlists.
 
-Integrated with a centralized command dashboard, the system automates threat escalation, generates chronological incident dossiers, and alerts security personnel within milliseconds of a breach.`,
+Utilizing state-of-the-art ByteTrack and Re-Identification (Re-ID) neural algorithms, the platform tracks subjects and vehicles across non-overlapping camera fields, generating complete spatiotemporal trajectory maps and anomaly logs.
+
+Integrated directly with a centralized command center dashboard, the system automates threat escalation, generates chronological forensic incident dossiers, and dispatches critical breach alerts to security personnel within milliseconds of a perimeter violation while supporting automated dynamic privacy masking for public audit compliance.`,
     architecturePillars: [
       {
         step: "01",
@@ -363,11 +373,13 @@ Integrated with a centralized command dashboard, the system automates threat esc
     icon: "GraduationCap",
     title: "GuruKula AI",
     short: "Intelligent Learning Management System Empowering Students, Educators, Institutions, and Training Centers.",
-    detail: `GuruKula AI is an intelligent enterprise Learning Management System (LMS) engineered to transform academic institutions, defence training academies, and corporate development programs into adaptive AI-driven learning environments.
+    detail: `GuruKula AI is an intelligent enterprise Learning Management System (LMS) engineered to transform universities, defence training academies, and corporate development institutions into adaptive AI-driven learning ecosystems.
 
-The platform integrates a 24/7 contextual AI Tutor that explains complex concepts, resolves student doubts through interactive step-by-step reasoning, and adheres strictly to institutional curriculum guidelines. Automated evaluation engines grade coding assignments, essays, and quantitative quizzes in real-time while providing formative feedback.
+The platform integrates a 24/7 contextual AI Tutor that explains complex concepts, answers student queries through interactive Socratic step-by-step reasoning, and adheres strictly to accredited institutional curriculum guidelines. Automated evaluation engines evaluate code submissions in secure execution sandboxes and grade essays and quizzes with real-time rubric-aligned feedback.
 
-Comprehensive analytical dashboards give instructors deep visibility into student comprehension, learning velocity, and skill acquisition trajectories, enabling personalized interventions at scale.`,
+Dynamic learning pathways analyze diagnostic performance metrics in real time, automatically tailoring instructional pacing and quiz difficulty to individual learner velocity and knowledge gaps.
+
+Engineered for sovereign institutional deployment, GuruKula AI can run entirely within on-premise campus servers to protect student data and eliminate recurring cloud expenses. It integrates seamlessly with standard educational frameworks including SCORM, LTI, Canvas, Moodle, and campus single sign-on (SSO) protocols.`,
     architecturePillars: [
       {
         step: "01",
@@ -417,6 +429,264 @@ Comprehensive analytical dashboards give instructors deep visibility into studen
       { label: "AI Tutor", value: "24/7 Context Doubt Engine" },
       { label: "Workflows", value: "Adaptive Skill Tracking" },
       { label: "Architecture", value: "Multi-Tenant Cloud/On-Prem" }
+    ]
+  },
+  {
+    id: "conversational-ai-platform",
+    category: "Conversational AI",
+    icon: "MessageSquare",
+    title: "Conversational AI Platform",
+    short: "Intelligent Voice-Based AI Solution Enabling Natural, Real-Time Human-Machine Interaction Through STT, LLMs, and TTS.",
+    detail: `Conversational AI Platform is an enterprise-grade, voice-first machine intelligence ecosystem engineered to enable instantaneous, highly natural, and sovereign human-machine dialogue across mission-critical environments. Combining ultra-low-latency Speech-to-Text (STT), fine-tuned domain-specific Large Language Models (LLMs), and lifelike neural Text-to-Speech (TTS), the platform bridges operational personnel and complex autonomous command architectures with zero friction.
+
+Built to operate with complete independence from external cloud providers, the platform is 100% air-gapped capable, running directly on secure on-premises GPU infrastructure, tactical field servers, and ruggedized edge appliances. It ensures that sensitive voice transmissions, operational commands, strategic briefings, and classified telemetry remain strictly contained within sovereign organizational perimeters.
+
+At the acoustic ingestion layer, the platform incorporates advanced neural beamforming, dynamic noise suppression (spectral gating and Wiener filtering), and acoustic isolation algorithms capable of extracting crystal-clear phonemes even in extreme 85+ dB acoustic environments—including vehicular cockpits, industrial command rooms, flight decks, and tactical field deployments. Multi-accent phoneme adaptation supports 14+ Indian regional languages, international dialects, defense radio protocols, and specialized jargon.
+
+The cognitive dialogue engine features full-duplex conversational turn-taking with instant barge-in (interruption handling), voice activity detection (VAD), and contextual state tracking. Integrated Retrieval-Augmented Generation (RAG) empowers the system to ground natural voice conversations against live telemetry feeds, standard operating procedures (SOPs), classified technical manuals, and multi-tenant enterprise knowledge graphs in sub-250ms voice-to-voice turnarounds.
+
+Optimized with TensorRT-LLM and custom quantized inference runtimes, Conversational AI Platform delivers unmatched throughput and concurrency, enabling multi-operator voice control, autonomous dispatch assistance, hands-free field equipment operations, and interactive executive command intelligence.`,
+    architecturePillars: [
+      {
+        step: "01",
+        title: "Real-Time Speech-to-Text (STT)",
+        desc: "Noise-robust acoustic ingestion and accent-adaptive phoneme decoding converting live operational speech into text with sub-second latency."
+      },
+      {
+        step: "02",
+        title: "Context-Aware LLM Dialogue Engine",
+        desc: "Domain-specialized Large Language Model architecture performing intent routing, multi-turn reasoning, and policy-governed response generation."
+      },
+      {
+        step: "03",
+        title: "Low-Latency Text-to-Speech (TTS)",
+        desc: "Neural voice synthesis engine delivering human-grade, emotion-adaptive acoustic outputs with customizable voice profiles and tactical clarity."
+      }
+    ],
+    deploymentCapabilities: [
+      {
+        title: "Sub-Second End-to-End Latency",
+        desc: "Engineered with direct streaming pipelines ensuring seamless, uninterrupted real-time voice conversations."
+      },
+      {
+        title: "Multilingual & Dialect Resilience",
+        desc: "Native speech and acoustic models tailored for regional Indian accents, tactical codes, and industry vocabulary."
+      },
+      {
+        title: "100% Air-Gapped & Sovereign Execution",
+        desc: "Executes entirely on local GPUs without internet connectivity or external API streaming dependencies."
+      },
+      {
+        title: "Hands-Free Command Control",
+        desc: "Direct integration into tactical dashboards, vehicle headsets, and mission-critical audio consoles."
+      }
+    ],
+    bullets: [
+      "Real-Time Streaming Speech-to-Text (STT)",
+      "Context-Aware LLM Dialogue & Reasoning Engine",
+      "Ultra-Realistic Neural Text-to-Speech (TTS)",
+      "Multilingual Recognition & Regional Accent Adaptation",
+      "Acoustic Noise Suppression & Speaker Isolation",
+      "Air-Gapped On-Premises & Edge Deployment"
+    ],
+    image: "/HERO/PRODUCTS/CONVERSATIONAL_AI.jpg",
+    badge: "Voice & Speech AI",
+    specs: [
+      { label: "Latency", value: "< 250ms Voice-to-Voice" },
+      { label: "Modalities", value: "Streaming Audio & Text" },
+      { label: "Deployment", value: "Air-Gapped / On-Prem / Edge" }
+    ]
+  },
+  {
+    id: "kavacha-ai",
+    category: "Defence & Border AI",
+    icon: "ShieldCheck",
+    title: "Kavacha AI",
+    short: "Intelligent Border Surveillance Platform Designed to Enhance Security and Situational Awareness Across Sensitive Border Zones.",
+    detail: `Kavacha AI is a mission-critical, autonomous border surveillance and perimeter defence ecosystem engineered to maximize situational awareness across highly sensitive border frontiers, remote outposts, and strategic installations.
+
+The platform continuously processes multi-spectrum video feeds—integrating high-definition daylight optical, long-range thermal, and night-vision infrared sensors. Powered by custom Vision Transformer (ViT) and YOLO object detection backbones, Kavacha AI delivers sub-pixel precision in classifying personnel, military vehicles, camouflaged targets, concealed weapons, and low-altitude unmanned aerial vehicles (UAVs).
+
+Engineered to operate reliably in extreme operational environments, the system maintains continuous detection fidelity through thick fog, blinding sandstorms, dense jungle canopies, and total-darkness night conditions. Real-time geometric geofencing and virtual tripwires analyze intrusion vectors, velocity, and formation dynamics to generate instant threat-priority scores.
+
+Operating on ruggedized MIL-SPEC edge appliances installed directly at border observation posts, Kavacha AI functions 100% autonomously without external cloud or internet connectivity. It synchronizes incident dossiers, thermal metadata, and automated alert payloads directly into central Tactical Operations Center (TOC) C4ISR mapping walls.`,
+    architecturePillars: [
+      {
+        step: "01",
+        title: "Multi-Spectrum Thermal & Optical Ingestion",
+        desc: "Processes high-definition day/night optical, long-range thermal, and infrared camera streams simultaneously across extensive borders."
+      },
+      {
+        step: "02",
+        title: "Deep Neural Object & Intruder Detection",
+        desc: "YOLO & Vision Transformer backbones engineered for sub-pixel object detection, camouflaged target recognition, and breach tracking."
+      },
+      {
+        step: "03",
+        title: "Tactical Threat Matrix & Automated Alerts",
+        desc: "Dynamic threat scoring engine evaluating intrusion trajectory, speed, and classification to trigger perimeter defenses and command alerts."
+      }
+    ],
+    deploymentCapabilities: [
+      {
+        title: "Extreme Weather & Low-Light Resilience",
+        desc: "Maintains high-accuracy target tracking through fog, sandstorms, zero-light night conditions, and dense foliage."
+      },
+      {
+        title: "Edge Embedded Rugged Computing",
+        desc: "Runs on ruggedized MIL-SPEC edge compute modules deployed in remote border outposts and surveillance towers."
+      },
+      {
+        title: "Geofencing & Breach Vectoring",
+        desc: "Automated virtual tripwires and geometric polygon boundaries with directional crossing classification."
+      },
+      {
+        title: "C4ISR Command Wall Integration",
+        desc: "Direct feed synchronization into tactical operations center (TOC) GIS mapping systems."
+      }
+    ],
+    bullets: [
+      "Continuous Border & Perimeter Zone Monitoring",
+      "Thermal, Infrared & Optical Multi-Spectrum Vision",
+      "Camouflaged Intruder & Vehicle Object Detection",
+      "Automated Threat Scoring & Breach Alerting",
+      "Thermal ANPR & Low-Visibility Recognition",
+      "Air-Gapped Disconnected Outpost Architecture"
+    ],
+    image: "/HERO/PRODUCTS/Kavacha_AI.jpg",
+    badge: "Border Surveillance",
+    specs: [
+      { label: "Detection Range", value: "Long-Range Optical/Thermal" },
+      { label: "Processing", value: "Real-Time Edge Multi-Stream" },
+      { label: "Environment", value: "MIL-SPEC Extreme Climates" }
+    ]
+  },
+  {
+    id: "intelligent-fusion",
+    category: "Threat Intelligence",
+    icon: "Network",
+    title: "Intelligent Fusion",
+    short: "Converts Unstructured Intelligence Documents into Actionable Threat Intelligence Using Rule-Based Methods and GLiNER ML Models.",
+    detail: `Intelligent Fusion is an advanced sovereign intelligence fusion platform engineered to transform massive volumes of unstructured intelligence artifacts into actionable, structured threat intelligence and multi-dimensional knowledge graphs.
+
+The platform ingests heterogeneous, multi-source materials—including classified cables, intercept transcripts, field situation reports (SITREPs), redacted PDFs, DOCX briefs, and scanned photographic evidence. It applies advanced optical character recognition (OCR) and layout normalization to extract raw narrative intelligence with high precision.
+
+At the entity extraction core, Intelligent Fusion utilizes GLiNER (Generalist Model for Named Entity Recognition) alongside deterministic rule-based heuristic engines. This hybrid architecture enables zero-shot and few-shot extraction of custom entity classes—such as militant cells, operative aliases, front organizations, weapons serials, geographic waypoints, financial flows, and tactical events—without requiring model retraining.
+
+Extracted entities and relationships are automatically compiled into an interactive link-analysis knowledge graph. Analysts can explore hidden organizational hierarchies, uncover temporal event sequences, detect behavioral anomalies, and verify every link back to exact textual spans in original source materials within an air-gapped sovereign intelligence vault.`,
+    architecturePillars: [
+      {
+        step: "01",
+        title: "Heterogeneous Ingestion & Preprocessing",
+        desc: "High-throughput parser handling redacted PDFs, intelligence cables, DOCX, scanned reports, and OCR-extracted transcripts."
+      },
+      {
+        step: "02",
+        title: "GLiNER & Multi-Task Entity Extraction",
+        desc: "Zero-shot and few-shot neural Named Entity Recognition (NER) and Relation Extraction (RE) identifying persons, organizations, locations, equipment, and events."
+      },
+      {
+        step: "03",
+        title: "Dynamic Threat Knowledge Graph & Link Analysis",
+        desc: "Correlates extracted entities into an interactive, multi-dimensional knowledge graph for automated anomaly and relationship discovery."
+      }
+    ],
+    deploymentCapabilities: [
+      {
+        title: "Zero-Shot GLiNER Neural Engine",
+        desc: "Identifies arbitrary, customized entity classes on-the-fly without requiring extensive model retraining."
+      },
+      {
+        title: "Strict Multi-Level Compartmentalization",
+        desc: "Supports intelligence classification clearances (Confidential, Secret, Top Secret) per document partition."
+      },
+      {
+        title: "Explainable Evidence Chains",
+        desc: "Every extracted node and relationship links back with exact textual spans in original source materials."
+      },
+      {
+        title: "Air-Gapped Sovereign Intelligence Vault",
+        desc: "Runs 100% disconnected inside high-security analytical environments."
+      }
+    ],
+    bullets: [
+      "Unstructured Intelligence Ingestion (PDFs, DOCX, Scans, Intercepts)",
+      "GLiNER Machine Learning & Rule-Based Entity Extraction",
+      "Complex Relationship, Hierarchy & Event Mapping",
+      "Automated Threat Knowledge Graph Generation",
+      "Interactive Link Analysis & Anomaly Detection",
+      "Sovereign Air-Gapped Intelligence Processing"
+    ],
+    image: "/HERO/PRODUCTS/FUSION.jpg",
+    badge: "Threat Intelligence",
+    specs: [
+      { label: "Entity Engine", value: "GLiNER + Rule Hybrid" },
+      { label: "Output", value: "Interactive Knowledge Graph" },
+      { label: "Clearance", value: "Multi-Level Clearance RBAC" }
+    ]
+  },
+  {
+    id: "logistics-ai",
+    category: "Computer Vision",
+    icon: "Boxes",
+    title: "Logistics AI – Warehouse Intelligence",
+    short: "Transforms Warehouse Images and Videos into Actionable Operational Insights Using Computer Vision and AI.",
+    detail: `Logistics AI – Warehouse Scene Intelligence is an enterprise computer vision platform engineered to transform industrial camera feeds and mobile video streams into real-time operational insights, inventory accuracy, and workplace safety intelligence.
+
+The platform executes real-time multi-camera spatial tracking and perspective calibration across large-scale logistics hubs, high-bay storage facilities, and distribution centers. Deep neural detection networks identify, count, and classify pallets, forklifts, Automated Guided Vehicles (AGVs), personnel, packaging containers, and storage bay racks with 99%+ precision.
+
+Automating continuous inventory auditing, Logistics AI visually scans shelf occupancies, identifies misplaced cargo, and updates stock metrics without requiring manual handheld barcode scanning. Real-time spatial density heatmaps track aisle occupancy rates, detect throughput bottlenecks, and optimize material handling equipment routing.
+
+For workplace safety compliance, the platform provides sub-15ms proximity alerting to prevent collisions between forklifts, AGVs, and personnel while continuously monitoring Personal Protective Equipment (PPE) compliance (safety vests, helmets, restricted-zone incursions). It integrates natively with enterprise WMS and ERP systems (SAP, Oracle, Manhattan Associates) via high-speed REST and MQTT APIs.`,
+    architecturePillars: [
+      {
+        step: "01",
+        title: "Spatial Scene & Camera Calibration",
+        desc: "Performs multi-camera 3D perspective transformation and spatial coordinate mapping across multi-level warehouse bays."
+      },
+      {
+        step: "02",
+        title: "Deep Object Detection & Density Estimation",
+        desc: "High-precision convolutional and transformer models detecting pallets, packaging, forklifts, AGVs, and inventory items."
+      },
+      {
+        step: "03",
+        title: "Spatial Analytics & Heatmap Intelligence",
+        desc: "Computes aisle occupancy rates, congestion bottlenecks, inventory localization maps, and safety proximity alerts in real time."
+      }
+    ],
+    deploymentCapabilities: [
+      {
+        title: "Automated Real-Time Inventory Auditing",
+        desc: "Eliminates manual barcode scanning cycles with continuous visual stock counting and shelf vacancy detection."
+      },
+      {
+        title: "Forklift & AGV Safety Collision Prevention",
+        desc: "Sub-15ms proximity alerting preventing collisions between material handling vehicles and warehouse personnel."
+      },
+      {
+        title: "PPE & Safety Protocol Compliance",
+        desc: "Real-time identification of safety vests, helmets, and restricted-zone pedestrian infractions."
+      },
+      {
+        title: "Seamless WMS & ERP Integration",
+        desc: "Integrates directly with SAP, Oracle, Manhattan Associates, and custom Warehouse Management Systems."
+      }
+    ],
+    bullets: [
+      "Warehouse Scene & Multi-Camera Video Analytics",
+      "Pallet, Forklift, AGV & Cargo Object Detection",
+      "Real-Time Spatial Density & Heatmap Mapping",
+      "Automated Stock Counting & Shelf Vacancy Auditing",
+      "Worker Safety & PPE Compliance Monitoring",
+      "Aisle Congestion & Traffic Flow Optimization"
+    ],
+    image: "/HERO/PRODUCTS/LOGISTIC_AI.jpg",
+    badge: "Warehouse Scene AI",
+    specs: [
+      { label: "Capabilities", value: "Spatial Density & Object Localization" },
+      { label: "Integration", value: "WMS / ERP / Edge NVR" },
+      { label: "Accuracy", value: "99%+ Counting Precision" }
     ]
   }
 ];

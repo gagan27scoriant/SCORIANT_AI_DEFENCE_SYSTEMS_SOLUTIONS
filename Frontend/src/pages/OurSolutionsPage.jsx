@@ -24,6 +24,10 @@ export default function OurSolutionsPage() {
     'geospatial-intelligence': '🛰️',
     'smart-surveillance': '📹',
     'gurukula-ai': '🎓',
+    'conversational-ai-platform': '🎙️',
+    'kavacha-ai': '🛡️',
+    'intelligent-fusion': '🔮',
+    'logistics-ai': '📦',
   };
 
   const handleOpenDemo = (productTitle = '') => {
@@ -44,6 +48,41 @@ export default function OurSolutionsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const renderStyledTitle = (title) => {
+    if (!title) return null;
+    const words = title.split(' ');
+    if (words.length <= 1) {
+      return (
+        <span
+          style={{
+            background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          {title}
+        </span>
+      );
+    }
+    const highlightCount = words.length >= 4 ? 2 : 1;
+    const prefix = words.slice(0, words.length - highlightCount).join(' ');
+    const highlight = words.slice(words.length - highlightCount).join(' ');
+    return (
+      <>
+        {prefix}{' '}
+        <span
+          style={{
+            background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          {highlight}
+        </span>
+      </>
+    );
+  };
+
   // Dedicated Full Product Detail Page View
   if (selectedSolutionDetail) {
     const product = selectedSolutionDetail;
@@ -52,20 +91,20 @@ export default function OurSolutionsPage() {
     return (
       <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh', paddingTop: '80px' }}>
 
-        {/* 1. Solution Hero Section (Title + Tagline Only) */}
+        {/* 1. Solution Hero Section (Title + Tagline + Live Specs Bar) */}
         <section
           style={{
             position: 'relative',
             width: '100%',
-            minHeight: '55vh',
+            minHeight: '62vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             overflow: 'hidden',
             background: '#0b0f19',
             color: '#f8fafc',
-            paddingTop: '60px',
-            paddingBottom: '60px',
+            paddingTop: '70px',
+            paddingBottom: '70px',
           }}
         >
           {/* Background Media */}
@@ -78,7 +117,7 @@ export default function OurSolutionsPage() {
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'center',
-                opacity: 0.8,
+                opacity: 0.85,
                 filter: 'contrast(1.05) brightness(0.95)',
               }}
             />
@@ -87,15 +126,15 @@ export default function OurSolutionsPage() {
                 position: 'absolute',
                 inset: 0,
                 background: `
-                  linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.25) 50%, rgba(11, 15, 25, 0.7) 100%),
-                  linear-gradient(90deg, rgba(11, 15, 25, 0.6) 0%, rgba(11, 15, 25, 0.2) 50%, rgba(11, 15, 25, 0.5) 100%)
+                  linear-gradient(180deg, rgba(11, 15, 25, 0.5) 0%, rgba(11, 15, 25, 0.3) 50%, rgba(11, 15, 25, 0.75) 100%),
+                  linear-gradient(90deg, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.25) 50%, rgba(11, 15, 25, 0.55) 100%)
                 `,
               }}
             />
           </div>
 
           <div className="section-wrapper" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
-            <div style={{ maxWidth: '920px' }}>
+            <div style={{ maxWidth: '960px' }}>
               <div
                 style={{
                   display: 'inline-flex',
@@ -117,36 +156,36 @@ export default function OurSolutionsPage() {
                 <span>{product.category} — {product.badge}</span>
               </div>
 
-              {/* Title */}
+              {/* Title with Glowing Blue/Purple Gradient Highlight */}
               <h1
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  fontSize: 'clamp(32px, 4.5vw, 54px)',
                   fontWeight: 900,
                   color: '#ffffff',
                   lineHeight: 1.15,
                   letterSpacing: '-0.5px',
-                  marginBottom: '16px',
+                  marginBottom: '18px',
                 }}
               >
-                {product.title}
+                {renderStyledTitle(product.title)}
               </h1>
 
               {/* Small Tagline */}
               <p
                 style={{
-                  fontSize: 'clamp(16px, 1.8vw, 19.5px)',
+                  fontSize: 'clamp(16px, 1.85vw, 20px)',
                   color: '#cbd5e1',
                   lineHeight: 1.6,
-                  marginBottom: '32px',
-                  maxWidth: '820px',
+                  marginBottom: '28px',
+                  maxWidth: '860px',
                   fontWeight: 500,
                 }}
               >
                 {product.short}
               </p>
 
-              {/* Hero Action Button */}
+              {/* Hero Action Buttons */}
               <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                 <button
                   onClick={() => handleOpenDemo(product.title)}
@@ -156,7 +195,7 @@ export default function OurSolutionsPage() {
                     padding: '14px 34px',
                   }}
                 >
-                  <span>Request Demo</span>
+                  <span>Request Product Briefing</span>
                   <ArrowRight size={18} />
                 </button>
 
@@ -171,25 +210,69 @@ export default function OurSolutionsPage() {
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                   }}
                 >
-                  <span>View All Solutions</span>
+                  <ArrowLeft size={16} />
+                  <span>All Solutions</span>
                 </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 2. Detailed Information Section Below Hero */}
+        {/* 2. Detailed Overview Section Below Hero */}
         <section
           style={{
-            padding: '70px 0 80px 0',
+            padding: '80px 0 90px 0',
             background: 'var(--bg-secondary)',
             borderBottom: '1px solid var(--border-light)',
           }}
         >
           <div className="section-wrapper">
-            <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
-              {/* Header Badge & Title */}
-              <div style={{ marginBottom: '0px' }}>
+            <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+              <span
+                style={{
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                  color: 'var(--primary-purple)',
+                  display: 'inline-block',
+                  marginBottom: '12px',
+                }}
+              >
+                SOLUTION OVERVIEW & DEPLOYMENT ARCHITECTURE
+              </span>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(26px, 3.4vw, 40px)',
+                  fontWeight: 900,
+                  color: 'var(--text-main)',
+                  textTransform: 'uppercase',
+                  marginBottom: '26px',
+                  letterSpacing: '-0.5px',
+                }}
+              >
+                About {product.title}
+              </h2>
+              <div
+                style={{
+                  fontSize: '16.5px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.9,
+                  whiteSpace: 'pre-line',
+                }}
+              >
+                {product.detail}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Core Architecture & Execution Pipeline */}
+        {product.architecturePillars && product.architecturePillars.length > 0 && (
+          <section style={{ padding: '85px 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
+            <div className="section-wrapper">
+              <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 48px auto' }}>
                 <span
                   style={{
                     fontSize: '12px',
@@ -198,41 +281,183 @@ export default function OurSolutionsPage() {
                     textTransform: 'uppercase',
                     color: 'var(--primary-purple)',
                     display: 'inline-block',
-                    marginBottom: '12px',
+                    marginBottom: '10px',
                   }}
                 >
-                  SOLUTION OVERVIEW & DEPLOYMENT ARCHITECTURE
+                  SYSTEM ARCHITECTURE & EXECUTION PIPELINE
                 </span>
                 <h2
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: 'clamp(26px, 3.4vw, 38px)',
+                    fontSize: 'clamp(26px, 3.5vw, 38px)',
                     fontWeight: 900,
                     color: 'var(--text-main)',
                     textTransform: 'uppercase',
-                    marginBottom: '22px',
                     letterSpacing: '-0.5px',
                   }}
                 >
-                  About {product.title}
+                  3-Stage Processing Workflow
                 </h2>
-                <div
-                  style={{
-                    fontSize: '16.5px',
-                    color: 'var(--text-muted)',
-                    lineHeight: 1.85,
-                    whiteSpace: 'pre-line',
-                  }}
-                >
-                  {product.detail}
-                </div>
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gap: '28px',
+                  maxWidth: '1200px',
+                  margin: '0 auto',
+                }}
+              >
+                {product.architecturePillars.map((pillar, idx) => (
+                  <div
+                    key={idx}
+                    className="card-container"
+                    style={{
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border-light)',
+                      borderRadius: '20px',
+                      padding: '36px 30px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      boxShadow: 'var(--shadow-card)',
+                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '46px',
+                        height: '46px',
+                        borderRadius: '14px',
+                        background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(96, 165, 250, 0.15) 100%)',
+                        border: '1px solid rgba(124, 58, 237, 0.3)',
+                        color: 'var(--primary-purple)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '17px',
+                        fontWeight: 900,
+                        fontFamily: 'var(--font-heading)',
+                        marginBottom: '20px',
+                      }}
+                    >
+                      {pillar.step}
+                    </div>
+
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '20px',
+                        fontWeight: 800,
+                        color: 'var(--text-main)',
+                        marginBottom: '14px',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {pillar.title}
+                    </h3>
+
+                    <p
+                      style={{
+                        fontSize: '15px',
+                        color: 'var(--text-muted)',
+                        lineHeight: 1.75,
+                        margin: 0,
+                      }}
+                    >
+                      {pillar.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* 3. Detailed Points & Capabilities Section */}
-        <section style={{ padding: '80px 0', background: 'var(--bg-secondary)' }}>
+        {/* 4. Enterprise & Defence Deployment Capabilities */}
+        {product.deploymentCapabilities && product.deploymentCapabilities.length > 0 && (
+          <section style={{ padding: '85px 0', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-light)' }}>
+            <div className="section-wrapper">
+              <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 48px auto' }}>
+                <span
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    letterSpacing: '1.5px',
+                    textTransform: 'uppercase',
+                    color: 'var(--primary-purple)',
+                    display: 'inline-block',
+                    marginBottom: '10px',
+                  }}
+                >
+                  ENTERPRISE & DEFENCE DEPLOYMENT
+                </span>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: 'clamp(26px, 3.5vw, 38px)',
+                    fontWeight: 900,
+                    color: 'var(--text-main)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '-0.5px',
+                  }}
+                >
+                  Deployment & Operational Guardrails
+                </h2>
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '24px',
+                  maxWidth: '1200px',
+                  margin: '0 auto',
+                }}
+              >
+                {product.deploymentCapabilities.map((cap, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border-light)',
+                      borderRadius: '18px',
+                      padding: '28px',
+                      boxShadow: 'var(--shadow-card)',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+                      <div
+                        style={{
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '10px',
+                          background: 'rgba(124, 58, 237, 0.1)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Shield size={18} color="var(--primary-purple)" />
+                      </div>
+                      <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '17px', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
+                        {cap.title}
+                      </h4>
+                    </div>
+                    <p style={{ fontSize: '14.5px', color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
+                      {cap.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 5. Key Engineering Highlights / Feature Matrix */}
+        <section style={{ padding: '85px 0', background: 'var(--bg-primary)' }}>
           <div className="section-wrapper">
             <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 40px auto' }}>
               <span
@@ -246,7 +471,7 @@ export default function OurSolutionsPage() {
                   marginBottom: '10px',
                 }}
               >
-                SYSTEM CAPABILITIES & ARCHITECTURE
+                SYSTEM CAPABILITIES & SPECIFICATIONS
               </span>
               <h2
                 style={{
@@ -349,7 +574,7 @@ export default function OurSolutionsPage() {
                 className="btn-primary"
                 style={{ fontSize: '15px', padding: '14px 32px' }}
               >
-                <span>Request Demo Now</span>
+                <span>Request Briefing Now</span>
                 <ArrowRight size={18} />
               </button>
             </div>

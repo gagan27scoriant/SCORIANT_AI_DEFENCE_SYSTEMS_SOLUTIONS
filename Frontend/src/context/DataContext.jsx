@@ -79,7 +79,7 @@ const INITIAL_LOCATIONS = {
   india: {
     tag: 'HEADQUARTERS / INDIA',
     title: 'India Office',
-    company: 'Scoriant AI and Defence Systems',
+    company: 'Scoriant AI Defence Systems Solutions',
     address: '3rd Floor Sree Gururaya Mansion, 8th Main Rd, KSRTC Layout, J.P. Nagar, Bengaluru 560078',
     phone: '+91 (080) 4123-5890',
     email: 'info@scoriant.com',
@@ -89,7 +89,7 @@ const INITIAL_LOCATIONS = {
   usa: {
     tag: 'OPERATIONS CENTER / USA',
     title: 'USA Office',
-    company: 'Scoriant AI and Defence Systems',
+    company: 'Scoriant AI Defence Systems Solutions',
     address: '531A Giuffrida Avenue, San Jose',
     phone: '+1 (408) 555-0198',
     email: 'info@scoriant.com',
@@ -107,7 +107,7 @@ export function DataProvider({ children }) {
     if (!saved) return INITIAL_PRODUCTS;
     try {
       const parsed = JSON.parse(saved);
-      return parsed.map((p) => {
+      const mapped = parsed.map((p) => {
         const init = INITIAL_PRODUCTS.find((ip) => ip.id === p.id);
         if (init) {
           return {
@@ -121,6 +121,13 @@ export function DataProvider({ children }) {
         }
         return p;
       });
+      // Append any new products that are in INITIAL_PRODUCTS but not in localStorage
+      INITIAL_PRODUCTS.forEach((ip) => {
+        if (!mapped.some((p) => p.id === ip.id)) {
+          mapped.push(ip);
+        }
+      });
+      return mapped;
     } catch (e) {
       return INITIAL_PRODUCTS;
     }

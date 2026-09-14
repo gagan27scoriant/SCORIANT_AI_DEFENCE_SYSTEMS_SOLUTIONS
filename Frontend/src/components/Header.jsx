@@ -18,6 +18,10 @@ export default function Header() {
     'geospatial-intelligence': '🛰️',
     'smart-surveillance': '📹',
     'gurukula-ai': '🎓',
+    'conversational-ai-platform': '🎙️',
+    'kavacha-ai': '🛡️',
+    'intelligent-fusion': '🔮',
+    'logistics-ai': '📦',
   };
 
   useEffect(() => {
@@ -119,7 +123,7 @@ export default function Header() {
                 textTransform: 'uppercase',
               }}
             >
-              AI and Defence Systems
+              AI Defence Systems Solutions
             </span>
           </div>
         </Link>
@@ -185,7 +189,7 @@ export default function Header() {
                     )}
                   </Link>
 
-                  {/* Dropdown Solutions Menu */}
+                  {/* Dropdown Solutions Menu - Clean Minimal Product List */}
                   {isSolutionsHovered && (
                     <div
                       style={{
@@ -193,7 +197,7 @@ export default function Header() {
                         top: '100%',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        paddingTop: '10px',
+                        paddingTop: '8px',
                         zIndex: 2000,
                       }}
                     >
@@ -201,140 +205,45 @@ export default function Header() {
                         style={{
                           background: '#ffffff',
                           border: '1px solid rgba(226, 232, 240, 0.95)',
-                          borderRadius: '18px',
-                          boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15), 0 6px 20px rgba(124, 58, 237, 0.08)',
-                          padding: '12px',
-                          width: '360px',
+                          borderRadius: '14px',
+                          boxShadow: '0 18px 40px -8px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(124, 58, 237, 0.06)',
+                          padding: '8px',
+                          minWidth: '280px',
                           display: 'flex',
                           flexDirection: 'column',
-                          gap: '8px',
+                          gap: '2px',
                           backdropFilter: 'blur(20px)',
                         }}
                       >
-                        {/* Header banner inside dropdown */}
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '4px 8px 8px 8px',
-                            borderBottom: '1px solid #f1f5f9',
-                          }}
-                        >
-                          <span
+                        {products.map((product) => (
+                          <div
+                            key={product.id}
+                            onClick={(e) => handleProductClick(e, product.id)}
                             style={{
-                              fontSize: '11px',
-                              fontWeight: 800,
-                              color: '#7c3aed',
-                              letterSpacing: '1.2px',
-                              textTransform: 'uppercase',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '6px',
+                              padding: '9px 14px',
+                              borderRadius: '8px',
+                              cursor: 'pointer',
+                              fontSize: '13.5px',
+                              fontWeight: 650,
+                              color: '#334155',
+                              transition: 'all 0.18s ease',
+                              background: 'transparent',
+                              whiteSpace: 'nowrap',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'rgba(124, 58, 237, 0.08)';
+                              e.currentTarget.style.color = '#7c3aed';
+                              e.currentTarget.style.paddingLeft = '18px';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'transparent';
+                              e.currentTarget.style.color = '#334155';
+                              e.currentTarget.style.paddingLeft = '14px';
                             }}
                           >
-                            <Sparkles size={13} />
-                            <span>Enterprise & Defence Suite</span>
-                          </span>
-                          <Link
-                            to="/solutions"
-                            onClick={() => setIsSolutionsHovered(false)}
-                            style={{
-                              fontSize: '11.5px',
-                              fontWeight: 700,
-                              color: '#64748b',
-                              textDecoration: 'none',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              transition: 'color 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => (e.currentTarget.style.color = '#7c3aed')}
-                            onMouseLeave={(e) => (e.currentTarget.style.color = '#64748b')}
-                          >
-                            <span>View All</span>
-                            <ArrowRight size={12} />
-                          </Link>
-                        </div>
-
-                        {/* 1-Column List of Products */}
-                        <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '4px',
-                          }}
-                        >
-                          {products.map((product) => (
-                            <div
-                              key={product.id}
-                              onClick={(e) => handleProductClick(e, product.id)}
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '10px',
-                                padding: '8px 10px',
-                                borderRadius: '10px',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                                background: 'transparent',
-                                border: '1px solid transparent',
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'rgba(124, 58, 237, 0.08)';
-                                e.currentTarget.style.borderColor = 'rgba(124, 58, 237, 0.15)';
-                                e.currentTarget.style.transform = 'translateX(2px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'transparent';
-                                e.currentTarget.style.borderColor = 'transparent';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
-                            >
-                              <div
-                                style={{
-                                  width: '32px',
-                                  height: '32px',
-                                  borderRadius: '8px',
-                                  background: 'rgba(124, 58, 237, 0.08)',
-                                  border: '1px solid rgba(124, 58, 237, 0.15)',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  fontSize: '16px',
-                                  flexShrink: 0,
-                                }}
-                              >
-                                {EMOJI_MAP[product.id] || '⚡'}
-                              </div>
-                              <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
-                                <span
-                                  style={{
-                                    fontSize: '13px',
-                                    fontWeight: 800,
-                                    color: '#0f172a',
-                                    lineHeight: 1.3,
-                                    whiteSpace: 'nowrap',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                  }}
-                                >
-                                  {product.title}
-                                </span>
-                                <span
-                                  style={{
-                                    fontSize: '10.5px',
-                                    fontWeight: 600,
-                                    color: '#7c3aed',
-                                    marginTop: '1px',
-                                  }}
-                                >
-                                  {product.badge || product.category}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                            {product.title}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -433,24 +342,20 @@ export default function Header() {
                   </Link>
 
                   {/* Sub products for mobile */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', paddingLeft: '12px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingLeft: '12px' }}>
                     {products.map((p) => (
                       <div
                         key={p.id}
                         onClick={(e) => handleProductClick(e, p.id)}
                         style={{
                           fontSize: '13.5px',
-                          fontWeight: 700,
+                          fontWeight: 600,
                           color: '#475569',
                           padding: '6px 0',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px',
                           cursor: 'pointer',
                         }}
                       >
-                        <span>{EMOJI_MAP[p.id] || '⚡'}</span>
-                        <span>{p.title}</span>
+                        {p.title}
                       </div>
                     ))}
                   </div>

@@ -18,6 +18,9 @@ import {
   X,
   Sparkles,
   ShieldCheck,
+  MessageSquare,
+  Network,
+  Boxes,
 } from 'lucide-react';
 
 export default function TechStackSection() {
@@ -42,6 +45,14 @@ export default function TechStackSection() {
         return <Eye size={20} color="#a78bfa" />;
       case 'GraduationCap':
         return <GraduationCap size={20} color="#a78bfa" />;
+      case 'MessageSquare':
+        return <MessageSquare size={20} color="#a78bfa" />;
+      case 'ShieldCheck':
+        return <ShieldCheck size={20} color="#a78bfa" />;
+      case 'Network':
+        return <Network size={20} color="#a78bfa" />;
+      case 'Boxes':
+        return <Boxes size={20} color="#a78bfa" />;
       default:
         return <Cpu size={20} color="#a78bfa" />;
     }

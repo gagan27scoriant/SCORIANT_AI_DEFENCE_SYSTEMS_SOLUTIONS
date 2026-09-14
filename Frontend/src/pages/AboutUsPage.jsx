@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Target, Compass, Layers, ArrowRight } from 'lucide-react';
+import { Sparkles, Target, Compass, Layers, ArrowRight, Download } from 'lucide-react';
 import PillarsSection from '../components/PillarsSection';
 
 export default function AboutUsPage() {
@@ -123,21 +123,26 @@ export default function AboutUsPage() {
                 fontWeight: 450,
               }}
             >
-              Scoriant AI & Defence Systems is an engineering-driven pioneer specializing in sovereign AI platforms, air-gapped compute architectures, and mission-critical defence systems. Combining direct-to-silicon hardware acceleration with autonomous agentic intelligence, we empower aerospace agencies, defence establishments, and regulated enterprises with real-time situational awareness, carrier-grade 5G protocol stacks, and high-performance edge computing engineered for disconnected and extreme environments.
+              Scoriant AI Defence Systems Solutions is an engineering-driven pioneer specializing in sovereign AI platforms, air-gapped compute architectures, and mission-critical defence systems. Combining direct-to-silicon hardware acceleration with autonomous agentic intelligence, we empower aerospace agencies, defence establishments, and regulated enterprises with real-time situational awareness, carrier-grade 5G protocol stacks, and high-performance edge computing engineered for disconnected and extreme environments.
             </p>
 
             <div>
               <a
-                href="#our-identity"
+                href="https://drive.google.com/uc?export=download&id=1mBmPA3mhWEjU6vfezZqBhcMsKotU4RMw"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary"
                 style={{
                   textDecoration: 'none',
                   fontSize: '15px',
                   padding: '14px 34px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
                 }}
               >
-                <span>Explore Scoriant Identity</span>
-                <ArrowRight size={18} />
+                <Download size={18} />
+                <span>Download Scoriant Catalog</span>
               </a>
             </div>
           </div>

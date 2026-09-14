@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDataContext } from '../context/DataContext';
-import { ArrowRight, CheckCircle2, X, ExternalLink, ShieldAlert, Cpu, Server, BrainCircuit, FileText, Globe, Eye, GraduationCap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, X, ExternalLink, ShieldAlert, Cpu, Server, BrainCircuit, FileText, Globe, Eye, GraduationCap, MessageSquare, ShieldCheck, Network, Boxes } from 'lucide-react';
 
 export default function ProductCatalog({ onOpenDemoModal }) {
   const { products } = useDataContext();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeModalProduct, setActiveModalProduct] = useState(null);
 
-  const categories = ['All', 'Infrastructure', 'Agentic AI', 'Document AI', 'Geospatial AI', 'Computer Vision', 'EdTech AI'];
+  const categories = ['All', ...Array.from(new Set(products.map((p) => p.category)))];
 
   const filteredProducts = selectedCategory === 'All'
     ? products
@@ -21,6 +21,10 @@ export default function ProductCatalog({ onOpenDemoModal }) {
       case 'Globe': return <Globe size={22} color="var(--primary-purple)" />;
       case 'Eye': return <Eye size={22} color="var(--primary-purple)" />;
       case 'GraduationCap': return <GraduationCap size={22} color="var(--primary-purple)" />;
+      case 'MessageSquare': return <MessageSquare size={22} color="var(--primary-purple)" />;
+      case 'ShieldCheck': return <ShieldCheck size={22} color="var(--primary-purple)" />;
+      case 'Network': return <Network size={22} color="var(--primary-purple)" />;
+      case 'Boxes': return <Boxes size={22} color="var(--primary-purple)" />;
       default: return <Cpu size={22} color="var(--primary-purple)" />;
     }
   };
