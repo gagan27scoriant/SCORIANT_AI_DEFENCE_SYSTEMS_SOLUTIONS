@@ -195,23 +195,8 @@ export default function OurSolutionsPage() {
                     padding: '14px 34px',
                   }}
                 >
-                  <span>Request Product Briefing</span>
+                  <span>Request Demo</span>
                   <ArrowRight size={18} />
-                </button>
-
-                <button
-                  onClick={handleBackToSolutions}
-                  className="btn-secondary"
-                  style={{
-                    fontSize: '15px',
-                    padding: '14px 28px',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                  }}
-                >
-                  <ArrowLeft size={16} />
-                  <span>All Solutions</span>
                 </button>
               </div>
             </div>
@@ -268,195 +253,7 @@ export default function OurSolutionsPage() {
           </div>
         </section>
 
-        {/* 3. Core Architecture & Execution Pipeline */}
-        {product.architecturePillars && product.architecturePillars.length > 0 && (
-          <section style={{ padding: '85px 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
-            <div className="section-wrapper">
-              <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 48px auto' }}>
-                <span
-                  style={{
-                    fontSize: '12px',
-                    fontWeight: 800,
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    color: 'var(--primary-purple)',
-                    display: 'inline-block',
-                    marginBottom: '10px',
-                  }}
-                >
-                  SYSTEM ARCHITECTURE & EXECUTION PIPELINE
-                </span>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: 'clamp(26px, 3.5vw, 38px)',
-                    fontWeight: 900,
-                    color: 'var(--text-main)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '-0.5px',
-                  }}
-                >
-                  3-Stage Processing Workflow
-                </h2>
-              </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  gap: '28px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                }}
-              >
-                {product.architecturePillars.map((pillar, idx) => (
-                  <div
-                    key={idx}
-                    className="card-container"
-                    style={{
-                      background: 'var(--bg-card)',
-                      border: '1px solid var(--border-light)',
-                      borderRadius: '20px',
-                      padding: '36px 30px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      position: 'relative',
-                      boxShadow: 'var(--shadow-card)',
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '46px',
-                        height: '46px',
-                        borderRadius: '14px',
-                        background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(96, 165, 250, 0.15) 100%)',
-                        border: '1px solid rgba(124, 58, 237, 0.3)',
-                        color: 'var(--primary-purple)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '17px',
-                        fontWeight: 900,
-                        fontFamily: 'var(--font-heading)',
-                        marginBottom: '20px',
-                      }}
-                    >
-                      {pillar.step}
-                    </div>
-
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '20px',
-                        fontWeight: 800,
-                        color: 'var(--text-main)',
-                        marginBottom: '14px',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {pillar.title}
-                    </h3>
-
-                    <p
-                      style={{
-                        fontSize: '15px',
-                        color: 'var(--text-muted)',
-                        lineHeight: 1.75,
-                        margin: 0,
-                      }}
-                    >
-                      {pillar.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 4. Enterprise & Defence Deployment Capabilities */}
-        {product.deploymentCapabilities && product.deploymentCapabilities.length > 0 && (
-          <section style={{ padding: '85px 0', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-light)' }}>
-            <div className="section-wrapper">
-              <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 48px auto' }}>
-                <span
-                  style={{
-                    fontSize: '12px',
-                    fontWeight: 800,
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    color: 'var(--primary-purple)',
-                    display: 'inline-block',
-                    marginBottom: '10px',
-                  }}
-                >
-                  ENTERPRISE & DEFENCE DEPLOYMENT
-                </span>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: 'clamp(26px, 3.5vw, 38px)',
-                    fontWeight: 900,
-                    color: 'var(--text-main)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '-0.5px',
-                  }}
-                >
-                  Deployment & Operational Guardrails
-                </h2>
-              </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '24px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                }}
-              >
-                {product.deploymentCapabilities.map((cap, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: 'var(--bg-card)',
-                      border: '1px solid var(--border-light)',
-                      borderRadius: '18px',
-                      padding: '28px',
-                      boxShadow: 'var(--shadow-card)',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
-                      <div
-                        style={{
-                          width: '36px',
-                          height: '36px',
-                          borderRadius: '10px',
-                          background: 'rgba(124, 58, 237, 0.1)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          flexShrink: 0,
-                        }}
-                      >
-                        <Shield size={18} color="var(--primary-purple)" />
-                      </div>
-                      <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '17px', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
-                        {cap.title}
-                      </h4>
-                    </div>
-                    <p style={{ fontSize: '14.5px', color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
-                      {cap.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 5. Key Engineering Highlights / Feature Matrix */}
+        {/* 3. Key Engineering Highlights / Feature Matrix */}
         <section style={{ padding: '85px 0', background: 'var(--bg-primary)' }}>
           <div className="section-wrapper">
             <div style={{ textAlign: 'left', maxWidth: '1200px', margin: '0 auto 40px auto' }}>
@@ -574,7 +371,7 @@ export default function OurSolutionsPage() {
                 className="btn-primary"
                 style={{ fontSize: '15px', padding: '14px 32px' }}
               >
-                <span>Request Briefing Now</span>
+                <span>Request Demo Now</span>
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -819,7 +616,7 @@ export default function OurSolutionsPage() {
                     }}
                   />
 
-                  <div>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                     {/* Emoji Header */}
                     <div style={{ marginBottom: '16px' }}>
                       <div
@@ -849,6 +646,9 @@ export default function OurSolutionsPage() {
                         marginBottom: '10px',
                         lineHeight: 1.3,
                         letterSpacing: '-0.2px',
+                        minHeight: '48px',
+                        display: 'flex',
+                        alignItems: 'flex-start',
                       }}
                     >
                       {product.title}
@@ -861,6 +661,11 @@ export default function OurSolutionsPage() {
                         color: 'var(--text-muted)',
                         lineHeight: 1.55,
                         marginBottom: '20px',
+                        minHeight: '66px',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
                       }}
                     >
                       {product.short}
@@ -875,6 +680,7 @@ export default function OurSolutionsPage() {
                       justifyContent: 'center',
                       paddingTop: '16px',
                       borderTop: '1px solid var(--border-light)',
+                      marginTop: 'auto',
                     }}
                   >
                     <button

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Send, ShieldCheck } from 'lucide-react';
+import { submitDemoRequest } from '../services/api';
 
 export default function DemoModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -10,16 +11,30 @@ export default function DemoModal({ isOpen, onClose }) {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setErrorMessage('');
+    setIsSubmitting(true);
+
+    try {
+      await submitDemoRequest(formData);
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Demo request error:', err);
+      setErrorMessage(err.message || 'Failed to submit demo request. Please provide a valid email and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setErrorMessage('');
     setFormData({
       name: '',
       email: '',
@@ -242,6 +257,24 @@ export default function DemoModal({ isOpen, onClose }) {
                   }}
                 />
               </div>
+
+              {/* Error Notice */}
+              {errorMessage && (
+                <div
+                  style={{
+                    padding: '12px 16px',
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    borderRadius: '10px',
+                    color: '#ef4444',
+                    fontSize: '13.5px',
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  ⚠️ {errorMessage}
+                </div>
+              )}
 
               <button type="submit" className="btn-primary" style={{ marginTop: '8px', padding: '14px 24px' }}>
                 <Send size={16} />

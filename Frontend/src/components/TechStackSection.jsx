@@ -254,16 +254,24 @@ export default function TechStackSection() {
                 e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
               }}
             >
-              <div>
-                {/* Card Body */}
-                <div style={{ padding: '26px 26px' }}>
+              <div
+                style={{
+                  padding: '26px 26px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                  flex: 1,
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
                   {/* Category & Icon Header */}
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       gap: '10px',
-                      marginBottom: '12px',
+                      marginBottom: '14px',
                     }}
                   >
                     <div
@@ -293,7 +301,7 @@ export default function TechStackSection() {
                     </span>
                   </div>
 
-                  {/* Product Title */}
+                  {/* Product Title (Equalized Height) */}
                   <h3
                     style={{
                       fontFamily: 'var(--font-heading)',
@@ -302,24 +310,32 @@ export default function TechStackSection() {
                       color: '#ffffff',
                       marginBottom: '8px',
                       lineHeight: 1.3,
+                      minHeight: '50px',
+                      display: 'flex',
+                      alignItems: 'flex-start',
                     }}
                   >
                     {product.title}
                   </h3>
 
-                  {/* Product Summary */}
+                  {/* Product Summary (Equalized Height) */}
                   <p
                     style={{
                       fontSize: '13.5px',
                       color: '#94a3b8',
                       lineHeight: 1.55,
                       marginBottom: '18px',
+                      minHeight: '64px',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
                     }}
                   >
                     {product.short}
                   </p>
 
-                  {/* Key Capability Bullets */}
+                  {/* Key Capability Bullets (Equalized Height) */}
                   <div
                     className="responsive-product-bullets"
                     style={{
@@ -330,6 +346,8 @@ export default function TechStackSection() {
                       padding: '12px 14px',
                       borderRadius: '12px',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
+                      minHeight: '94px',
+                      justifyContent: 'center',
                     }}
                   >
                     {product.bullets.slice(0, 3).map((b, i) => (
@@ -355,31 +373,31 @@ export default function TechStackSection() {
                       </div>
                     ))}
                   </div>
-
-                  {/* Know More Action Button */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/solutions/${product.id}`);
-                    }}
-                    className="btn-primary"
-                    style={{
-                      width: '100%',
-                      padding: '10px 16px',
-                      fontSize: '13.5px',
-                      fontWeight: 700,
-                      marginTop: '16px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      borderRadius: '10px',
-                    }}
-                  >
-                    <span>Know More</span>
-                    <ArrowRight size={15} />
-                  </button>
                 </div>
+
+                {/* Know More Action Button (Locked to bottom) */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/solutions/${product.id}`);
+                  }}
+                  className="btn-primary"
+                  style={{
+                    width: '100%',
+                    padding: '11px 16px',
+                    fontSize: '13.5px',
+                    fontWeight: 700,
+                    marginTop: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    borderRadius: '10px',
+                  }}
+                >
+                  <span>Know More</span>
+                  <ArrowRight size={15} />
+                </button>
               </div>
             </div>
           ))}

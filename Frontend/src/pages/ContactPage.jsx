@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Mail, MapPin, Building, Phone, Clock, Send, User, FileText, CheckCircle2, ChevronDown, Sparkles, ShieldCheck, Zap, Globe } from 'lucide-react';
 import { useDataContext } from '../context/DataContext';
+import { submitContactForm } from '../services/api';
 
 const getPreloadedMessageForProduct = (productTitle) => {
   const normalized = (productTitle || '').toLowerCase();
@@ -45,6 +46,7 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const office = officesData[activeOffice] || officesData['india'];
 
@@ -97,16 +99,24 @@ export default function ContactPage() {
   }, [searchParams, location, products]);
 
   const handleChange = (e) => {
+    setErrorMessage('');
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      await submitContactForm(formData);
       setSubmitted(true);
-    }, 1200);
+    } catch (err) {
+      console.error('Contact submission error:', err);
+      setErrorMessage(err.message || 'Failed to submit inquiry. Please provide a valid email and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -226,8 +236,8 @@ export default function ContactPage() {
       >
         <div className="section-wrapper" style={{ paddingTop: 0, paddingBottom: 0 }}>
           {/* Section Header with India & USA Toggle Buttons */}
-          <div style={{ marginBottom: '20px' }}>
-            <div className="pill-badge" style={{ marginBottom: '8px' }}>
+          <div style={{ marginBottom: '36px' }}>
+            <div className="pill-badge" style={{ marginBottom: '10px' }}>
               <span>GLOBAL FOOTPRINT</span>
             </div>
 
@@ -255,7 +265,7 @@ export default function ContactPage() {
                   OUR OFFICE'S
                 </h2>
                 <p style={{ fontSize: '14px', color: 'var(--text-muted)', maxWidth: '600px', lineHeight: 1.45, margin: 0 }}>
-                  Explore our global facilities engineered for high-performance AI, defence hardware, and carrier-grade 5G stack development.
+                  Connect with our global innovation centres engineered for mission-critical AI, defence operations, and next-generation intelligence platforms.
                 </p>
               </div>
 
@@ -265,8 +275,8 @@ export default function ContactPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   background: 'var(--bg-card)',
-                  padding: '3px',
-                  borderRadius: 'var(--radius-pill)',
+                  padding: '4px',
+                  borderRadius: '12px',
                   border: '1px solid var(--border-light)',
                   boxShadow: '0 4px 14px rgba(0,0,0,0.04)',
                 }}
@@ -278,10 +288,12 @@ export default function ContactPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    padding: '6px 16px',
-                    borderRadius: 'var(--radius-pill)',
-                    fontSize: '12.5px',
-                    fontWeight: activeOffice === 'india' ? 800 : 600,
+                    padding: '7px 18px',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                    fontWeight: activeOffice === 'india' ? 800 : 700,
+                    letterSpacing: '0.4px',
+                    textTransform: 'uppercase',
                     color: activeOffice === 'india' ? '#ffffff' : 'var(--text-muted)',
                     background: activeOffice === 'india' ? 'var(--brand-gradient)' : 'transparent',
                     border: 'none',
@@ -290,7 +302,7 @@ export default function ContactPage() {
                     boxShadow: activeOffice === 'india' ? '0 4px 14px rgba(124, 58, 237, 0.3)' : 'none',
                   }}
                 >
-                  <span>India Office</span>
+                  <span>INDIA OFFICE</span>
                 </button>
 
                 <button
@@ -300,10 +312,12 @@ export default function ContactPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    padding: '6px 16px',
-                    borderRadius: 'var(--radius-pill)',
-                    fontSize: '12.5px',
-                    fontWeight: activeOffice === 'usa' ? 800 : 600,
+                    padding: '7px 18px',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                    fontWeight: activeOffice === 'usa' ? 800 : 700,
+                    letterSpacing: '0.4px',
+                    textTransform: 'uppercase',
                     color: activeOffice === 'usa' ? '#ffffff' : 'var(--text-muted)',
                     background: activeOffice === 'usa' ? 'var(--brand-gradient)' : 'transparent',
                     border: 'none',
@@ -312,7 +326,7 @@ export default function ContactPage() {
                     boxShadow: activeOffice === 'usa' ? '0 4px 14px rgba(124, 58, 237, 0.3)' : 'none',
                   }}
                 >
-                  <span>USA Office</span>
+                  <span>USA OFFICE</span>
                 </button>
               </div>
             </div>
@@ -345,20 +359,24 @@ export default function ContactPage() {
                   color: 'var(--text-main)',
                   lineHeight: 1.15,
                   marginBottom: '2px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.3px',
                 }}
               >
-                {office.title}
+                {office.title || (activeOffice === 'india' ? 'INDIA OFFICE' : 'USA OFFICE')}
               </h3>
 
               <h4
                 style={{
-                  fontSize: '14px',
-                  fontWeight: 700,
+                  fontSize: '13.5px',
+                  fontWeight: 800,
                   color: 'var(--primary-purple)',
-                  marginBottom: '12px',
+                  marginBottom: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.4px',
                 }}
               >
-                {office.company}
+                {office.company || 'Scoriant AI Defence Systems Solutions'}
               </h4>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: 0 }}>
@@ -369,32 +387,23 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                    <Mail size={14.5} color="var(--primary-purple)" />
-                    <a
-                      href={`mailto:${office.email}`}
-                      style={{
-                        fontSize: '13px',
-                        fontWeight: 700,
-                        color: 'var(--primary-purple)',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      {office.email}
-                    </a>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                    <Phone size={14.5} color="var(--primary-purple)" />
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)' }}>
-                      {office.phone}
-                    </span>
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
+                  <Mail size={15} color="var(--primary-purple)" style={{ flexShrink: 0 }} />
+                  <a
+                    href={`mailto:${office.email}`}
+                    style={{
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      color: 'var(--primary-purple)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {office.email}
+                  </a>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                  <Clock size={14.5} color="var(--text-subtle)" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
+                  <Clock size={15} color="var(--text-subtle)" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '12.5px', color: 'var(--text-subtle)', fontWeight: 600 }}>
                     {office.hours}
                   </span>
@@ -782,6 +791,25 @@ export default function ContactPage() {
                     }}
                   />
                 </div>
+
+                {/* Error Notice */}
+                {errorMessage && (
+                  <div
+                    style={{
+                      padding: '12px 16px',
+                      background: 'rgba(239, 68, 68, 0.2)',
+                      border: '1px solid rgba(239, 68, 68, 0.4)',
+                      borderRadius: '8px',
+                      color: '#fca5a5',
+                      fontSize: '13.5px',
+                      fontWeight: 600,
+                      lineHeight: 1.5,
+                      textAlign: 'center',
+                    }}
+                  >
+                    ⚠️ {errorMessage}
+                  </div>
+                )}
 
                 {/* Submit Button: "Submit Now" (Centered Purple-Blue Gradient Button) */}
                 <button

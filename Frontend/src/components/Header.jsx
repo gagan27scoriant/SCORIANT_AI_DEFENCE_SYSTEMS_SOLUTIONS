@@ -89,38 +89,36 @@ export default function Header() {
           onClick={() => setMobileMenuOpen(false)}
         >
           <img
-            src="/SCORIANT_LOGO.png"
+            src="/SCORIANT_LOGO_NAVBAR.png"
             alt="Scoriant Logo"
             style={{
-              height: '42px',
+              height: '48px',
               width: 'auto',
               objectFit: 'contain',
-              background: '#ffffff',
-              padding: '4px 8px',
-              borderRadius: '8px',
-              border: '1px solid #e2e8f0',
+              filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.06))',
             }}
           />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '22px',
-                fontWeight: 800,
+                fontSize: '24px',
+                fontWeight: 900,
                 color: '#0f172a',
-                letterSpacing: '1.5px',
-                lineHeight: 1.1,
+                letterSpacing: '1.2px',
+                lineHeight: 1.05,
               }}
             >
               SCORIANT
             </span>
             <span
               style={{
-                fontSize: '11.5px',
+                fontSize: '12px',
                 fontWeight: 900,
                 color: '#7c3aed',
-                letterSpacing: '2.0px',
+                letterSpacing: '1.8px',
                 textTransform: 'uppercase',
+                marginTop: '1px',
               }}
             >
               AI Defence Systems Solutions

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin } from 'lucide-react';
+import { Mail, MapPin, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -24,24 +24,25 @@ export default function Footer() {
         >
           {/* Company Info */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
               <img
-                src="/SCORIANT_LOGO.png"
+                src="/SCORIANT_LOGO_NAVBAR.png"
                 alt="Scoriant Logo"
                 style={{
-                  height: '38px',
+                  height: '46px',
                   width: 'auto',
+                  objectFit: 'contain',
                   background: '#ffffff',
-                  padding: '4px 8px',
-                  borderRadius: '6px',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  padding: '4px',
+                  borderRadius: '10px',
+                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)',
                 }}
               />
               <div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: 800, color: '#ffffff', letterSpacing: '1.5px', lineHeight: 1.1 }}>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 900, color: '#ffffff', letterSpacing: '1.2px', lineHeight: 1.05 }}>
                   SCORIANT
                 </div>
-                <div style={{ fontSize: '10px', fontWeight: 800, color: '#a78bfa', letterSpacing: '2.0px', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '11px', fontWeight: 900, color: '#a78bfa', letterSpacing: '1.8px', textTransform: 'uppercase', marginTop: '2px' }}>
                   AI Defence Systems Solutions
                 </div>
               </div>
@@ -105,6 +106,47 @@ export default function Footer() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <MapPin size={16} color="#a78bfa" />
                 <span>Delaware, USA</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <a
+                  href="https://in.linkedin.com/company/scoriant-ai-defence-systems-solutions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    color: '#94a3b8',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#a78bfa';
+                    const textSpan = e.currentTarget.querySelector('span');
+                    if (textSpan) textSpan.style.textDecoration = 'underline';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#94a3b8';
+                    const textSpan = e.currentTarget.querySelector('span');
+                    if (textSpan) textSpan.style.textDecoration = 'none';
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ flexShrink: 0, borderRadius: '3px' }}
+                  >
+                    <rect width="24" height="24" rx="4" fill="#7c3aed" />
+                    <path
+                      d="M7.4 9.6H4.8V18H7.4V9.6ZM6.1 8.4C6.9 8.4 7.6 7.7 7.6 6.9C7.6 6.1 6.9 5.4 6.1 5.4C5.3 5.4 4.6 6.1 4.6 6.9C4.6 7.7 5.3 8.4 6.1 8.4ZM19.2 18H16.6V13.8C16.6 12.8 16.6 11.5 15.2 11.5C13.8 11.5 13.6 12.6 13.6 13.7V18H11V9.6H13.5V10.7H13.5C13.9 10 14.8 9.3 16 9.3C18.6 9.3 19.2 11 19.2 13.2V18Z"
+                      fill="#FFFFFF"
+                    />
+                  </svg>
+                  <span>Scoriant AI Defence Systems Solutions</span>
+                </a>
               </div>
             </div>
           </div>

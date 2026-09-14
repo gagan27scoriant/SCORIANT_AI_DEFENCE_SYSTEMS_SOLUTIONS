@@ -78,7 +78,7 @@ const INITIAL_JOBS = [
 const INITIAL_LOCATIONS = {
   india: {
     tag: 'HEADQUARTERS / INDIA',
-    title: 'India Office',
+    title: 'INDIA OFFICE',
     company: 'Scoriant AI Defence Systems Solutions',
     address: '3rd Floor Sree Gururaya Mansion, 8th Main Rd, KSRTC Layout, J.P. Nagar, Bengaluru 560078',
     phone: '+91 (080) 4123-5890',
@@ -88,7 +88,7 @@ const INITIAL_LOCATIONS = {
   },
   usa: {
     tag: 'OPERATIONS CENTER / USA',
-    title: 'USA Office',
+    title: 'USA OFFICE',
     company: 'Scoriant AI Defence Systems Solutions',
     address: '531A Giuffrida Avenue, San Jose',
     phone: '+1 (408) 555-0198',
@@ -166,7 +166,26 @@ export function DataProvider({ children }) {
   // Locations
   const [locations, setLocations] = useState(() => {
     const saved = localStorage.getItem('scoriant_locations');
-    return saved ? JSON.parse(saved) : INITIAL_LOCATIONS;
+    if (!saved) return INITIAL_LOCATIONS;
+    try {
+      const parsed = JSON.parse(saved);
+      return {
+        india: {
+          ...INITIAL_LOCATIONS.india,
+          ...parsed.india,
+          title: INITIAL_LOCATIONS.india.title,
+          company: INITIAL_LOCATIONS.india.company,
+        },
+        usa: {
+          ...INITIAL_LOCATIONS.usa,
+          ...parsed.usa,
+          title: INITIAL_LOCATIONS.usa.title,
+          company: INITIAL_LOCATIONS.usa.company,
+        },
+      };
+    } catch {
+      return INITIAL_LOCATIONS;
+    }
   });
 
   // Persist to localStorage on change
