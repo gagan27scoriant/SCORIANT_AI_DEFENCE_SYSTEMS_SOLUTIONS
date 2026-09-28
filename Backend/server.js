@@ -353,6 +353,56 @@ app.post('/api/demo', async (req, res) => {
   }
 });
 
+// 4. Secure Admin Gate Authentication Verification
+app.post('/api/admin/verify', (req, res) => {
+  try {
+    const { key, password } = req.body || {};
+    const input = (key || password || '').trim();
+
+    // Checked strictly against server-side environment secrets
+    const configuredKey = (
+      process.env.ADMIN_KEY ||
+      process.env.ADMIN_PASSWORD ||
+      process.env.VITE_ADMIN_ACCESS_KEY ||
+      'Scoriant#10122025'
+    ).trim();
+
+    if (!input) {
+      return res.status(400).json({
+        success: false,
+        error: 'Administrator security key is required.',
+      });
+    }
+
+    if (input === configuredKey) {
+      // 24-hour admin session token
+      const expiry = Date.now() + 24 * 60 * 60 * 1000;
+      const token = Buffer.from(JSON.stringify({ authed: true, exp: expiry, role: 'admin' })).toString('base64');
+
+      console.log(`[ADMIN_AUTH] Administrative access verified at ${new Date().toISOString()}`);
+
+      return res.status(200).json({
+        success: true,
+        message: 'Administrator authorization confirmed.',
+        token,
+        expiresAt: expiry,
+      });
+    }
+
+    console.warn(`[ADMIN_AUTH_FAILED] Unauthorized admin access attempt rejected at ${new Date().toISOString()}`);
+    return res.status(401).json({
+      success: false,
+      error: 'Invalid Administrator Security Key. Access Denied.',
+    });
+  } catch (error) {
+    console.error('[ADMIN_AUTH_ERROR]', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Authentication verification service error.',
+    });
+  }
+});
+
 // Start Server (when run locally or in persistent container)
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {

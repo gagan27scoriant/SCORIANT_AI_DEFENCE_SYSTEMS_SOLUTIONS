@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowRight, ArrowLeft, CheckCircle2, Shield, Zap, Cpu, Server, Globe, FileText, BrainCircuit, Eye, GraduationCap, Layers } from 'lucide-react';
 import { useDataContext } from '../context/DataContext';
 import DemoModal from '../components/DemoModal';
+import SEO from '../components/SEO';
+import { buildGraph, getProductSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export default function OurSolutionsPage() {
   const { productId } = useParams();
@@ -88,8 +90,25 @@ export default function OurSolutionsPage() {
     const product = selectedSolutionDetail;
     const emoji = EMOJI_MAP[product.id] || '⚡';
 
+    const productSchema = buildGraph(
+      getProductSchema(product),
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Solutions', url: '/solutions' },
+        { name: product.title, url: `/solutions/${product.id}` }
+      ])
+    );
+
     return (
       <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh', paddingTop: '80px' }}>
+        <SEO
+          title={product.title}
+          description={(product.short || product.detail || '').substring(0, 160)}
+          canonical={`/solutions/${product.id}`}
+          image={product.image}
+          type="product"
+          schema={productSchema}
+        />
 
         {/* 1. Solution Hero Section (Title + Tagline + Live Specs Bar) */}
         <section
@@ -389,8 +408,21 @@ export default function OurSolutionsPage() {
   }
 
   // Default Our Solutions Page Layout (Clean Hero with Title & Small Tagline Only)
+  const catalogSchema = buildGraph(
+    getBreadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Solutions', url: '/solutions' }
+    ])
+  );
+
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      <SEO
+        title="Enterprise & Sovereign Defence AI Platforms"
+        description="Explore Scoriant's suite of 10 defence-grade AI platforms, including air-gapped secure storage, multi-modal knowledge studios, geospatial analysis, and border surveillance."
+        canonical="/solutions"
+        schema={catalogSchema}
+      />
       {/* 1. Main Hero Section (Clean Title + Small Tagline Only) */}
       <section
         id="solutions-hero"

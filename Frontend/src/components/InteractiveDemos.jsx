@@ -319,7 +319,7 @@ export default function InteractiveDemos() {
               {/* After Image (Background) */}
               <img
                 src="/HERO/PRODUCTS/GEOSPATIAL-01.jpg"
-                alt="After"
+                alt="Geospatial satellite scan — Timeline B (Recent Satellite Scan)"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               <div
@@ -351,7 +351,7 @@ export default function InteractiveDemos() {
               >
                 <img
                   src="/HERO/PRODUCTS/SECURE_STORAGE.jpg"
-                  alt="Before"
+                  alt="Geospatial satellite scan — Timeline A (Baseline Image)"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -475,7 +475,7 @@ export default function InteractiveDemos() {
             >
               <img
                 src="/HERO/PRODUCTS/SMART_SURVELLIENCE.jpg"
-                alt="Camera Stream"
+                alt="Smart Surveillance AI live camera feed simulation with object detection"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
 

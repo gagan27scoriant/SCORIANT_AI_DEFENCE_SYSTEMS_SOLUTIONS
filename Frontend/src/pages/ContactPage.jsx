@@ -3,6 +3,8 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { Mail, MapPin, Building, Phone, Clock, Send, User, FileText, CheckCircle2, ChevronDown, Sparkles, ShieldCheck, Zap, Globe } from 'lucide-react';
 import { useDataContext } from '../context/DataContext';
 import { submitContactForm } from '../services/api';
+import SEO from '../components/SEO';
+import { buildGraph, getBreadcrumbSchema, getOrganizationSchema } from '../utils/seoSchemas';
 
 const getPreloadedMessageForProduct = (productTitle) => {
   const normalized = (productTitle || '').toLowerCase();
@@ -119,8 +121,23 @@ export default function ContactPage() {
     }
   };
 
+  const contactSchema = buildGraph(
+    getOrganizationSchema(),
+    getBreadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Contact', url: '/contact' }
+    ])
+  );
+
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      <SEO
+        title="Contact Scoriant | Enterprise & Defence Technology Inquiries"
+        description="Connect with Scoriant AI Defence Systems Solutions for enterprise deployments, technical briefings, product demonstrations, and confidential defence inquiries."
+        canonical="/contact"
+        image="/HERO/CONTACT_ME_PAGE.jpg"
+        schema={contactSchema}
+      />
       {/* 1. Hero Section (Home Hero Theme) */}
       <section
         style={{

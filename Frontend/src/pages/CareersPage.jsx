@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Briefcase, MapPin, Clock, ArrowRight, ArrowLeft, UploadCloud, CheckCircle2, X, Send, Sparkles, Building, ChevronRight, FileText } from 'lucide-react';
 import { useDataContext } from '../context/DataContext';
 import { submitCareerApplication } from '../services/api';
+import SEO from '../components/SEO';
+import { buildGraph, getJobPostingSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export default function CareersPage() {
   const { jobId } = useParams();
@@ -85,8 +87,23 @@ export default function CareersPage() {
   if (selectedJobDetail) {
     const job = selectedJobDetail;
 
+    const jobSchema = buildGraph(
+      getJobPostingSchema(job),
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Careers', url: '/careers' },
+        { name: job.title, url: `/careers/${job.id}` }
+      ])
+    );
+
     return (
       <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh', paddingTop: '100px', paddingBottom: '100px' }}>
+        <SEO
+          title={`${job.title} — Careers at Scoriant`}
+          description={(job.shortDesc || job.roleOverview || '').substring(0, 160)}
+          canonical={`/careers/${job.id}`}
+          schema={jobSchema}
+        />
         {/* 2-Column Application Layout Container */}
         <div className="section-wrapper" style={{ paddingTop: '20px', paddingBottom: 0 }}>
           <div
@@ -698,8 +715,22 @@ export default function CareersPage() {
   }
 
   // Default Careers Page Layout (Hero + Openings List Grid)
+  const careersCatalogSchema = buildGraph(
+    getBreadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Careers', url: '/careers' }
+    ])
+  );
+
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      <SEO
+        title="Careers at Scoriant | Engineering Defence & Edge AI"
+        description="Join Scoriant to engineer mission-critical AI, edge hardware acceleration, autonomous agentic platforms, and 5G network stacks."
+        canonical="/careers"
+        image="/HERO/CARRER_PAGE.jpg"
+        schema={careersCatalogSchema}
+      />
       {/* 1. Hero Section */}
       <section
         style={{

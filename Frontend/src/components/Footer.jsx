@@ -174,8 +174,17 @@ export default function Footer() {
         <div>
           © {new Date().getFullYear()} Scoriant AI Defence Systems Solutions. All rights reserved.
         </div>
-        <div>
-          Engineering the Autonomous Future
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Link
+            to="/privacy-policy"
+            style={{ color: '#94a3b8', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseOver={(e) => (e.currentTarget.style.color = '#c084fc')}
+            onMouseOut={(e) => (e.currentTarget.style.color = '#94a3b8')}
+          >
+            Privacy Policy
+          </Link>
+          <span>•</span>
+          <span>Engineering the Autonomous Future</span>
         </div>
       </div>
 

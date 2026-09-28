@@ -1,6 +1,16 @@
 # Dependencies
 node_modules/
 Frontend/node_modules/
+Backend/node_modules/
+
+# Environment variables – NEVER commit secrets
+.env
+.env.*
+.env.local
+.env.production
+Backend/.env
+Frontend/.env
+*.env
 
 # Build & Cache
 dist/
@@ -13,3 +23,4 @@ Frontend/.vite-temp/
 # Misc
 .DS_Store
 *.log
+

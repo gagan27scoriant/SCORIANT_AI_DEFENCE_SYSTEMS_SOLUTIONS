@@ -1,0 +1,16 @@
+{
+  "name": "scoriant-defence-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "Frontend",
+    "Backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev --prefix Frontend",
+    "dev:frontend": "npm run dev --prefix Frontend",
+    "dev:backend": "npm run start --prefix Backend",
+    "build": "npm run build --prefix Frontend",
+    "start": "npm run start --prefix Backend"
+  }
+}

@@ -6,6 +6,20 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    host: true
-  }
+    host: true,
+  },
+  build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-icons': ['lucide-react'],
+        },
+      },
+    },
+  },
 })
+

@@ -1,10 +1,27 @@
 import React from 'react';
 import { Sparkles, Target, Compass, Layers, ArrowRight, Download } from 'lucide-react';
 import PillarsSection from '../components/PillarsSection';
+import SEO from '../components/SEO';
+import { buildGraph, getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export default function AboutUsPage() {
+  const aboutSchema = buildGraph(
+    getOrganizationSchema(),
+    getBreadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'About Us', url: '/about' }
+    ])
+  );
+
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      <SEO
+        title="About Scoriant | Mission-Critical Engineering & Defence AI"
+        description="Discover Scoriant's leadership, sovereign defence engineering philosophy, and high-performance edge AI platforms built for mission success."
+        canonical="/about"
+        image="/HERO/ABOUT_US.jpg"
+        schema={aboutSchema}
+      />
       {/* 1. Hero Section (Home Hero Aesthetic featuring Scoriant & 3 Core Domains) */}
       <section
         id="about-hero"

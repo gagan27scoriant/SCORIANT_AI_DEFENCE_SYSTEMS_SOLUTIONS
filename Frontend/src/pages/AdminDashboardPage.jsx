@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDataContext } from '../context/DataContext';
+import SEO from '../components/SEO';
 import {
   Shield,
   Plus,
@@ -50,6 +51,7 @@ export default function AdminDashboardPage() {
   });
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // Active Admin Tab
   const [activeTab, setActiveTab] = useState('jobs');
@@ -59,20 +61,60 @@ export default function AdminDashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formFields, setFormFields] = useState({});
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (passwordInput === 'admin' || passwordInput === 'scoriant2026#admin') {
-      setIsAuthenticated(true);
-      localStorage.setItem('scoriant_admin_authed', 'true');
-      setAuthError('');
-    } else {
-      setAuthError('Invalid Admin Security Key. Access Denied.');
+    setAuthError('');
+
+    if (!passwordInput.trim()) {
+      setAuthError('Please enter the administrator security key.');
+      return;
+    }
+
+    setIsVerifying(true);
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+
+    try {
+      const response = await fetch(`${apiUrl}/api/admin/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: passwordInput.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsAuthenticated(true);
+        if (data.token) {
+          sessionStorage.setItem('scoriant_admin_token', data.token);
+        }
+        localStorage.setItem('scoriant_admin_authed', 'true');
+        setAuthError('');
+        setPasswordInput('');
+      } else {
+        setAuthError(data.error || 'Invalid Admin Security Key. Access Denied.');
+      }
+    } catch (networkErr) {
+      // Local dev fallback if backend is offline and env key is defined
+      const localDevKey = import.meta.env.VITE_ADMIN_KEY;
+      if (localDevKey && passwordInput.trim() === localDevKey) {
+        setIsAuthenticated(true);
+        localStorage.setItem('scoriant_admin_authed', 'true');
+        setAuthError('');
+        setPasswordInput('');
+      } else {
+        setAuthError(
+          'Backend authentication service is offline. Please start the backend server (port 8787) to verify credentials.'
+        );
+      }
+    } finally {
+      setIsVerifying(false);
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('scoriant_admin_authed');
+    sessionStorage.removeItem('scoriant_admin_token');
   };
 
   // Open modal to add or edit
@@ -176,6 +218,7 @@ export default function AdminDashboardPage() {
   if (!isAuthenticated) {
     return (
       <div style={{ background: '#0b0f19', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', color: '#f8fafc', position: 'relative', overflow: 'hidden' }}>
+        <SEO title="Administrative Gate" noindex={true} />
         {/* Background Overlay */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
           <img
@@ -255,7 +298,7 @@ export default function AdminDashboardPage() {
                 required
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                placeholder="Enter Secret Key (default: scoriant2026#admin)"
+                placeholder="Enter administrator key"
                 style={{
                   width: '100%',
                   padding: '14px 18px 14px 48px',
@@ -279,6 +322,7 @@ export default function AdminDashboardPage() {
             <button
               type="submit"
               className="btn-primary"
+              disabled={isVerifying}
               style={{
                 width: '100%',
                 padding: '14px',
@@ -290,9 +334,11 @@ export default function AdminDashboardPage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
+                opacity: isVerifying ? 0.7 : 1,
+                cursor: isVerifying ? 'not-allowed' : 'pointer',
               }}
             >
-              <span>Unlock Admin Console</span>
+              <span>{isVerifying ? 'Verifying Credentials...' : 'Unlock Admin Console'}</span>
               <ArrowRight size={18} />
             </button>
           </form>
@@ -304,6 +350,7 @@ export default function AdminDashboardPage() {
   // Render Full Homepage-Style Admin Command Center
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
+      <SEO title="Admin Operations Portal" noindex={true} />
       {/* 1. HERO SECTION */}
       <section
         style={{

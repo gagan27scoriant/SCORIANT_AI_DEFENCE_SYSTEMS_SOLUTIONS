@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function NotFoundPage() {
   return (
     <div style={{ background: '#0b0f19', color: '#f8fafc', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <SEO title="404 - Page Not Found" noindex={true} />
       {/* 404 Hero Section Only */}
       <section
         style={{

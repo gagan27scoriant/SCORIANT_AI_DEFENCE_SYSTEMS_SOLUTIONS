@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+
+# Block admin and application routes from all crawlers
+User-agent: *
+Disallow: /secret-admin-gate
+Disallow: /admin-portal
+Disallow: /careers/*/apply
+Allow: /
+
+# XML Sitemap declaration
+Sitemap: https://scoriant.com/sitemap.xml
