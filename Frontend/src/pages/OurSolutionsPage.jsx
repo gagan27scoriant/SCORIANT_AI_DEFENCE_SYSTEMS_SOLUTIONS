@@ -56,10 +56,19 @@ export default function OurSolutionsPage() {
     if (words.length <= 1) {
       return (
         <span
+          className="gradient-text-clip"
           style={{
-            background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
+            display: 'inline-block',
+            backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
+            backgroundColor: 'transparent',
             WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            color: 'transparent',
+            WebkitBoxDecorationBreak: 'clone',
+            boxDecorationBreak: 'clone',
+            verticalAlign: 'baseline',
+            whiteSpace: 'nowrap',
           }}
         >
           {title}
@@ -68,19 +77,33 @@ export default function OurSolutionsPage() {
     }
     const highlightCount = words.length >= 4 ? 2 : 1;
     const prefix = words.slice(0, words.length - highlightCount).join(' ');
-    const highlight = words.slice(words.length - highlightCount).join(' ');
+    const highlightWords = words.slice(words.length - highlightCount);
     return (
       <>
         {prefix}{' '}
-        <span
-          style={{
-            background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          {highlight}
-        </span>
+        {highlightWords.map((word, idx) => (
+          <React.Fragment key={idx}>
+            <span
+              className="gradient-text-clip"
+              style={{
+                display: 'inline-block',
+                backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%)',
+                backgroundColor: 'transparent',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+                WebkitBoxDecorationBreak: 'clone',
+                boxDecorationBreak: 'clone',
+                verticalAlign: 'baseline',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {word}
+            </span>
+            {idx < highlightWords.length - 1 ? ' ' : ''}
+          </React.Fragment>
+        ))}
       </>
     );
   };
@@ -521,10 +544,19 @@ export default function OurSolutionsPage() {
             >
               Our{' '}
               <span
+                className="gradient-text-clip"
                 style={{
-                  background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                  display: 'inline-block',
+                  backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                  backgroundColor: 'transparent',
                   WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                  WebkitBoxDecorationBreak: 'clone',
+                  boxDecorationBreak: 'clone',
+                  verticalAlign: 'baseline',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 Solutions

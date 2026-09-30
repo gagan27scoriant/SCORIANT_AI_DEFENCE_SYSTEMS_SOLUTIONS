@@ -140,12 +140,32 @@ body {
   box-shadow: var(--shadow-card-hover);
 }
 
-/* Text Gradient Effect */
-.text-gradient {
-  background: var(--brand-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Bulletproof Text Gradient Effect & Clipping Classes */
+.text-gradient,
+.gradient-text-clip {
+  display: inline-block;
+  background-image: var(--text-gradient-bg, linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%));
+  background-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  vertical-align: baseline;
 }
+
+/* Graceful Fallback for browsers or engines where background-clip: text fails */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-gradient,
+  .gradient-text-clip {
+    color: #60a5fa !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}
+
 
 /* Section Wrapper */
 .section-wrapper {

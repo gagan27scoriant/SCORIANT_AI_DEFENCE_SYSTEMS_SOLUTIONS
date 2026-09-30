@@ -1,9 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
 
-# Block admin and application routes from all crawlers
+# Block internal API and application endpoints from crawlers
 User-agent: *
-Disallow: /secret-admin-gate
-Disallow: /admin-portal
+Disallow: /api/
 Disallow: /careers/*/apply
 Allow: /
 

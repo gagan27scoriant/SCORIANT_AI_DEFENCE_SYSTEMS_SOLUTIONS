@@ -161,10 +161,19 @@ export default function Hero() {
           >
             {currentItem.titlePrefix}{' '}
             <span
+              className="gradient-text-clip"
               style={{
-                background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
+                backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                backgroundColor: 'transparent',
                 WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+                WebkitBoxDecorationBreak: 'clone',
+                boxDecorationBreak: 'clone',
+                verticalAlign: 'baseline',
               }}
             >
               {currentItem.titleHighlight}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Briefcase, MapPin, Clock, ArrowRight, ArrowLeft, UploadCloud, CheckCircle2, X, Send, Sparkles, Building, ChevronRight, FileText } from 'lucide-react';
+import { Briefcase, MapPin, Clock, ArrowRight, ArrowLeft, UploadCloud, CheckCircle2, X, Send, Sparkles, Building, ChevronRight, FileText, Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { useDataContext } from '../context/DataContext';
 import { submitCareerApplication } from '../services/api';
 import SEO from '../components/SEO';
@@ -31,7 +31,38 @@ export default function CareersPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const selectedJobDetail = jobId ? jobs.find((j) => j.id === jobId) : null;
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDepartment, setSelectedDepartment] = useState('All');
+
+  // General talent network profile when specific positions are not open or for speculative applications
+  const generalJobProfile = {
+    id: 'general-application',
+    title: 'General Candidate Application — Open Talent Network',
+    department: 'AI & Defence Systems Engineering',
+    location: 'Bangalore, India / Delaware, USA / Remote',
+    type: 'Full Time / Contract',
+    experience: 'Open to All Experience Levels',
+    badge: 'Talent Network',
+    tags: ['Artificial Intelligence', 'Edge Systems', 'Sovereign Defence', 'Machine Learning', 'Computer Vision'],
+    shortDesc: 'Submit your resume and engineering portfolio directly to Scoriant leadership for upcoming opportunities.',
+    roleOverview:
+      'We welcome proactive applications from exceptional AI researchers, software engineers, embedded hardware specialists, and defence technology innovators. Submit your credentials to join our talent network for active and upcoming projects.',
+    keyResponsibilities: [
+      'Collaborate with Scoriant engineering leadership regarding sovereign AI and defence systems.',
+      'Participate in confidential technical discussions when matching positions become available.',
+      'Contribute to our mission of building sovereign, air-gapped intelligence platforms.',
+    ],
+    requiredQualifications: [
+      'Demonstrated expertise or deep passion for Artificial Intelligence, Edge Computing, Computer Vision, or Embedded Hardware.',
+      'Strong problem-solving capability, engineering rigor, and commitment to technological sovereignty.',
+    ],
+  };
+
+  const selectedJobDetail = jobId
+    ? jobId === 'general-application'
+      ? generalJobProfile
+      : jobs.find((j) => j.id === jobId)
+    : null;
 
   const handleSelectJob = (job) => {
     setSubmitted(false);
@@ -46,6 +77,25 @@ export default function CareersPage() {
     navigate('/careers');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Dynamically compute list of departments from existing jobs
+  const departments = ['All', ...new Set(jobs.map((j) => j.department).filter(Boolean))];
+
+  // Filter jobs based on search query and department filter
+  const filteredJobs = jobs.filter((job) => {
+    const query = searchQuery.trim().toLowerCase();
+    const matchesSearch =
+      !query ||
+      (job.title && job.title.toLowerCase().includes(query)) ||
+      (job.department && job.department.toLowerCase().includes(query)) ||
+      (job.location && job.location.toLowerCase().includes(query)) ||
+      (job.shortDesc && job.shortDesc.toLowerCase().includes(query)) ||
+      (Array.isArray(job.tags) && job.tags.some((t) => t.toLowerCase().includes(query)));
+
+    const matchesDept = selectedDepartment === 'All' || job.department === selectedDepartment;
+
+    return matchesSearch && matchesDept;
+  });
 
   const handleChange = (e) => {
     setErrorMessage('');
@@ -804,10 +854,19 @@ export default function CareersPage() {
             >
               Careers at{' '}
               <span
+                className="gradient-text-clip"
                 style={{
-                  background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                  display: 'inline-block',
+                  whiteSpace: 'nowrap',
+                  backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+                  backgroundColor: 'transparent',
                   WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                  WebkitBoxDecorationBreak: 'clone',
+                  boxDecorationBreak: 'clone',
+                  verticalAlign: 'baseline',
                 }}
               >
                 Scoriant
@@ -837,30 +896,157 @@ export default function CareersPage() {
         }}
       >
         <div className="section-wrapper">
-          <div style={{ textAlign: 'left', width: '80%', maxWidth: '1100px', margin: '0 auto 40px auto' }}>
-            <div className="pill-badge" style={{ marginBottom: '14px' }}>
-              <span>ACTIVE HIRING</span>
-            </div>
+          <div style={{ textAlign: 'left', width: '80%', maxWidth: '1100px', margin: '0 auto 36px auto' }}>
+            {jobs.length > 0 && (
+              <div className="pill-badge" style={{ marginBottom: '14px' }}>
+                <span>ACTIVE HIRING</span>
+              </div>
+            )}
 
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(28px, 3.8vw, 42px)',
-                fontWeight: 900,
-                color: 'var(--text-main)',
-                lineHeight: 1.2,
-                marginBottom: '12px',
-                letterSpacing: '-0.5px',
-              }}
-            >
-              Current Openings ({jobs.length})
-            </h2>
-            <p style={{ fontSize: '16px', color: 'var(--text-muted)', margin: 0 }}>
-              Explore active positions across our engineering hubs in India and Delaware, USA.
-            </p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
+              <div>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: 'clamp(28px, 3.8vw, 42px)',
+                    fontWeight: 900,
+                    color: 'var(--text-main)',
+                    lineHeight: 1.2,
+                    marginBottom: '10px',
+                    letterSpacing: '-0.5px',
+                  }}
+                >
+                  Current Openings ({jobs.length})
+                </h2>
+                <p style={{ fontSize: '16px', color: 'var(--text-muted)', margin: 0 }}>
+                  Explore active positions across our engineering hubs in India and Delaware, USA.
+                </p>
+              </div>
+
+              {/* Status Indicator Badge */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '8px 18px',
+                  borderRadius: 'var(--radius-pill)',
+                  background: jobs.length > 0 ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                  border: jobs.length > 0 ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
+                  color: jobs.length > 0 ? '#10b981' : '#f87171',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  letterSpacing: '0.3px',
+                }}
+              >
+                <span
+                  style={{
+                    width: '9px',
+                    height: '9px',
+                    borderRadius: '50%',
+                    background: jobs.length > 0 ? '#10b981' : '#f87171',
+                    display: 'inline-block',
+                    boxShadow: jobs.length > 0 ? '0 0 10px rgba(16, 185, 129, 0.6)' : '0 0 10px rgba(239, 68, 68, 0.6)',
+                  }}
+                />
+                <span>{jobs.length > 0 ? `${jobs.length} Positions Available` : 'Currently No Active Openings'}</span>
+              </div>
+            </div>
           </div>
 
-          {/* Job Openings List Grid */}
+          {/* SEARCH & FILTER BAR (ALWAYS VISIBLE, EVEN WITH 0 OPENINGS) */}
+          <div
+            style={{
+              width: '80%',
+              maxWidth: '1100px',
+              margin: '0 auto 36px auto',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+            }}
+          >
+            {/* Search Input Box */}
+            <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                background: 'var(--bg-card)',
+                border: '1.5px solid var(--border-light)',
+                borderRadius: '16px',
+                padding: '4px 12px 4px 18px',
+                boxShadow: '0 8px 24px -6px rgba(0, 0, 0, 0.08)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <Search size={20} style={{ color: 'var(--primary-purple)', marginRight: '14px', flexShrink: 0 }} />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search openings by title, keyword, tech stack, or location..."
+                style={{
+                  width: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  color: 'var(--text-main)',
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  padding: '12px 0',
+                }}
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  title="Clear Search"
+                >
+                  <X size={18} />
+                </button>
+              )}
+            </div>
+
+            {/* Department Filter Pills */}
+            {departments.length > 2 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-muted)', marginRight: '4px' }}>
+                  Filter:
+                </span>
+                {departments.map((dept) => (
+                  <button
+                    key={dept}
+                    type="button"
+                    onClick={() => setSelectedDepartment(dept)}
+                    style={{
+                      background: selectedDepartment === dept ? 'var(--primary-purple)' : 'var(--bg-card)',
+                      color: selectedDepartment === dept ? '#ffffff' : 'var(--text-muted)',
+                      border: selectedDepartment === dept ? '1px solid var(--primary-purple)' : '1px solid var(--border-light)',
+                      padding: '6px 16px',
+                      borderRadius: 'var(--radius-pill)',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    {dept === 'All' ? 'All Roles' : dept}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* JOB OPENINGS LIST GRID OR CURRENTLY NO OPENINGS CARD */}
           <div
             style={{
               width: '80%',
@@ -871,156 +1057,279 @@ export default function CareersPage() {
               gap: '24px',
             }}
           >
-            {jobs.map((job) => (
+            {/* WHEN ZERO OPENINGS IN SYSTEM OR NO MATCH FOUND */}
+            {filteredJobs.length === 0 ? (
               <div
-                key={job.id}
                 style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-light)',
-                  borderRadius: '24px',
-                  padding: '32px 36px',
-                  boxShadow: '0 20px 48px -10px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(124, 58, 237, 0.08)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '20px',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  borderRadius: '16px',
+                  padding: '22px 28px',
+                  textAlign: 'left',
+                  boxShadow: 'var(--shadow-card, 0 10px 30px -5px rgba(15, 23, 42, 0.06))',
                   position: 'relative',
                   overflow: 'hidden',
                 }}
-                className="card-container"
               >
-                {/* Top Accent Line */}
+                {/* Glowing Top Accent Line */}
                 <div
                   style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
-                    height: '3.5px',
-                    background: 'linear-gradient(90deg, #7c3aed 0%, #3b82f6 100%)',
+                    height: '3px',
+                    background: 'var(--brand-gradient, linear-gradient(90deg, #7c3aed 0%, #3b82f6 100%))',
                   }}
                 />
 
-                {/* Header Row: Department Pill & Badge */}
+                {/* Row 1: Left-aligned Icon + Title, Right-aligned Status Badge */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    gap: '16px',
                     flexWrap: 'wrap',
-                    gap: '12px',
                   }}
                 >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '9px',
+                        background: 'rgba(124, 58, 237, 0.1)',
+                        color: 'var(--primary-purple)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Briefcase size={17} />
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '18px',
+                        fontWeight: 800,
+                        color: 'var(--text-main)',
+                        margin: 0,
+                        letterSpacing: '-0.3px',
+                      }}
+                    >
+                      {jobs.length === 0
+                        ? 'Currently No Openings Available'
+                        : `No Openings Found Matching "${searchQuery}"`}
+                    </h3>
+                  </div>
+
                   <span
                     style={{
-                      fontSize: '11.5px',
+                      fontSize: '11px',
                       fontWeight: 800,
-                      letterSpacing: '1px',
-                      textTransform: 'uppercase',
                       color: 'var(--primary-purple)',
                       background: 'rgba(124, 58, 237, 0.08)',
                       border: '1px solid rgba(124, 58, 237, 0.2)',
                       padding: '4px 12px',
                       borderRadius: 'var(--radius-pill)',
-                    }}
-                  >
-                    {job.department}
-                  </span>
-
-                  <span
-                    style={{
-                      fontSize: '11.5px',
-                      fontWeight: 800,
-                      color: '#10b981',
-                      background: 'rgba(16, 185, 129, 0.1)',
-                      border: '1px solid rgba(16, 185, 129, 0.25)',
-                      padding: '4px 12px',
-                      borderRadius: 'var(--radius-pill)',
                       textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
                     }}
                   >
-                    ● {job.badge}
+                    {jobs.length === 0 ? 'No Active Roles' : 'Filter Active'}
                   </span>
                 </div>
 
-                {/* Job Title */}
-                <h3
+                {/* Row 2: Left-aligned Concise Description */}
+                <p
                   style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '22px',
-                    fontWeight: 800,
-                    color: 'var(--text-main)',
-                    lineHeight: 1.3,
-                    letterSpacing: '-0.3px',
-                    margin: 0,
+                    fontSize: '13.5px',
+                    color: 'var(--text-muted)',
+                    margin: '8px 0 0 0',
+                    lineHeight: 1.5,
+                    textAlign: 'left',
                   }}
                 >
-                  {job.title}
-                </h3>
+                  {jobs.length === 0
+                    ? 'There are currently no active job postings available at Scoriant. Please check back later for upcoming roles.'
+                    : 'No active positions matched your current search parameters. You can clear your filters to view all listings.'}
+                </p>
 
-                {/* 2 Rows: Location & Job Type */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: 'var(--text-muted)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <MapPin size={15} color="var(--primary-purple)" />
-                    <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Location</span>
-                    <span>—</span>
-                    <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{job.location}</span>
+                {/* Row 3: Left-aligned Clear Filter Button (when filters are active) */}
+                {(searchQuery || selectedDepartment !== 'All') && (
+                  <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '12px' }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearchQuery('');
+                        setSelectedDepartment('All');
+                      }}
+                      className="btn-secondary"
+                      style={{ padding: '6px 18px', fontSize: '12.5px', fontWeight: 700, borderRadius: '8px' }}
+                    >
+                      Clear Search Filters
+                    </button>
                   </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Briefcase size={15} color="var(--primary-blue)" />
-                    <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Job Type</span>
-                    <span>—</span>
-                    <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{job.type}</span>
-                  </div>
-                </div>
-
-                {/* Tags & Action Footer */}
+                )}
+              </div>
+            ) : (
+              /* WHEN JOBS EXIST: RENDER MATCHING CARDS */
+              filteredJobs.map((job) => (
                 <div
+                  key={job.id}
                   style={{
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-light)',
+                    borderRadius: '24px',
+                    padding: '32px 36px',
+                    boxShadow: '0 20px 48px -10px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(124, 58, 237, 0.08)',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingTop: '20px',
-                    borderTop: '1px solid var(--border-light)',
-                    flexWrap: 'wrap',
-                    gap: '16px',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
                   }}
+                  className="card-container"
                 >
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {job.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        style={{
-                          fontSize: '12px',
-                          fontWeight: 600,
-                          color: 'var(--text-main)',
-                          background: 'var(--bg-subtle)',
-                          border: '1px solid var(--border-light)',
-                          padding: '4px 12px',
-                          borderRadius: '8px',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => handleSelectJob(job)}
-                    className="btn-primary"
+                  {/* Top Accent Line */}
+                  <div
                     style={{
-                      fontSize: '14px',
-                      padding: '10px 24px',
-                      fontWeight: 700,
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '3.5px',
+                      background: 'linear-gradient(90deg, #7c3aed 0%, #3b82f6 100%)',
+                    }}
+                  />
+
+                  {/* Header Row: Department Pill & Badge */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '12px',
                     }}
                   >
-                    <span>Apply Now</span>
-                    <ArrowRight size={16} />
-                  </button>
+                    <span
+                      style={{
+                        fontSize: '11.5px',
+                        fontWeight: 800,
+                        letterSpacing: '1px',
+                        textTransform: 'uppercase',
+                        color: 'var(--primary-purple)',
+                        background: 'rgba(124, 58, 237, 0.08)',
+                        border: '1px solid rgba(124, 58, 237, 0.2)',
+                        padding: '4px 12px',
+                        borderRadius: 'var(--radius-pill)',
+                      }}
+                    >
+                      {job.department}
+                    </span>
+
+                    <span
+                      style={{
+                        fontSize: '11.5px',
+                        fontWeight: 800,
+                        color: '#10b981',
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        border: '1px solid rgba(16, 185, 129, 0.25)',
+                        padding: '4px 12px',
+                        borderRadius: 'var(--radius-pill)',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      ● {job.badge}
+                    </span>
+                  </div>
+
+                  {/* Job Title */}
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '22px',
+                      fontWeight: 800,
+                      color: 'var(--text-main)',
+                      lineHeight: 1.3,
+                      letterSpacing: '-0.3px',
+                      margin: 0,
+                    }}
+                  >
+                    {job.title}
+                  </h3>
+
+                  {/* 2 Rows: Location & Job Type */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: 'var(--text-muted)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <MapPin size={15} color="var(--primary-purple)" />
+                      <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Location</span>
+                      <span>—</span>
+                      <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{job.location}</span>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Briefcase size={15} color="var(--primary-blue)" />
+                      <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Job Type</span>
+                      <span>—</span>
+                      <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{job.type}</span>
+                    </div>
+                  </div>
+
+                  {/* Tags & Action Footer */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingTop: '20px',
+                      borderTop: '1px solid var(--border-light)',
+                      flexWrap: 'wrap',
+                      gap: '16px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                      {Array.isArray(job.tags) &&
+                        job.tags.map((tag, idx) => (
+                          <span
+                            key={idx}
+                            style={{
+                              fontSize: '12px',
+                              fontWeight: 600,
+                              color: 'var(--text-main)',
+                              background: 'var(--bg-subtle)',
+                              border: '1px solid var(--border-light)',
+                              padding: '4px 12px',
+                              borderRadius: '8px',
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                    </div>
+
+                    <button
+                      onClick={() => handleSelectJob(job)}
+                      className="btn-primary"
+                      style={{
+                        fontSize: '14px',
+                        padding: '10px 24px',
+                        fontWeight: 700,
+                      }}
+                    >
+                      <span>Apply Now</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>

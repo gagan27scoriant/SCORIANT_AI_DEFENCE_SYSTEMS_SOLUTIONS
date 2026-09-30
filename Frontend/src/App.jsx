@@ -63,9 +63,8 @@ function AppContent() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             
-            {/* Secret Admin Gate */}
-            <Route path="/secret-admin-gate" element={<AdminDashboardPage />} />
-            <Route path="/admin-portal" element={<AdminDashboardPage />} />
+            {/* Restricted Sovereign Admin Gate */}
+            <Route path="/Scoriant_Admin" element={<AdminDashboardPage />} />
 
             {/* 404 Error Page */}
             <Route path="*" element={<NotFoundPage />} />
