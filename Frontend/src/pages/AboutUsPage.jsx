@@ -16,10 +16,11 @@ export default function AboutUsPage() {
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
       <SEO
-        title="About Scoriant | Mission-Critical Engineering & Defence AI"
-        description="Discover Scoriant's leadership, sovereign defence engineering philosophy, and high-performance edge AI platforms built for mission success."
+        title="Top Deep-Tech AI & 5G Startup | Sovereign Defence Systems"
+        description="Discover Scoriant, a leading deep-tech startup pioneering autonomous agentic AI, carrier-grade 5G protocol stacks, and secure storage box infrastructure."
         canonical="/about"
         image="/HERO/ABOUT_US.jpg"
+        keywords="Top AI Startups, Top 5G Startups, Top Storage Box, Best Solutions, Deep Tech Startup, Sovereign AI, Air-Gapped Infrastructure"
         schema={aboutSchema}
       />
       {/* 1. Hero Section (Home Hero Aesthetic featuring Scoriant & 3 Core Domains) */}

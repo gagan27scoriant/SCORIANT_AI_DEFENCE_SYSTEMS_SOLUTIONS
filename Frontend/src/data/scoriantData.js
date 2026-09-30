@@ -50,8 +50,8 @@ export const PRODUCTS_DATA = [
     category: "Infrastructure",
     icon: "Server",
     title: "Secure Storage & Deployment Platform",
-    short: "Enterprise-Grade Secure Infrastructure for AI, Data, and Mission-Critical Deployments.",
-    detail: `Secure Storage & Deployment Platform is a defence-grade infrastructure ecosystem engineered for high-assurance storage, automated model packaging, and air-gapped deployment of mission-critical AI workloads across hostile and extreme operational environments.
+    short: "Enterprise-Grade Secure Storage Box & Air-Gapped Infrastructure for AI, Data, and Mission-Critical Deployments.",
+    detail: `Secure Storage & Deployment Platform is a defence-grade sovereign secure storage box and infrastructure ecosystem engineered for high-assurance storage, automated model packaging, and air-gapped deployment of mission-critical AI workloads across hostile and extreme operational environments.
 
 Built specifically for aerospace agencies, defence establishments, intelligence services, and regulated enterprises, the platform completely eliminates external telemetry beacons, cloud dependencies, and third-party phone-home vulnerabilities. It enforces direct-to-silicon AES-256-GCM cryptographic encryption with post-quantum key isolation, immutable write-once audit logging, and hardware-security-module (HSM) clearance boundaries.
 

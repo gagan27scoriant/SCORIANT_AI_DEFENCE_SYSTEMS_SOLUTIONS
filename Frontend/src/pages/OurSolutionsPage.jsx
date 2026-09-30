@@ -4,7 +4,7 @@ import { Sparkles, ArrowRight, ArrowLeft, CheckCircle2, Shield, Zap, Cpu, Server
 import { useDataContext } from '../context/DataContext';
 import DemoModal from '../components/DemoModal';
 import SEO from '../components/SEO';
-import { buildGraph, getProductSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
+import { buildGraph, getProductSchema, getBreadcrumbSchema, getTopSolutionsItemListSchema, getStartupFAQSchema } from '../utils/seoSchemas';
 
 export default function OurSolutionsPage() {
   const { productId } = useParams();
@@ -125,11 +125,12 @@ export default function OurSolutionsPage() {
     return (
       <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh', paddingTop: '80px' }}>
         <SEO
-          title={product.title}
+          title={`${product.title} | Top Products & Best Solutions`}
           description={(product.short || product.detail || '').substring(0, 160)}
           canonical={`/solutions/${product.id}`}
           image={product.image}
           type="product"
+          keywords={`Top Products, Best Solutions, ${product.title}, ${product.category}, Secure Storage Box, Top AI Startups, Top 5G Startups`}
           schema={productSchema}
         />
 
@@ -435,15 +436,18 @@ export default function OurSolutionsPage() {
     getBreadcrumbSchema([
       { name: 'Home', url: '/' },
       { name: 'Solutions', url: '/solutions' }
-    ])
+    ]),
+    getTopSolutionsItemListSchema(products),
+    getStartupFAQSchema()
   );
 
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-main)', minHeight: '100vh' }}>
       <SEO
-        title="Enterprise & Sovereign Defence AI Platforms"
-        description="Explore Scoriant's suite of 10 defence-grade AI platforms, including air-gapped secure storage, multi-modal knowledge studios, geospatial analysis, and border surveillance."
+        title="Top Products & Best Solutions in AI, 5G & Secure Storage"
+        description="Discover Scoriant's top products and best solutions, featuring air-gapped secure storage box platforms, carrier-grade 5G protocol stacks, and autonomous AI systems."
         canonical="/solutions"
+        keywords="Top Products, Best Solutions, Top Startups of AI, Top 5G Startups, Top Storage Box, Secure Storage Box, Air-Gapped AI, Sovereign Defence Solutions"
         schema={catalogSchema}
       />
       {/* 1. Main Hero Section (Clean Title + Small Tagline Only) */}

@@ -28,7 +28,7 @@ export default function WhyUsSection() {
     <section id="why-scoriant" className="section-wrapper" style={{ padding: '70px 24px' }}>
       <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 40px auto' }}>
         <div className="pill-badge" style={{ marginBottom: '12px' }}>
-          <span>The Scoriant Difference</span>
+          <span>Top Deep-Tech Startup • AI, 5G & Secure Storage Innovation</span>
         </div>
         <h2
           style={{
@@ -41,10 +41,10 @@ export default function WhyUsSection() {
             letterSpacing: '-0.5px',
           }}
         >
-          Why Scoriant?
+          Why Scoriant for Sovereign AI & 5G Solutions?
         </h2>
         <p style={{ fontSize: '15.5px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-          We stand at the frontier of intelligent engineering — combining deep hardware expertise, advanced AI architectures, and sophisticated data science to create systems that truly perform in the field.
+          Recognized among the top deep-tech startups delivering sovereign AI platforms, carrier-grade 5G protocol stacks, and air-gapped secure storage box architectures engineered for extreme mission-critical performance.
         </p>
       </div>
 
