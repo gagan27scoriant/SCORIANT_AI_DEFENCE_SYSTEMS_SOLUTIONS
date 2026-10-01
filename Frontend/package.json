@@ -22,5 +22,12 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "vite": "^6.0.5"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "0.25.12",
+    "@rollup/rollup-linux-x64-gnu": "4.63.1"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
