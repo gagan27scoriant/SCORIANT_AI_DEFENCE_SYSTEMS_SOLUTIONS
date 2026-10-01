@@ -11,8 +11,18 @@ const app = express();
 const PORT = cleanEnv(process.env.PORT, '8787');
 const RECEIVER_EMAIL = cleanEnv(process.env.RECEIVER_EMAIL || process.env.CONTACT_TO_EMAIL, 'info@scoriant.com');
 const CC_EMAIL = cleanEnv(process.env.CC_EMAIL, 'gagan@scoriant.com');
-// Product inquiries CC: both Gagan and Anand
-const PRODUCT_INQUIRY_CC = ['gagan@scoriant.com', 'anand@scoriant.com'];
+
+// Product enquiries email routing:
+// Primary recipients / forwarded to: Sunil & Raman (+ Info)
+const PRODUCT_INQUIRY_TO = ['sunil@scoriant.com', 'raman@scoriant.com', 'info@scoriant.com'];
+// CC recipients: Gagan, Anand, Shreyas, Jaden, Sai (strictly for product enquiries only)
+const PRODUCT_INQUIRY_CC = [
+  'gagan@scoriant.com',
+  'anand@scoriant.com',
+  'shreyas@scoriant.com',
+  'jaden@scoriant.com',
+  'sai@scoriant.com',
+];
 
 // Multer in-memory storage for file uploads
 const upload = multer({
@@ -78,7 +88,7 @@ function getTransporter() {
 }
 
 // Reusable HTML Email Template Generator
-function generateEmailHtml({ title, badge, fields, message, ccDisplay = CC_EMAIL }) {
+function generateEmailHtml({ title, badge, fields, message, toDisplay = RECEIVER_EMAIL, ccDisplay = CC_EMAIL }) {
   const fieldRows = Object.entries(fields)
     .filter(([_, val]) => val && String(val).trim().length > 0)
     .map(
@@ -91,6 +101,7 @@ function generateEmailHtml({ title, badge, fields, message, ccDisplay = CC_EMAIL
     )
     .join('');
 
+  const displayToText = Array.isArray(toDisplay) ? toDisplay.join(', ') : toDisplay;
   const displayCcText = Array.isArray(ccDisplay) ? ccDisplay.join(', ') : ccDisplay;
 
   return `
@@ -133,7 +144,7 @@ function generateEmailHtml({ title, badge, fields, message, ccDisplay = CC_EMAIL
           }
         </div>
         <div class="footer">
-          Received via Scoriant Online Portal • Destination: ${RECEIVER_EMAIL} • CC: ${displayCcText}
+          Received via Scoriant Online Portal • Destination: ${displayToText} • CC: ${displayCcText}
         </div>
       </div>
     </body>
@@ -175,7 +186,7 @@ app.post('/api/contact', async (req, res) => {
 
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
-      to: RECEIVER_EMAIL,
+      to: PRODUCT_INQUIRY_TO,
       cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
       subject: `[Scoriant Inquiry] ${productOfInterest || 'General Consultation'} - ${trimmedName}`,
@@ -190,20 +201,21 @@ app.post('/api/contact', async (req, res) => {
           'Product of Interest': productOfInterest || 'General Inquiry',
         },
         message,
+        toDisplay: PRODUCT_INQUIRY_TO,
         ccDisplay: PRODUCT_INQUIRY_CC,
       }),
     };
 
     if (transporter) {
       await transporter.sendMail(mailOptions);
-      console.log(`[CONTACT] Email dispatched successfully to ${RECEIVER_EMAIL} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
+      console.log(`[CONTACT] Email dispatched successfully to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
     } else {
       console.warn(`[CONTACT] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
 
     return res.status(200).json({
       success: true,
-      message: `Your inquiry has been received and forwarded to ${RECEIVER_EMAIL} and ${PRODUCT_INQUIRY_CC.join(', ')}.`,
+      message: `Your inquiry has been received and forwarded to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}).`,
     });
   } catch (error) {
     console.error('[CONTACT_ERROR]', error);
@@ -324,7 +336,7 @@ app.post('/api/demo', async (req, res) => {
 
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
-      to: RECEIVER_EMAIL,
+      to: PRODUCT_INQUIRY_TO,
       cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
       subject: `[Demo Request] ${interest || 'Product Briefing'} - ${trimmedName}`,
@@ -338,20 +350,21 @@ app.post('/api/demo', async (req, res) => {
           'Solution of Interest': interest || 'Defence Systems',
         },
         message,
+        toDisplay: PRODUCT_INQUIRY_TO,
         ccDisplay: PRODUCT_INQUIRY_CC,
       }),
     };
 
     if (transporter) {
       await transporter.sendMail(mailOptions);
-      console.log(`[DEMO] Request dispatched successfully to ${RECEIVER_EMAIL} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
+      console.log(`[DEMO] Request dispatched successfully to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
     } else {
       console.warn(`[DEMO] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
 
     return res.status(200).json({
       success: true,
-      message: `Your demo request has been received and forwarded to ${RECEIVER_EMAIL} and ${PRODUCT_INQUIRY_CC.join(', ')}.`,
+      message: `Your demo request has been received and forwarded to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}).`,
     });
   } catch (error) {
     console.error('[DEMO_ERROR]', error);
