@@ -17,13 +17,6 @@ export default function GlobalPartnersSection() {
       maxWidth: '250px',
       filter: 'saturate(2.2) contrast(1.3) brightness(1.05)',
     },
-    {
-      name: 'Tech Phosis',
-      src: '/partners/Tech-phosis.png',
-      height: '58px',
-      maxWidth: '170px',
-      filter: 'saturate(1.5) contrast(1.15) brightness(1.05)',
-    },
   ];
 
   return (
