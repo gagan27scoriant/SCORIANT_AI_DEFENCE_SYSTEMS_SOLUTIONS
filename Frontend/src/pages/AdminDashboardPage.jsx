@@ -127,7 +127,9 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     const token = sessionStorage.getItem('scoriant_admin_token');
     if (token) {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+      const apiUrl = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
+        ? import.meta.env.VITE_API_URL
+        : (import.meta.env.DEV ? 'http://localhost:8787' : '');
       fetch(`${apiUrl}/api/admin/verify-token`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -175,7 +177,9 @@ export default function AdminDashboardPage() {
     }
 
     setIsVerifying(true);
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+    const apiUrl = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
+      ? import.meta.env.VITE_API_URL
+      : (import.meta.env.DEV ? 'http://localhost:8787' : '');
 
     try {
       const response = await fetch(`${apiUrl}/api/admin/request-otp`, {
@@ -253,7 +257,9 @@ export default function AdminDashboardPage() {
     }
 
     setIsVerifying(true);
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+    const apiUrl = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
+      ? import.meta.env.VITE_API_URL
+      : (import.meta.env.DEV ? 'http://localhost:8787' : '');
 
     try {
       const response = await fetch(`${apiUrl}/api/admin/verify-otp`, {
@@ -291,7 +297,9 @@ export default function AdminDashboardPage() {
     setIsResending(true);
     setAuthError('');
     setAuthSuccess('');
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+    const apiUrl = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
+      ? import.meta.env.VITE_API_URL
+      : (import.meta.env.DEV ? 'http://localhost:8787' : '');
 
     try {
       const response = await fetch(`${apiUrl}/api/admin/resend-otp`, {

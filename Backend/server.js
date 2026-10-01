@@ -5,10 +5,15 @@ const nodemailer = require('nodemailer');
 const multer = require('multer');
 const crypto = require('crypto');
 
+// Helper: Clean Env Var (strip unicode BOM, quotes, and whitespace)
+const cleanEnv = (val, defaultVal = '') => (val ? String(val).replace(/^\uFEFF/, '').replace(/^["']|["']$/g, '').trim() : defaultVal);
+
 const app = express();
-const PORT = process.env.PORT || 8787;
-const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL || process.env.CONTACT_TO_EMAIL || 'info@scoriant.com';
-const CC_EMAIL = process.env.CC_EMAIL || 'gagan@scoriant.com';
+const PORT = cleanEnv(process.env.PORT, '8787');
+const RECEIVER_EMAIL = cleanEnv(process.env.RECEIVER_EMAIL || process.env.CONTACT_TO_EMAIL, 'info@scoriant.com');
+const CC_EMAIL = cleanEnv(process.env.CC_EMAIL, 'gagan@scoriant.com');
+// Product inquiries CC: both Gagan and Anand
+const PRODUCT_INQUIRY_CC = ['gagan@scoriant.com', 'anand@scoriant.com'];
 
 // Multer in-memory storage for file uploads
 const upload = multer({
@@ -22,7 +27,9 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:5173',
   'https://scoriant.com',
-  ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(s => s.trim()) : [])
+  'https://www.scoriant.com',
+  'https://scoriant-ai.vercel.app',
+  ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(s => cleanEnv(s)) : [])
 ];
 
 app.use(cors({
@@ -30,7 +37,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
       callback(null, true);
     } else {
-      callback(null, true); // Permissive in dev to avoid CORS blocking
+      callback(null, true); // Permissive in dev/prod to avoid CORS blocking
     }
   },
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -42,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 // Helper: Validate email address format strictly
 function isValidEmail(email) {
   if (!email || typeof email !== 'string') return false;
-  const trimmed = email.trim();
+  const trimmed = email.replace(/^\uFEFF/, '').trim();
   if (trimmed.length < 5 || trimmed.length > 254) return false;
   // RFC 5322 compliant regex for standard email addresses
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
@@ -51,11 +58,11 @@ function isValidEmail(email) {
 
 // Helper: Create Nodemailer Transporter
 function getTransporter() {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  const port = parseInt(process.env.SMTP_PORT || '587', 10);
-  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+  const host = cleanEnv(process.env.SMTP_HOST);
+  const user = cleanEnv(process.env.SMTP_USER);
+  const pass = cleanEnv(process.env.SMTP_PASS);
+  const port = parseInt(cleanEnv(process.env.SMTP_PORT, '587'), 10);
+  const secure = cleanEnv(process.env.SMTP_SECURE) === 'true' || port === 465;
 
   if (!host || !user || !pass) {
     return null;
@@ -73,7 +80,7 @@ function getTransporter() {
 }
 
 // Reusable HTML Email Template Generator
-function generateEmailHtml({ title, badge, fields, message }) {
+function generateEmailHtml({ title, badge, fields, message, ccDisplay = CC_EMAIL }) {
   const fieldRows = Object.entries(fields)
     .filter(([_, val]) => val && String(val).trim().length > 0)
     .map(
@@ -85,6 +92,8 @@ function generateEmailHtml({ title, badge, fields, message }) {
     `
     )
     .join('');
+
+  const displayCcText = Array.isArray(ccDisplay) ? ccDisplay.join(', ') : ccDisplay;
 
   return `
     <!DOCTYPE html>
@@ -126,7 +135,7 @@ function generateEmailHtml({ title, badge, fields, message }) {
           }
         </div>
         <div class="footer">
-          Received via Scoriant Online Portal • Destination: ${RECEIVER_EMAIL} • CC: ${CC_EMAIL}
+          Received via Scoriant Online Portal • Destination: ${RECEIVER_EMAIL} • CC: ${displayCcText}
         </div>
       </div>
     </body>
@@ -163,13 +172,13 @@ app.post('/api/contact', async (req, res) => {
     const trimmedName = name.trim();
 
     const transporter = getTransporter();
-    const fromAddress = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || 'info@scoriant.com';
-    const fromName = process.env.SMTP_FROM_NAME || 'Scoriant Portal';
+    const fromAddress = cleanEnv(process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER, 'info@scoriant.com');
+    const fromName = cleanEnv(process.env.SMTP_FROM_NAME, 'Scoriant Portal');
 
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
       to: RECEIVER_EMAIL,
-      cc: CC_EMAIL,
+      cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
       subject: `[Scoriant Inquiry] ${productOfInterest || 'General Consultation'} - ${trimmedName}`,
       html: generateEmailHtml({
@@ -183,19 +192,20 @@ app.post('/api/contact', async (req, res) => {
           'Product of Interest': productOfInterest || 'General Inquiry',
         },
         message,
+        ccDisplay: PRODUCT_INQUIRY_CC,
       }),
     };
 
     if (transporter) {
       await transporter.sendMail(mailOptions);
-      console.log(`[CONTACT] Email dispatched successfully to ${RECEIVER_EMAIL} (CC: ${CC_EMAIL}) from ${trimmedEmail}`);
+      console.log(`[CONTACT] Email dispatched successfully to ${RECEIVER_EMAIL} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
     } else {
       console.warn(`[CONTACT] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
 
     return res.status(200).json({
       success: true,
-      message: `Your inquiry has been received and forwarded to ${RECEIVER_EMAIL} and ${CC_EMAIL}.`,
+      message: `Your inquiry has been received and forwarded to ${RECEIVER_EMAIL} and ${PRODUCT_INQUIRY_CC.join(', ')}.`,
     });
   } catch (error) {
     console.error('[CONTACT_ERROR]', error);
@@ -247,8 +257,8 @@ app.post('/api/careers', upload.single('resume'), async (req, res) => {
       console.log(`[CAREERS] Resume attached: ${req.file.originalname} (${req.file.size} bytes) for candidate ${trimmedName}`);
     }
 
-    const fromAddress = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || 'info@scoriant.com';
-    const fromName = process.env.SMTP_FROM_NAME || 'Scoriant Careers Portal';
+    const fromAddress = cleanEnv(process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER, 'info@scoriant.com');
+    const fromName = cleanEnv(process.env.SMTP_FROM_NAME, 'Scoriant Careers Portal');
 
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
@@ -312,13 +322,13 @@ app.post('/api/demo', async (req, res) => {
     const trimmedName = name.trim();
 
     const transporter = getTransporter();
-    const fromAddress = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || 'info@scoriant.com';
-    const fromName = process.env.SMTP_FROM_NAME || 'Scoriant Demo Portal';
+    const fromAddress = cleanEnv(process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER, 'info@scoriant.com');
+    const fromName = cleanEnv(process.env.SMTP_FROM_NAME, 'Scoriant Demo Portal');
 
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
       to: RECEIVER_EMAIL,
-      cc: CC_EMAIL,
+      cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
       subject: `[Demo Request] ${interest || 'Product Briefing'} - ${trimmedName}`,
       html: generateEmailHtml({
@@ -331,19 +341,20 @@ app.post('/api/demo', async (req, res) => {
           'Solution of Interest': interest || 'Defence Systems',
         },
         message,
+        ccDisplay: PRODUCT_INQUIRY_CC,
       }),
     };
 
     if (transporter) {
       await transporter.sendMail(mailOptions);
-      console.log(`[DEMO] Request dispatched successfully to ${RECEIVER_EMAIL} (CC: ${CC_EMAIL}) from ${trimmedEmail}`);
+      console.log(`[DEMO] Request dispatched successfully to ${RECEIVER_EMAIL} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
     } else {
       console.warn(`[DEMO] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
 
     return res.status(200).json({
       success: true,
-      message: `Your demo request has been received and forwarded to ${RECEIVER_EMAIL} and ${CC_EMAIL}.`,
+      message: `Your demo request has been received and forwarded to ${RECEIVER_EMAIL} and ${PRODUCT_INQUIRY_CC.join(', ')}.`,
     });
   } catch (error) {
     console.error('[DEMO_ERROR]', error);
@@ -489,11 +500,11 @@ app.post('/api/admin/request-otp', async (req, res) => {
     const inputKey = (key || password || '').trim();
 
     // Master Administrator Security Key (strictly configured on server)
-    const masterKey = (
+    const masterKey = cleanEnv(
       process.env.ADMIN_PASSWORD ||
-      process.env.ADMIN_KEY ||
+      process.env.ADMIN_KEY,
       'Scoriant#10122025'
-    ).trim();
+    );
 
     if (!inputKey) {
       return res.status(400).json({

@@ -5,74 +5,8 @@ import {
   PILLARS_DATA as INITIAL_PILLARS,
 } from '../data/scoriantData';
 
-// Initial Jobs list
-const INITIAL_JOBS = [
-  {
-    id: 'ai-research-engineer',
-    title: 'Senior AI Research Engineer — LLM & Agentic Systems',
-    department: 'AI & Intelligence Engineering',
-    location: 'Bangalore, India',
-    type: 'Full Time',
-    experience: '4+ Years',
-    badge: 'Urgent Hiring',
-    tags: ['LLM Fine-Tuning', 'PyTorch', 'Vector RAG', 'Agentic Workflows'],
-    shortDesc: 'Engineer next-generation autonomous AI agents and fine-tune domain-specific LLMs for air-gapped defence and enterprise deployments.',
-    roleOverview: 'The Senior AI Research Engineer will be responsible for designing and fine-tuning domain-specific Large Language Models (LLMs) and building context-aware agentic AI architectures for mission-critical defence and enterprise environments.',
-    keyResponsibilities: [
-      'Design, train, and fine-tune domain-adapted Large Language Models (LLMs) and multimodal neural networks.',
-      'Develop Retrieval-Augmented Generation (RAG) pipelines with hybrid semantic vector indexing and deep citations.',
-      'Implement autonomous agentic routing workflows with human-in-the-loop oversight and tool-calling execution.',
-      'Optimize AI inference pipelines for air-gapped hardware, NVIDIA TensorRT, and edge compute platforms.'
-    ],
-    requiredQualifications: [
-      '4+ years of hands-on experience in PyTorch, Transformers, Deep Learning, and LLM fine-tuning.',
-      'Proven expertise with RAG frameworks, vector databases (Qdrant, FAISS, Milvus), and agentic orchestration.',
-      'Strong proficiency in Python, CUDA acceleration, and ONNX / TensorRT quantization pipelines.'
-    ]
-  },
-  {
-    id: 'defence-hardware-engineer',
-    title: 'Embedded AI Hardware & FPGA Acceleration Engineer',
-    department: 'Defence Systems Hardware',
-    location: 'Bangalore, India',
-    type: 'Full Time',
-    experience: '3+ Years',
-    badge: 'Hardware Core',
-    tags: ['NVIDIA TensorRT', 'AMD Xilinx FPGA', 'Sub-15ms Latency', 'C++ / CUDA'],
-    shortDesc: 'Design and optimize direct-to-silicon compilation pipelines for edge GPU/FPGA accelerators operating in high-vibration, tactical units.',
-    roleOverview: 'The Embedded AI Hardware Engineer will lead the optimization and compilation of deep neural networks directly onto silicon target hardware engineered for tactical command posts.',
-    keyResponsibilities: [
-      'Compile and quantize deep neural models for sub-15ms inference latency on NVIDIA TensorRT and FPGA targets.',
-      'Design thermal and shock-resilient hardware enclosure architectures for tactical field deployments.',
-      'Optimize memory bandwidth, PCIe bus communication, and sensor telemetry ingestion streams.'
-    ],
-    requiredQualifications: [
-      '3+ years of experience in C/C++, CUDA, VHDL/Verilog, and TensorRT hardware compilation.',
-      'Deep understanding of embedded Linux, PCIe architecture, and FPGA micro-architectures.'
-    ]
-  },
-  {
-    id: 'computer-vision-lead',
-    title: 'Computer Vision & Real-Time Video Analytics Lead',
-    department: 'Surveillance & Reconnaissance',
-    location: 'Delaware, USA',
-    type: 'Full Time',
-    experience: '5+ Years',
-    badge: 'Core Team',
-    tags: ['OpenCV', 'TensorRT', 'ANPR', 'Cross-Camera Tracking'],
-    shortDesc: 'Lead the development of 60 FPS real-time multi-camera video intelligence, anomaly detection, and ANPR platforms.',
-    roleOverview: 'The Computer Vision Lead will architect and scale 60 FPS real-time multi-camera video intelligence systems, object tracking algorithms, and ANPR platforms.',
-    keyResponsibilities: [
-      'Architect real-time multi-stream video analytics pipelines utilizing OpenCV and TensorRT acceleration.',
-      'Develop cross-camera object detection, vehicle tracking, and Automatic Number Plate Recognition (ANPR).',
-      'Engineer real-time threat alert generation and automated perimeter intrusion detection algorithms.'
-    ],
-    requiredQualifications: [
-      '5+ years of experience building production computer vision & deep learning video systems.',
-      'Expert knowledge of OpenCV, PyTorch, TensorRT, DeepStream, and GStreamer.'
-    ]
-  }
-];
+// Initial Jobs list (Default: 0 active openings)
+const INITIAL_JOBS = [];
 
 // Initial Office Locations
 const INITIAL_LOCATIONS = {
@@ -133,10 +67,17 @@ export function DataProvider({ children }) {
     }
   });
 
-  // Jobs
+  // Jobs (Default: 0 active job openings)
   const [jobs, setJobs] = useState(() => {
-    const saved = localStorage.getItem('scoriant_jobs');
-    return saved ? JSON.parse(saved) : INITIAL_JOBS;
+    try {
+      const saved = localStorage.getItem('scoriant_jobs_v2');
+      if (saved) return JSON.parse(saved);
+      // Clean up legacy cache if present
+      localStorage.removeItem('scoriant_jobs');
+    } catch (e) {
+      // ignore
+    }
+    return INITIAL_JOBS;
   });
 
   // Use Cases
@@ -194,7 +135,7 @@ export function DataProvider({ children }) {
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('scoriant_jobs', JSON.stringify(jobs));
+    localStorage.setItem('scoriant_jobs_v2', JSON.stringify(jobs));
   }, [jobs]);
 
   useEffect(() => {
@@ -276,6 +217,7 @@ export function DataProvider({ children }) {
   // Reset to Defaults
   const resetToDefaults = () => {
     localStorage.removeItem('scoriant_products');
+    localStorage.removeItem('scoriant_jobs_v2');
     localStorage.removeItem('scoriant_jobs');
     localStorage.removeItem('scoriant_usecases');
     localStorage.removeItem('scoriant_pillars');

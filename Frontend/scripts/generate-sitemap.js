@@ -39,11 +39,7 @@ const productPages = PRODUCTS_DATA.map((product) => ({
 // ─── Career Listings ─────────────────────────────────────────────────────────
 // Source job IDs from the same place as DataContext (INITIAL_JOBS equivalent).
 // To add new jobs: update this list or DataContext.jsx — both in sync.
-const CAREER_JOB_IDS = [
-  'ai-research-engineer',
-  'defence-hardware-engineer',
-  'computer-vision-lead',
-];
+const CAREER_JOB_IDS = [];
 
 const careerPages = CAREER_JOB_IDS.map((jobId) => ({
   url: `/careers/${jobId}`,

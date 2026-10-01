@@ -954,10 +954,11 @@ export default function CareersPage() {
             </div>
           </div>
 
-          {/* SEARCH & FILTER BAR (ALWAYS VISIBLE, EVEN WITH 0 OPENINGS) */}
-          <div
-            style={{
-              width: '80%',
+          {/* SEARCH & FILTER BAR (VISIBLE WHEN ACTIVE OPENINGS EXIST) */}
+          {jobs.length > 0 && (
+            <div
+              style={{
+                width: '80%',
               maxWidth: '1100px',
               margin: '0 auto 36px auto',
               display: 'flex',
@@ -1045,6 +1046,7 @@ export default function CareersPage() {
               </div>
             )}
           </div>
+          )}
 
           {/* JOB OPENINGS LIST GRID OR CURRENTLY NO OPENINGS CARD */}
           <div
@@ -1147,10 +1149,10 @@ export default function CareersPage() {
                 {/* Row 2: Left-aligned Concise Description */}
                 <p
                   style={{
-                    fontSize: '13.5px',
+                    fontSize: '14px',
                     color: 'var(--text-muted)',
-                    margin: '8px 0 0 0',
-                    lineHeight: 1.5,
+                    margin: '10px 0 0 0',
+                    lineHeight: 1.6,
                     textAlign: 'left',
                   }}
                 >
