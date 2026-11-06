@@ -141,8 +141,8 @@ export default function DemoModal({ isOpen, onClose }) {
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  Full Name *
+                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px', letterSpacing: '0.4px' }}>
+                  FULL NAME *
                 </label>
                 <input
                   type="text"
@@ -164,8 +164,8 @@ export default function DemoModal({ isOpen, onClose }) {
               </div>
 
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  Work / Official Email *
+                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px', letterSpacing: '0.4px' }}>
+                  WORK / OFFICIAL EMAIL ID *
                 </label>
                 <input
                   type="email"
@@ -187,8 +187,8 @@ export default function DemoModal({ isOpen, onClose }) {
               </div>
 
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  Organization / Agency
+                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px', letterSpacing: '0.4px' }}>
+                  ORGANIZATION / AGENCY
                 </label>
                 <input
                   type="text"
@@ -209,8 +209,8 @@ export default function DemoModal({ isOpen, onClose }) {
               </div>
 
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  Primary Solution Interest
+                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px', letterSpacing: '0.4px' }}>
+                  PRIMARY SOLUTION INTEREST
                 </label>
                 <select
                   value={formData.interest}
@@ -236,8 +236,8 @@ export default function DemoModal({ isOpen, onClose }) {
               </div>
 
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  Message / Deployment Notes
+                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '6px', letterSpacing: '0.4px' }}>
+                  MESSAGE / DEPLOYMENT NOTES
                 </label>
                 <textarea
                   rows={3}

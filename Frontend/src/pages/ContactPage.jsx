@@ -557,7 +557,7 @@ export default function ContactPage() {
               }}
             />
 
-            {/* Header Title: "Stay Ahead at the Edge" (Centered) */}
+            {/* Header Title: "PRODUCT ENQUIRY" (Centered) */}
             <div style={{ marginBottom: '24px', textAlign: 'center' }}>
               <h2
                 style={{
@@ -570,7 +570,7 @@ export default function ContactPage() {
                   letterSpacing: '-0.3px',
                 }}
               >
-                Stay Ahead at the Edge
+                PRODUCT ENQUIRY
               </h2>
             </div>
 
@@ -621,8 +621,8 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                 {/* ROW 1: Name (Full Width) */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                    Name *
+                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                    NAME *
                   </label>
                   <input
                     type="text"
@@ -649,8 +649,8 @@ export default function ContactPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
                   {/* Company Name */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Company Name
+                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                      COMPANY NAME
                     </label>
                     <input
                       type="text"
@@ -674,8 +674,8 @@ export default function ContactPage() {
 
                   {/* Email Address */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Email Address *
+                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                      EMAIL ID *
                     </label>
                     <input
                       type="email"
@@ -703,8 +703,8 @@ export default function ContactPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
                   {/* Phone Number */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Phone Number *
+                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                      PHONE NUMBER
                     </label>
                     <div
                       style={{
@@ -719,8 +719,7 @@ export default function ContactPage() {
                       <input
                         type="tel"
                         name="phone"
-                        required
-                        placeholder="+91 / +1 Phone Number"
+                        placeholder="+91 / +1 Phone Number (Optional)"
                         value={formData.phone}
                         onChange={handleChange}
                         style={{
@@ -739,8 +738,8 @@ export default function ContactPage() {
 
                   {/* Product of Interest */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                      Product of Interest
+                    <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                      PRODUCT OF INTEREST
                     </label>
                     <div style={{ position: 'relative' }}>
                       <select
@@ -792,8 +791,8 @@ export default function ContactPage() {
 
                 {/* ROW 4: Message (Full Width) */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px' }}>
-                    Message
+                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: '#ffffff', marginBottom: '7px', letterSpacing: '0.4px' }}>
+                    MESSAGE
                   </label>
                   <textarea
                     name="message"
