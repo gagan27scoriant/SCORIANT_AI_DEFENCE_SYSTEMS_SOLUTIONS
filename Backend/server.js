@@ -16,11 +16,10 @@ const CC_EMAIL = cleanEnv(process.env.CC_EMAIL, 'gagan@scoriant.com');
 // Product enquiries email routing:
 // Primary recipients / forwarded to: Sunil & Raman (+ Info)
 const PRODUCT_INQUIRY_TO = ['sunil@scoriant.com', 'raman@scoriant.com', 'info@scoriant.com'];
-// CC recipients: Gagan, Anand, Shreyas, Jaden, Sai (strictly for product enquiries only)
+// CC recipients: Gagan, Anand, Jaden, Sai (strictly for product enquiries only)
 const PRODUCT_INQUIRY_CC = [
   'gagan@scoriant.com',
   'anand@scoriant.com',
-  'shreyas@scoriant.com',
   'jaden@scoriant.com',
   'sai@scoriant.com',
 ];
@@ -186,21 +185,23 @@ app.post('/api/contact', async (req, res) => {
     const fromAddress = cleanEnv(process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER, 'info@scoriant.com');
     const fromName = cleanEnv(process.env.SMTP_FROM_NAME, 'Scoriant Portal');
 
+    const chosenProduct = (productOfInterest && String(productOfInterest).trim()) ? productOfInterest.trim() : 'Product Enquiry Request';
+
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
       to: PRODUCT_INQUIRY_TO,
       cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
-      subject: `[Scoriant Inquiry] ${productOfInterest || 'General Consultation'} - ${trimmedName}`,
+      subject: `[Scoriant Inquiry] ${chosenProduct} - ${trimmedName}`,
       html: generateEmailHtml({
         title: 'New Client Inquiry Received',
-        badge: 'CONTACT & INQUIRY',
+        badge: chosenProduct,
         fields: {
           'Full Name': trimmedName,
           'Company / Organization': companyName || 'N/A',
           'Sender Email Address': trimmedEmail,
           'Phone Number': phone || 'N/A',
-          'Product of Interest': productOfInterest || 'General Inquiry',
+          'Product of Interest': chosenProduct,
         },
         message,
         toDisplay: PRODUCT_INQUIRY_TO,
@@ -337,20 +338,22 @@ app.post('/api/demo', async (req, res) => {
     const fromAddress = cleanEnv(process.env.CONTACT_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER, 'info@scoriant.com');
     const fromName = cleanEnv(process.env.SMTP_FROM_NAME, 'Scoriant Demo Portal');
 
+    const chosenInterest = (interest && String(interest).trim()) ? interest.trim() : 'Product Enquiry Request';
+
     const mailOptions = {
       from: `"${fromName}" <${fromAddress}>`,
       to: PRODUCT_INQUIRY_TO,
       cc: PRODUCT_INQUIRY_CC,
       replyTo: trimmedEmail,
-      subject: `[Demo Request] ${interest || 'Product Briefing'} - ${trimmedName}`,
+      subject: `[Demo Request] ${chosenInterest} - ${trimmedName}`,
       html: generateEmailHtml({
         title: 'New Live Demo Request Received',
-        badge: 'DEFENCE DEMO & BRIEFING',
+        badge: chosenInterest,
         fields: {
           'Full Name': trimmedName,
           'Organization / Defence Agency': organization || 'N/A',
           'Official Email': trimmedEmail,
-          'Solution of Interest': interest || 'Defence Systems',
+          'Solution of Interest': chosenInterest,
         },
         message,
         toDisplay: PRODUCT_INQUIRY_TO,

@@ -1,5 +1,11 @@
-const API_BASE_URL = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
-  ? import.meta.env.VITE_API_URL
+const rawApiUrl = (import.meta.env.VITE_API_URL || '').trim();
+
+// Resolve API Base URL:
+// - If VITE_API_URL is set and not the non-existent placeholder domain, use it.
+// - In local Vite development, default to 'http://localhost:8787'.
+// - In production, default to '' (relative path /api/...), matching Vercel's unified serverless routing.
+export const API_BASE_URL = (rawApiUrl && !rawApiUrl.includes('scoriant-backend.vercel.app'))
+  ? rawApiUrl
   : (import.meta.env.DEV ? 'http://localhost:8787' : '');
 
 // Client-side email validation helper
