@@ -153,6 +153,99 @@ function generateEmailHtml({ title, badge, fields, message, toDisplay = RECEIVER
   `;
 }
 
+// Reusable Confirmation Email Template Generator for Requesters (Demo & Inquiries)
+function generateConfirmationEmailHtml({ name, requestType = 'Demo Request', interest = 'Defence AI Solutions', organization }) {
+  const timeString = new Date().toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    dateStyle: 'full',
+    timeStyle: 'medium',
+  });
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Scoriant ${requestType} Confirmation</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; margin: 0; padding: 24px; color: #f8fafc; }
+        .wrapper { max-width: 620px; margin: 0 auto; background: #0f172a; border-radius: 18px; overflow: hidden; border: 1px solid #1e293b; box-shadow: 0 20px 45px rgba(0,0,0,0.45); }
+        .header { background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 60%, #0f172a 100%); padding: 34px 30px 26px; border-bottom: 1px solid rgba(167, 139, 250, 0.25); text-align: left; }
+        .badge { display: inline-block; background: rgba(124, 58, 237, 0.25); border: 1px solid #a855f7; color: #c084fc; font-size: 11px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 14px; border-radius: 9999px; margin-bottom: 12px; }
+        .title { font-size: 23px; font-weight: 800; margin: 0 0 6px 0; color: #ffffff; letter-spacing: -0.4px; }
+        .subtitle { font-size: 13.5px; color: #94a3b8; margin: 0; }
+        .content { padding: 30px; background: #0f172a; }
+        .greeting { font-size: 16px; font-weight: 700; color: #f8fafc; margin: 0 0 16px 0; }
+        .intro-text { font-size: 14.5px; color: #cbd5e1; line-height: 1.65; margin: 0 0 22px 0; }
+        .status-box { background: rgba(124, 58, 237, 0.12); border: 1px solid rgba(167, 139, 250, 0.35); border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; }
+        .status-header { font-size: 14px; font-weight: 700; color: #a78bfa; margin-bottom: 6px; }
+        .status-desc { font-size: 13.5px; color: #e2e8f0; line-height: 1.5; margin: 0; }
+        .summary-card { width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #0b0f19; border-radius: 12px; overflow: hidden; border: 1px solid #1e293b; }
+        .summary-card td { padding: 11px 16px; font-size: 13.5px; border-bottom: 1px solid #1e293b; }
+        .summary-card tr:last-child td { border-bottom: none; }
+        .summary-label { color: #64748b; font-weight: 600; width: 38%; }
+        .summary-val { color: #ffffff; font-weight: 600; }
+        .process-box { background: #0b0f19; border-radius: 12px; padding: 20px; border: 1px solid #1e293b; margin-bottom: 24px; }
+        .process-title { font-size: 13.5px; font-weight: 700; color: #f8fafc; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .process-steps { margin: 0; padding-left: 20px; color: #94a3b8; font-size: 13.5px; line-height: 1.7; }
+        .process-steps li strong { color: #cbd5e1; }
+        .support-text { font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin: 0; }
+        .support-text a { color: #a78bfa; text-decoration: none; font-weight: 600; }
+        .footer { padding: 22px 30px; background: #070a13; border-top: 1px solid #1e293b; text-align: center; color: #64748b; font-size: 12px; line-height: 1.6; }
+      </style>
+    </head>
+    <body>
+      <div class="wrapper">
+        <div class="header">
+          <div class="badge">CONFIRMATION // ${requestType.toUpperCase()}</div>
+          <h1 class="title">${requestType} Received</h1>
+          <p class="subtitle">Scoriant AI Defence Systems Solutions • Sovereign Technology Platform</p>
+        </div>
+        <div class="content">
+          <p class="greeting">Dear ${name},</p>
+          <p class="intro-text">
+            Thank you for reaching out to <strong>Scoriant AI Defence Systems Solutions</strong>. We have successfully received your ${requestType.toLowerCase()} and our team is already reviewing your details.
+          </p>
+
+          <div class="status-box">
+            <div class="status-header">✓ Demo Request Successfully Registered</div>
+            <p class="status-desc">
+              Your request has been routed to our technical solutions team. A Scoriant technical representative will reach out to you shortly to guide you through the demonstration and discuss the further process.
+            </p>
+          </div>
+
+          <table class="summary-card">
+            <tr><td class="summary-label">Requester Name</td><td class="summary-val">${name}</td></tr>
+            ${organization ? `<tr><td class="summary-label">Organization</td><td class="summary-val">${organization}</td></tr>` : ''}
+            <tr><td class="summary-label">Solution / Product</td><td class="summary-val">${interest}</td></tr>
+            <tr><td class="summary-label">Received Timestamp</td><td class="summary-val">${timeString} (IST)</td></tr>
+            <tr><td class="summary-label">Status</td><td class="summary-val" style="color: #34d399;">Queued for Technical Review</td></tr>
+          </table>
+
+          <div class="process-box">
+            <div class="process-title">What Happens Next?</div>
+            <ol class="process-steps">
+              <li><strong>Requirement Evaluation:</strong> Our technical team reviews your operational goals and deployment architecture (air-gapped, on-premises, or edge).</li>
+              <li><strong>Contact & Scheduling:</strong> Our representative will contact you via email or phone to align on a mutually convenient demo time and outline the further process.</li>
+              <li><strong>Live Demonstration:</strong> A dedicated technical walkthrough of the platform tailored to your mission requirements.</li>
+            </ol>
+          </div>
+
+          <p class="support-text">
+            If you have any urgent queries or specific technical questions in the meantime, feel free to reply directly to this email or contact us at <a href="mailto:info@scoriant.com">info@scoriant.com</a>.
+          </p>
+        </div>
+        <div class="footer">
+          Scoriant AI Defence Systems Solutions • Sovereign AI, Air-Gapped Compute & Defence Systems<br />
+          <a href="https://scoriant.com" style="color: #64748b; text-decoration: underline;">https://scoriant.com</a> • Confidential Communication
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
   res.json({
@@ -210,8 +303,30 @@ app.post('/api/contact', async (req, res) => {
     };
 
     if (transporter) {
+      // 1. Send Internal Notification to Scoriant Team
       await transporter.sendMail(mailOptions);
       console.log(`[CONTACT] Email dispatched successfully to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
+
+      // 2. Send Automated Confirmation Email to Requester
+      try {
+        const confirmationMailOptions = {
+          from: `"Scoriant Defence Systems" <${fromAddress}>`,
+          to: trimmedEmail,
+          replyTo: fromAddress,
+          subject: `[Scoriant] Request Received - ${chosenProduct}`,
+          html: generateConfirmationEmailHtml({
+            name: trimmedName,
+            requestType: 'Inquiry & Demo Request',
+            interest: chosenProduct,
+            organization: companyName || 'N/A',
+          }),
+        };
+
+        await transporter.sendMail(confirmationMailOptions);
+        console.log(`[CONTACT_CONFIRMATION] Confirmation email dispatched successfully to ${trimmedEmail}`);
+      } catch (confError) {
+        console.error('[CONTACT_CONFIRMATION_ERROR] Failed to send confirmation email to requester:', confError.message);
+      }
     } else {
       console.warn(`[CONTACT] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
@@ -362,8 +477,30 @@ app.post('/api/demo', async (req, res) => {
     };
 
     if (transporter) {
+      // 1. Send Internal Notification to Scoriant Team
       await transporter.sendMail(mailOptions);
       console.log(`[DEMO] Request dispatched successfully to ${PRODUCT_INQUIRY_TO.join(', ')} (CC: ${PRODUCT_INQUIRY_CC.join(', ')}) from ${trimmedEmail}`);
+
+      // 2. Send Automated Confirmation Email to Requester
+      try {
+        const confirmationMailOptions = {
+          from: `"Scoriant Defence Systems" <${fromAddress}>`,
+          to: trimmedEmail,
+          replyTo: fromAddress,
+          subject: `[Scoriant] Demo Request Received - ${chosenInterest}`,
+          html: generateConfirmationEmailHtml({
+            name: trimmedName,
+            requestType: 'Demo Request',
+            interest: chosenInterest,
+            organization: organization || 'N/A',
+          }),
+        };
+
+        await transporter.sendMail(confirmationMailOptions);
+        console.log(`[DEMO_CONFIRMATION] Confirmation email dispatched successfully to ${trimmedEmail}`);
+      } catch (confError) {
+        console.error('[DEMO_CONFIRMATION_ERROR] Failed to send confirmation email to requester:', confError.message);
+      }
     } else {
       console.warn(`[DEMO] SMTP credentials not set in .env. Logging submission to console:`, req.body);
     }
